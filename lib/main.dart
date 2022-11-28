@@ -1,6 +1,5 @@
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {
