@@ -1,7 +1,7 @@
-import 'package:final_project_beamin_app/view/pages/favorite_store/favorite_store.dart';
-import 'package:final_project_beamin_app/view/pages/home/home_page.dart';
-import 'package:final_project_beamin_app/view/pages/order_list/order_list.dart';
-import 'package:final_project_beamin_app/view/pages/search/search.dart';
+import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
+import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
+import 'package:final_project_beamin_app/view/pages/main/search/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
