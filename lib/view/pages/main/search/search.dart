@@ -12,6 +12,10 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
+      body: Column(children: [
+        _buildfilterList(),
+        Container(color: Colors.grey[200], height: 2),
+      ]),
     );
   }
 
@@ -57,4 +61,88 @@ class Search extends StatelessWidget {
       ],
     );
   }
+}
+
+Widget _buildfilterList() {
+  return Container(
+    height: 48,
+    child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        Row(
+          children: [
+            SizedBox(width: gap_xs),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    '리뷰 많은순',
+                    style: textTheme().bodyText1,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: gap_xs),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    '별점 높은순',
+                    style: textTheme().bodyText1,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: gap_xs),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: gap_xxs, vertical: gap_xs),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    '배달비 낮은순',
+                    style: textTheme().bodyText1,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: gap_xs),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    '주문 횟수순',
+                    style: textTheme().bodyText1,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: gap_xs),
+          ],
+        )
+      ],
+    ),
+  );
 }
