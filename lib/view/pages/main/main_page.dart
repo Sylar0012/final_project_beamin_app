@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
         children: [
           HomePage(),
           Search(),
-          FavoriteStroe(),
+          FavoriteStore(),
           OrderList(),
           HomePage(),
         ],

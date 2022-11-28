@@ -32,6 +32,7 @@ dependencies:
   google_fonts: ^3.0.1
   font_awesome: ^5.10.1
   intl: ^0.17.0
+  card_swiper: ^2.0.4
 
 
 
@@ -63,10 +64,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/category
-    - assets/images/home_page
-    - assets/images/main_screen
-    - assets/images/store
+    - assets/images/category/
+    - assets/images/home_page/
+    - assets/images/store/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
