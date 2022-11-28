@@ -132,7 +132,7 @@ AppBar _buildAppBar() {
         ),
       ),
       SizedBox(
-        width: 16,
+        width: gap_xs,
       )
     ],
   );
