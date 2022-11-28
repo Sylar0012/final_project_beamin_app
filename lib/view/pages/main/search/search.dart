@@ -1,3 +1,4 @@
+import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +13,28 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Column(children: [
-        _buildfilterList(),
-        Container(color: Colors.grey[200], height: 2),
-      ]),
+      body: Column(
+        children: [
+          _buildfilterList(),
+          Container(color: Colors.grey[200], height: 2),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  StoreList(img: "치킨", storeName: "네네치킨", starPoint: 4),
+                  StoreList(img: "피자", storeName: "도미노피자", starPoint: 5),
+                  StoreList(img: "버거", storeName: "롯데리아", starPoint: 3),
+                  StoreList(img: "분식", storeName: "신전떡볶이", starPoint: 5),
+                  StoreList(img: "한식", storeName: "본비빔밥", starPoint: 4),
+                  StoreList(img: "중식", storeName: "홍콩반점", starPoint: 3),
+                  StoreList(img: "보쌈", storeName: "원할머니보쌈", starPoint: 3),
+                  StoreList(img: "죽", storeName: "본죽", starPoint: 1),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -77,13 +96,13 @@ Widget _buildfilterList() {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: kMainColor),
                 ),
                 child: TextButton(
                   onPressed: () {},
                   child: Text(
                     '리뷰 많은순',
-                    style: textTheme().bodyText1,
+                    style: TextStyle(color: kMainColor, fontSize: 14, height: 1.0),
                   ),
                 ),
               ),
@@ -100,7 +119,7 @@ Widget _buildfilterList() {
                   onPressed: () {},
                   child: Text(
                     '별점 높은순',
-                    style: textTheme().bodyText1,
+                    style: textTheme().bodyText2,
                   ),
                 ),
               ),
@@ -117,7 +136,7 @@ Widget _buildfilterList() {
                   onPressed: () {},
                   child: Text(
                     '배달비 낮은순',
-                    style: textTheme().bodyText1,
+                    style: textTheme().bodyText2,
                   ),
                 ),
               ),
@@ -134,7 +153,7 @@ Widget _buildfilterList() {
                   onPressed: () {},
                   child: Text(
                     '주문 횟수순',
-                    style: textTheme().bodyText1,
+                    style: textTheme().bodyText2,
                   ),
                 ),
               ),
