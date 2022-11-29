@@ -2,6 +2,7 @@ import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/my_alert_dialog.dart';
+import 'package:final_project_beamin_app/view/pages/review_write/review_write.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -122,7 +123,9 @@ Widget _bulidStore(BuildContext context, String orderDay, String ordeyState, Str
                     style: ButtonStyle(
                       alignment: Alignment.bottomCenter,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewWrite()));
+                    },
                     child: Text(
                       '리뷰 쓰기',
                       style: TextStyle(color: kMainColor, fontSize: 14, height: 0.8),
