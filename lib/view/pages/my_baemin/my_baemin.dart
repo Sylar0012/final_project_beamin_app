@@ -2,6 +2,7 @@ import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
+import 'package:final_project_beamin_app/view/pages/review_list/reivew_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class MyBaemin extends StatelessWidget {
           Row(
             children: [
               _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", OrderList()),
-              _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", MainPage()),
+              _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", ReviewList()),
               _buildMenu(context, CupertinoIcons.heart, "찜한 가게", FavoriteStore()),
             ],
           ),
