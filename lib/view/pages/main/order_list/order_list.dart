@@ -22,6 +22,9 @@ class OrderList extends StatelessWidget {
 
   AppBar _buildAppBar() {
     return AppBar(
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
       title: Text("주문내역", style: textTheme().headline1),
       centerTitle: true,
       elevation: 1,
