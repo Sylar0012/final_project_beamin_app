@@ -40,6 +40,9 @@ class Search extends StatelessWidget {
 
   AppBar _buildAppBar() {
     return AppBar(
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
       elevation: 1.0,
       title: Container(
         decoration: BoxDecoration(
