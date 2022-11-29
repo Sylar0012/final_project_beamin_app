@@ -74,7 +74,7 @@ Widget _bulidStore(BuildContext context, String orderDay, String ordeyState, Str
                     ],
                   ),
                 ),
-                MyAlertDialog(),
+                MyAlertDialog(text: "주문내역"),
               ],
             ),
             SizedBox(height: gap_xs),

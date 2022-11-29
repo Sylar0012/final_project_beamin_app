@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyAlertDialog extends StatelessWidget {
-  const MyAlertDialog({Key? key}) : super(key: key);
+  final String text;
+  const MyAlertDialog({required this.text, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +35,8 @@ class MyAlertDialog extends StatelessWidget {
                         onPressed: () {},
                       ),
                       TextButton(
-                        child: const Text(
-                          '주문내역 삭제',
+                        child: Text(
+                          '${text} 삭제',
                           style: TextStyle(fontSize: 16, color: Colors.red),
                         ),
                         onPressed: () {},
