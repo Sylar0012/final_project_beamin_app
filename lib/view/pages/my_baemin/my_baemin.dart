@@ -3,6 +3,7 @@ import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
 import 'package:final_project_beamin_app/view/pages/review_list/reivew_list.dart';
+import 'package:final_project_beamin_app/view/pages/user_info/info_update.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MyBaemin extends StatelessWidget {
       appBar: _buildAppBar(context),
       body: Column(
         children: [
-          _buildUserTitle(),
+          _buildUserTitle(context, UserInfo()),
           Row(
             children: [
               _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", OrderList()),
@@ -64,7 +65,7 @@ class MyBaemin extends StatelessWidget {
     );
   }
 
-  Widget _buildUserTitle() {
+  Widget _buildUserTitle(BuildContext context, settings) {
     return Column(
       children: [
         Padding(
@@ -85,7 +86,9 @@ class MyBaemin extends StatelessWidget {
                 ),
                 Align(alignment: Alignment.center, child: Text("ssar님 반갑습니다!", style: textTheme().headline1)),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => settings));
+                    },
                     icon: Icon(
                       CupertinoIcons.right_chevron,
                       size: 28,
