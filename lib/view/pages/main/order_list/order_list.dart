@@ -78,34 +78,56 @@ Widget _bulidStore(BuildContext context, String orderDay, String ordeyState, Str
             ),
             SizedBox(height: gap_xs),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    "assets/images/category/${img}.jpg",
-                    width: 55,
-                    height: 55,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                SizedBox(width: gap_s),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(
+                        "assets/images/category/${img}.jpg",
+                        width: 55,
+                        height: 55,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    SizedBox(width: gap_s),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Row(
+                          children: [
+                            Text(
+                              "${storeName}",
+                              style: textTheme().headline2,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: gap_s),
                         Text(
-                          "${storeName}",
-                          style: textTheme().headline2,
+                          "${order}",
+                          style: textTheme().subtitle1,
                         ),
                       ],
                     ),
-                    SizedBox(height: gap_s),
-                    Text(
-                      "${order}",
-                      style: textTheme().subtitle1,
-                    ),
                   ],
+                ),
+                Container(
+                  height: 35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: kMainColor),
+                  ),
+                  child: TextButton(
+                    style: ButtonStyle(
+                      alignment: Alignment.bottomCenter,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      '리뷰 쓰기',
+                      style: TextStyle(color: kMainColor, fontSize: 14, height: 0.8),
+                    ),
+                  ),
                 ),
               ],
             ),
