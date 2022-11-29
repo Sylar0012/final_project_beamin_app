@@ -1,3 +1,5 @@
+import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,6 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+      title: "beamin_ui",
+      debugShowCheckedModeBanner: false,
+      theme: theme(),
+      home: MainPage(),
+    );
   }
 }
