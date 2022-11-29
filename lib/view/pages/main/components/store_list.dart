@@ -4,6 +4,8 @@ import 'package:final_project_beamin_app/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../components/my_icons.dart';
+
 class StoreList extends StatelessWidget {
   final String img;
   final String storeName;
@@ -50,9 +52,9 @@ class StoreList extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    for (int i = 0; i < starPoint; i++) _bulidStarIcon(CupertinoIcons.star_fill),
+                    for (int i = 0; i < starPoint; i++) StarIcon(CupertinoIcons.star_fill, 16),
                     if (starPoint < 5)
-                      for (int i = 0; i < 5 - starPoint; i++) _bulidStarIcon(CupertinoIcons.star),
+                      for (int i = 0; i < 5 - starPoint; i++) StarIcon(CupertinoIcons.star, 16),
                   ],
                 ),
                 SizedBox(height: gap_s),
@@ -69,20 +71,4 @@ class StoreList extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _bulidStarIcon(CupertinoIcons) {
-  return Icon(
-    CupertinoIcons,
-    size: 16,
-    color: kMainColor,
-    shadows: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(1),
-        blurRadius: 1.0,
-        spreadRadius: 1.0,
-        offset: const Offset(0.5, 1),
-      )
-    ],
-  );
 }
