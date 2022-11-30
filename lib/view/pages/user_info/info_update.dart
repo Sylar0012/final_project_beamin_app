@@ -1,6 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/user_inactive/user_inactive.dart';
 import 'package:flutter/material.dart';
 
 class InfoUpdate extends StatefulWidget {
@@ -91,7 +92,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(": ssar", style: textTheme().bodyText1),
+                      Text("ssar", style: textTheme().bodyText1),
                       SizedBox(height: gap_m),
                       Container(
                         width: 300,
@@ -223,6 +224,60 @@ class _InfoUpdateState extends State<InfoUpdate> {
             thickness: 10,
             color: Colors.grey[200],
           ),
+          SizedBox(height: gap_m),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: gap_s),
+            child: Row(
+              children: [
+                Text.rich(
+                  TextSpan(children: [
+                    TextSpan(text: "주소 변경 ", style: textTheme().headline2),
+                    TextSpan(text: "배달 받으실 주소로 사용됩니다.", style: textTheme().bodyText2),
+                  ]),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: gap_s),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: gap_s),
+            child: Container(
+              width: 200,
+              height: 30,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: _buildTextFormField("주소"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: TextButton(
+                onPressed: () {},
+                child: Container(
+                  width: 100,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: kMainColor),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    '변경 하기',
+                    style: TextStyle(color: kMainColor, fontSize: 14, height: 1.7),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            height: 10,
+            thickness: 10,
+            color: Colors.grey[200],
+          ),
           SizedBox(height: gap_s),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: gap_s),
@@ -231,10 +286,15 @@ class _InfoUpdateState extends State<InfoUpdate> {
               children: [
                 TextButton(onPressed: () {}, child: Text("로그아웃", style: textTheme().bodyText2)),
                 SizedBox(width: gap_s),
-                TextButton(onPressed: () {}, child: Text("비활성화", style: TextStyle(color: Colors.red, fontSize: 14, height: 1.0))),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => UserInactive()));
+                    },
+                    child: Text("비활성화", style: TextStyle(color: Colors.red[600], fontSize: 14, height: 1.0))),
               ],
             ),
-          )
+          ),
+          SizedBox(height: gap_s),
         ],
       ),
     );
