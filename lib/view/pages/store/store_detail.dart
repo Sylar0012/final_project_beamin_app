@@ -1,5 +1,6 @@
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
+import 'package:final_project_beamin_app/view/pages/store/menu/menu_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -152,26 +153,14 @@ class _StoreDetailState extends State<StoreDetail> with SingleTickerProviderStat
   }
 }
 
-Widget _bulidStoreCategory(String text) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: gap_s),
-    child: Container(
-      child: Text(
-        text,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 16,
-          shadows: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(1),
-              blurRadius: 1.0,
-              spreadRadius: 1.0,
-              offset: const Offset(0.5, 1),
-            ),
-          ],
-        ),
-      ),
-    ),
+Widget _buildMenuList(BuildContext context) {
+  return Column(
+    children: [
+      SizedBox(height: gap_l),
+      _bulidStoreMenu(context, "치킨", "후라이드 치킨", "후라이드 치킨 존맛탱ㅇㅈ? ㅇ ㅇㅈ~~ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ", "17,000원"),
+      _bulidStoreMenu(context, "치킨", "양념 치킨", "착한 사람 눈엔 양념치킨 사진으로 보입니다. 당신은 착한 사람입니다", "19,000원"),
+      _bulidStoreMenu(context, "치킨", "간장 치킨", "간장 드릴테니 찍어드세연 ㅋㅋㄹㅃㅃ 꼬우면 아시죠?ㅋㅋㅋㅋ", "18,000원"),
+    ],
   );
 }
 
@@ -186,7 +175,7 @@ Widget _bulidStoreMenu(BuildContext context, String img, String menuName, String
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.asset(
-                "assets/images/store_image/${img}.jpg",
+                "assets/images/category/${img}.jpg",
                 width: 115,
                 height: 115,
                 fit: BoxFit.cover,
@@ -228,6 +217,29 @@ Widget _bulidStoreMenu(BuildContext context, String img, String menuName, String
             ],
           )
         ],
+      ),
+    ),
+  );
+}
+
+Widget _bulidStoreCategory(String text) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: gap_s),
+    child: Container(
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+          shadows: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(1),
+              blurRadius: 1.0,
+              spreadRadius: 1.0,
+              offset: const Offset(0.5, 1),
+            ),
+          ],
+        ),
       ),
     ),
   );
