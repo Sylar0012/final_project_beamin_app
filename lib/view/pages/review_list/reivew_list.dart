@@ -1,6 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/main/components/my_alert_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -170,6 +171,11 @@ Widget _bulidUserReview(String nickName, String orderList, starPoint) {
         for (int i = 0; i < starPoint; i++) StarIcon(CupertinoIcons.star_fill, 16),
         if (starPoint < 5)
           for (int i = 0; i < 5 - starPoint; i++) StarIcon(CupertinoIcons.star, 16),
+        SizedBox(width: gap_xs),
+        Container(
+          height: 48,
+          child: Align(alignment: Alignment.topCenter, child: MyAlertDialog(text: "리뷰")),
+        ),
       ],
     ),
   );
