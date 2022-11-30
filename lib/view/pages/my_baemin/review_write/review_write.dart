@@ -4,7 +4,7 @@ import 'package:final_project_beamin_app/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../components/my_icons.dart';
+import 'package:final_project_beamin_app/view/pages/components/my_icons.dart';
 
 class ReviewWrite extends StatefulWidget {
   const ReviewWrite({Key? key}) : super(key: key);

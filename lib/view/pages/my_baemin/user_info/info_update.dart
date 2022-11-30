@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/user_inactive/user_inactive.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/user_inactive/user_inactive.dart';
 import 'package:flutter/material.dart';
 
 class InfoUpdate extends StatefulWidget {
