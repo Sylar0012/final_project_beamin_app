@@ -2,6 +2,7 @@ import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
 import 'package:final_project_beamin_app/view/pages/main/search/search.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/my_baemin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,13 @@ class _MainPageState extends State<MainPage> {
           setState(
             () {
               _selectedIndex = index;
+              if (_selectedIndex == 4) {
+                _selectedIndex = 0;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyBaemin()),
+                );
+              }
             },
           );
         },
@@ -36,7 +44,9 @@ class _MainPageState extends State<MainPage> {
             icon: IconButton(
               padding: EdgeInsets.zero, // 패딩 설정
               constraints: BoxConstraints(),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyBaemin()));
+              },
               icon: Icon(
                 CupertinoIcons.person_circle,
                 size: 24,

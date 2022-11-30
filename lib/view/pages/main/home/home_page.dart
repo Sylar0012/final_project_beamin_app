@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/store_list.dart';
+import 'package:final_project_beamin_app/view/pages/main/search/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +68,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget _bulidCategory(String text) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Search()));
+      },
       child: Column(
         children: [
           ClipRRect(
@@ -111,18 +114,20 @@ class _HomePageState extends State<HomePage> {
 
 AppBar _buildAppBar() {
   return AppBar(
-    title: Text("김해시 외동 9999-9번지", style: textTheme().headline1),
+    title: Align(alignment: AlignmentDirectional.bottomCenter, child: Text("김해시 외동 9999-9번지", style: textTheme().headline1)),
     centerTitle: true,
     elevation: 1.0,
-    leading: IconButton(
-      onPressed: () {},
-      icon: Icon(
-        CupertinoIcons.left_chevron,
-        size: 28,
-        color: Colors.black,
-      ),
-    ),
     actions: [
+      IconButton(
+        padding: EdgeInsets.zero, // 패딩 설정
+        constraints: BoxConstraints(),
+        onPressed: () {},
+        icon: Icon(
+          CupertinoIcons.bell,
+          size: 28,
+          color: Colors.black,
+        ),
+      ),
       IconButton(
         onPressed: () {},
         icon: Icon(
