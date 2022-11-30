@@ -19,7 +19,7 @@ class MyBaemin extends StatelessWidget {
       appBar: _buildAppBar(context),
       body: Column(
         children: [
-          _buildUserTitle(context, UserInfo()),
+          _buildUserTitle(context, InfoUpdate()),
           Row(
             children: [
               _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", OrderList()),
