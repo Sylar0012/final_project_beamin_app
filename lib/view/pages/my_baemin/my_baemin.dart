@@ -108,6 +108,9 @@ class MyBaemin extends StatelessWidget {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
       title: Text("My 배민", style: textTheme().headline1),
       centerTitle: true,
       elevation: 1.0,
