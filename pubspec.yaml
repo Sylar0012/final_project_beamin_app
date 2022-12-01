@@ -67,6 +67,7 @@ flutter:
     - assets/images/category/
     - assets/images/home_page/
     - assets/images/store/
+    - assets/images/review/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
