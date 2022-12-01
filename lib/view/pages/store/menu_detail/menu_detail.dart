@@ -1,6 +1,8 @@
+import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -172,7 +174,66 @@ class _MenuDetailState extends State<MenuDetail> {
                 )
               ],
             ),
-          )
+          ),
+          SizedBox(height: gap_s),
+          Container(
+            height: 170,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: gap_s),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
+                    child: Container(
+                      width: 150,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: kMainColor),
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Color.fromRGBO(251, 82, 28, 0.8),
+                              content: Text("장바구니에 담았습니다!"),
+                              action: SnackBarAction(
+                                textColor: Colors.white,
+                                label: '확인 하기',
+                                onPressed: () {},
+                              ),
+                            ),
+                          );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetail()));
+                        },
+                        child: Text(
+                          '장바구니에 담기',
+                          style: TextStyle(color: kMainColor, fontSize: 14, height: 1.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
+                    child: Container(
+                      width: 150,
+                      height: 40,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(color: kMainColor), color: kMainColor),
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          '주문 하기',
+                          style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
