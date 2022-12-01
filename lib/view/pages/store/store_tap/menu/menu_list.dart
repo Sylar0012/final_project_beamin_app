@@ -6,15 +6,19 @@ class MenuList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          SizedBox(height: gap_l),
-          _bulidStoreMenu(context, "치킨", "후라이드 치킨", "후라이드 치킨 존맛탱ㅇㅈ? ㅇ ㅇㅈ~~ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ", "17,000원"),
-          _bulidStoreMenu(context, "치킨", "양념 치킨", "착한 사람 눈엔 양념치킨 사진으로 보입니다. 당신은 착한 사람입니다", "19,000원"),
-          _bulidStoreMenu(context, "치킨", "간장 치킨", "간장 드릴테니 찍어드세연 ㅋㅋㄹㅃㅃ 꼬우면 아시죠?ㅋㅋㅋㅋ", "18,000원"),
-        ],
-      ),
+    return ListView(
+      children: [
+        SizedBox(height: gap_m),
+        _bulidStoreMenu(context, "치킨", "후라이드 치킨", "후라이드 치킨 ", "17,000원"),
+        _bulidStoreMenu(context, "치킨", "양념 치킨", "착한 사람 눈엔 양념치킨 사진으로 보입니다. 당신은 착한 사람입니다", "19,000원"),
+        _bulidStoreMenu(context, "치킨", "간장 치킨", "간장치킨", "18,000원"),
+        _bulidStoreMenu(context, "치킨", "후라이드 치킨", "후라이드 치킨 ", "17,000원"),
+        _bulidStoreMenu(context, "치킨", "양념 치킨", "착한 사람 눈엔 양념치킨 사진으로 보입니다. 당신은 착한 사람입니다", "19,000원"),
+        _bulidStoreMenu(context, "치킨", "간장 치킨", "간장치킨", "18,000원"),
+        _bulidStoreMenu(context, "치킨", "후라이드 치킨", "후라이드 치킨 ", "17,000원"),
+        _bulidStoreMenu(context, "치킨", "양념 치킨", "착한 사람 눈엔 양념치킨 사진으로 보입니다. 당신은 착한 사람입니다", "19,000원"),
+        _bulidStoreMenu(context, "치킨", "간장 치킨", "간장치킨", "18,000원"),
+      ],
     );
   }
 }
