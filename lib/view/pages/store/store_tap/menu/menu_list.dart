@@ -1,4 +1,5 @@
 import 'package:final_project_beamin_app/size.dart';
+import 'package:final_project_beamin_app/view/pages/store/menu_detail/menu_detail.dart';
 import 'package:flutter/material.dart';
 
 class MenuList extends StatelessWidget {
@@ -10,14 +11,14 @@ class MenuList extends StatelessWidget {
       children: [
         SizedBox(height: gap_m),
         _bulidStoreMenu(context, "치킨", "후라이드 치킨", "후라이드 치킨 ", "17,000원"),
-        _bulidStoreMenu(context, "치킨", "양념 치킨", "착한 사람 눈엔 양념치킨 사진으로 보입니다. 당신은 착한 사람입니다", "19,000원"),
-        _bulidStoreMenu(context, "치킨", "간장 치킨", "간장치킨", "18,000원"),
+        _bulidStoreMenu(context, "양념치킨", "양념 치킨", "양념치킨", "19,000원"),
+        _bulidStoreMenu(context, "간장치킨", "간장 치킨", "간장치킨", "18,000원"),
         _bulidStoreMenu(context, "치킨", "후라이드 치킨", "후라이드 치킨 ", "17,000원"),
-        _bulidStoreMenu(context, "치킨", "양념 치킨", "착한 사람 눈엔 양념치킨 사진으로 보입니다. 당신은 착한 사람입니다", "19,000원"),
-        _bulidStoreMenu(context, "치킨", "간장 치킨", "간장치킨", "18,000원"),
+        _bulidStoreMenu(context, "양념치킨", "양념 치킨", "양념치킨", "19,000원"),
+        _bulidStoreMenu(context, "간장치킨", "간장 치킨", "간장치킨", "18,000원"),
         _bulidStoreMenu(context, "치킨", "후라이드 치킨", "후라이드 치킨 ", "17,000원"),
-        _bulidStoreMenu(context, "치킨", "양념 치킨", "착한 사람 눈엔 양념치킨 사진으로 보입니다. 당신은 착한 사람입니다", "19,000원"),
-        _bulidStoreMenu(context, "치킨", "간장 치킨", "간장치킨", "18,000원"),
+        _bulidStoreMenu(context, "양념치킨", "양념 치킨", "양념치킨", "19,000원"),
+        _bulidStoreMenu(context, "간장치킨", "간장 치킨", "간장치킨", "18,000원"),
       ],
     );
   }
@@ -25,7 +26,9 @@ class MenuList extends StatelessWidget {
 
 Widget _bulidStoreMenu(BuildContext context, String img, String menuName, String menuInfo, String menuPrice) {
   return InkWell(
-    onTap: () {},
+    onTap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => MenuDetail()));
+    },
     child: Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
@@ -52,7 +55,7 @@ Widget _bulidStoreMenu(BuildContext context, String img, String menuName, String
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: gap_s),
               Container(
                 width: 200,
                 child: Text(
@@ -65,7 +68,7 @@ Widget _bulidStoreMenu(BuildContext context, String img, String menuName, String
                   ),
                 ),
               ),
-              SizedBox(height: 8),
+              SizedBox(height: gap_m),
               Text(
                 "${menuPrice}",
                 style: TextStyle(
