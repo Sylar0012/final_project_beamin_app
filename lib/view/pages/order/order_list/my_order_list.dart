@@ -160,7 +160,7 @@ class _MyOrderListState extends State<MyOrderList> {
               child: TextButton(
                 onPressed: () {},
                 child: Text(
-                  '주문 하기',
+                  '${numberPriceFormat("${deliveryCost + orderCount * price}")} 주문 하기',
                   style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
                 ),
               ),
