@@ -2,7 +2,9 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/store_list.dart';
+import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
 import 'package:final_project_beamin_app/view/pages/main/search/search.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: ListView(
         children: [
           _buildMainScreen(),
@@ -112,7 +114,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-AppBar _buildAppBar() {
+AppBar _buildAppBar(context) {
   return AppBar(
     title: Align(alignment: AlignmentDirectional.bottomCenter, child: Text("김해시 외동 9999-9번지", style: textTheme().headline1)),
     centerTitle: true,
@@ -129,7 +131,9 @@ AppBar _buildAppBar() {
         ),
       ),
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
+        },
         icon: Icon(
           CupertinoIcons.shopping_cart,
           size: 28,

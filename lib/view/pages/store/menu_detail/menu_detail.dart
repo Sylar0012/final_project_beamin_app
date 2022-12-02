@@ -224,7 +224,11 @@ class _MenuDetailState extends State<MenuDetail> {
                   child: Container(
                     width: 150,
                     height: 40,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(color: kMainColor), color: kMainColor),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: kMainColor),
+                      color: kMainColor,
+                    ),
                     child: TextButton(
                       onPressed: () {},
                       child: Text(

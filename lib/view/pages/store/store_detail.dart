@@ -150,7 +150,15 @@ class _StoreDetailState extends State<StoreDetail> {
         return Icon(
           CupertinoIcons.heart_fill,
           color: isLiked ? Colors.redAccent : Colors.grey,
-          size: 26,
+          size: 24,
+          shadows: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(1),
+              blurRadius: 1.0,
+              spreadRadius: 1.0,
+              offset: const Offset(0.5, 1),
+            )
+          ],
         );
       },
       likeCount: count,
@@ -160,13 +168,22 @@ class _StoreDetailState extends State<StoreDetail> {
         if (count == 0) {
           result = Text(
             "love",
-            style: TextStyle(color: color),
+            style: TextStyle(
+              color: color,
+              shadows: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(1),
+                  blurRadius: 1.0,
+                  spreadRadius: 1.0,
+                  offset: const Offset(0.5, 1),
+                )
+              ],
+            ),
           );
         } else
           result = Text(
             text,
             style: TextStyle(
-              fontSize: 16,
               color: color,
               shadows: [
                 BoxShadow(
@@ -220,6 +237,14 @@ Widget _buildStioreInfoText(String text) {
       style: TextStyle(
         fontSize: 16,
         color: Colors.black,
+        shadows: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(1),
+            blurRadius: 1.0,
+            spreadRadius: 1.0,
+            offset: const Offset(0.5, 1),
+          )
+        ],
       ),
     ),
   );
