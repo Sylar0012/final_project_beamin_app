@@ -3,10 +3,16 @@ import 'package:final_project_beamin_app/view/pages/store/components/store_detai
 import 'package:final_project_beamin_app/view/pages/store/store_tap/store_tap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 
-class StoreDetail extends StatelessWidget {
+class StoreDetail extends StatefulWidget {
   const StoreDetail({Key? key}) : super(key: key);
 
+  @override
+  State<StoreDetail> createState() => _StoreDetailState();
+}
+
+class _StoreDetailState extends State<StoreDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +112,7 @@ class StoreDetail extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _buildStoreInfoIconWithText(CupertinoIcons: CupertinoIcons.heart_fill, text: " 1234"),
+                      _buildLikeButton(1234),
                       _buildStoreInfoIcon(CupertinoIcons.phone_solid),
                       _buildStoreInfoIconWithText(CupertinoIcons: CupertinoIcons.map_pin_ellipse, text: " 3.1 Km"),
                     ],
@@ -129,6 +135,51 @@ class StoreDetail extends StatelessWidget {
         },
         body: StoreTap(),
       ),
+    );
+  }
+
+  LikeButton _buildLikeButton(int count) {
+    return LikeButton(
+      size: 26,
+      circleColor: CircleColor(start: Colors.orangeAccent, end: Colors.orange),
+      bubblesColor: BubblesColor(
+        dotPrimaryColor: Colors.pink,
+        dotSecondaryColor: Colors.orange,
+      ),
+      likeBuilder: (bool isLiked) {
+        return Icon(
+          CupertinoIcons.heart_fill,
+          color: isLiked ? Colors.redAccent : Colors.grey,
+          size: 26,
+        );
+      },
+      likeCount: count,
+      countBuilder: (count, isLiked, text) {
+        var color = isLiked ? Colors.redAccent : Colors.grey;
+        Widget result;
+        if (count == 0) {
+          result = Text(
+            "love",
+            style: TextStyle(color: color),
+          );
+        } else
+          result = Text(
+            text,
+            style: TextStyle(
+              fontSize: 16,
+              color: color,
+              shadows: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(1),
+                  blurRadius: 1.0,
+                  spreadRadius: 1.0,
+                  offset: const Offset(0.5, 1),
+                )
+              ],
+            ),
+          );
+        return result;
+      },
     );
   }
 }
