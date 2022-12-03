@@ -2,6 +2,7 @@ import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/components/order_appbar.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/util/number_formet/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -166,7 +167,9 @@ class _MyOrderListState extends State<MyOrderList> {
               color: kMainColor,
             ),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Payment()));
+              },
               child: Text(
                 '${numberPriceFormat("${orderCount * price}")} 주문 하기',
                 style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
@@ -212,7 +215,9 @@ class _MyOrderListState extends State<MyOrderList> {
               color: kMainColor,
             ),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Payment()));
+              },
               child: Text(
                 '${numberPriceFormat("${deliveryCost + orderCount * price}")} 주문 하기',
                 style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
