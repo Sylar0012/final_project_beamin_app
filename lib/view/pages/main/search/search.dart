@@ -6,8 +6,15 @@ import 'package:flutter/material.dart';
 import '../../../../theme.dart';
 import '../components/store_list.dart';
 
-class Search extends StatelessWidget {
+class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
+
+  @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
+  int selectedId = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,27 @@ class Search extends StatelessWidget {
       appBar: _buildAppBar(),
       body: Column(
         children: [
-          _buildfilterList(),
+          Container(
+            height: 48,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(width: gap_xs),
+                    _bulidFilterButton(1, "리뷰 많은순"),
+                    SizedBox(width: gap_xs),
+                    _bulidFilterButton(2, "별점 높은순"),
+                    SizedBox(width: gap_xs),
+                    _bulidFilterButton(3, "배달비 낮은순"),
+                    SizedBox(width: gap_xs),
+                    _bulidFilterButton(4, "주문 횟수순"),
+                    SizedBox(width: gap_xs),
+                  ],
+                )
+              ],
+            ),
+          ),
           Container(color: Colors.grey[200], height: 2),
           Expanded(
             child: SingleChildScrollView(
@@ -38,133 +65,74 @@ class Search extends StatelessWidget {
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      iconTheme: IconThemeData(
-        color: Colors.black,
-      ),
-      elevation: 1.0,
-      title: Container(
+  Widget _bulidFilterButton(int id, String Filter) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
+      child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.grey),
+          color: id == selectedId ? kMainColor : null,
         ),
-        width: double.infinity,
-        height: 40,
-        child: Align(
-          alignment: AlignmentDirectional.centerStart,
-          child: Row(
-            children: [
-              SizedBox(width: gap_xs),
-              Icon(
-                size: 24,
-                CupertinoIcons.search,
-                color: Colors.grey,
-              ),
-              Text("검색", style: textTheme().bodyText2),
-            ],
+        child: TextButton(
+          onPressed: () {
+            setState(() {
+              selectedId = id;
+            });
+            print("선택한 번호 : ${id}");
+          },
+          child: Text(
+            Filter,
+            style: TextStyle(color: id == selectedId ? Colors.white : Colors.grey, fontSize: 14, height: 1.0),
           ),
         ),
       ),
-      actions: [
-        IconButton(
-          padding: EdgeInsets.zero, // 패딩 설정
-          constraints: BoxConstraints(),
-          onPressed: () {},
-          icon: Icon(
-            CupertinoIcons.cart,
-            color: Colors.black,
-            size: 28,
-          ),
-        ),
-        SizedBox(
-          width: 22,
-        )
-      ],
     );
   }
 }
 
-Widget _buildfilterList() {
-  return Container(
-    height: 48,
-    child: ListView(
-      scrollDirection: Axis.horizontal,
-      children: [
-        Row(
+AppBar _buildAppBar() {
+  return AppBar(
+    iconTheme: IconThemeData(
+      color: Colors.black,
+    ),
+    elevation: 1.0,
+    title: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.grey[200],
+      ),
+      width: double.infinity,
+      height: 40,
+      child: Align(
+        alignment: AlignmentDirectional.centerStart,
+        child: Row(
           children: [
             SizedBox(width: gap_xs),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: kMainColor),
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    '리뷰 많은순',
-                    style: TextStyle(color: kMainColor, fontSize: 14, height: 1.0),
-                  ),
-                ),
-              ),
+            Icon(
+              size: 24,
+              CupertinoIcons.search,
+              color: Colors.grey,
             ),
-            SizedBox(width: gap_xs),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    '별점 높은순',
-                    style: textTheme().bodyText2,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: gap_xs),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: gap_xxs, vertical: gap_xs),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    '배달비 낮은순',
-                    style: textTheme().bodyText2,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: gap_xs),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    '주문 횟수순',
-                    style: textTheme().bodyText2,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: gap_xs),
+            Text("검색", style: textTheme().bodyText2),
           ],
-        )
-      ],
+        ),
+      ),
     ),
+    actions: [
+      IconButton(
+        padding: EdgeInsets.zero, // 패딩 설정
+        constraints: BoxConstraints(),
+        onPressed: () {},
+        icon: Icon(
+          CupertinoIcons.cart,
+          color: Colors.black,
+          size: 28,
+        ),
+      ),
+      SizedBox(
+        width: 22,
+      )
+    ],
   );
 }

@@ -1,17 +1,20 @@
+import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class StoreDetailAppBer extends StatelessWidget implements PreferredSizeWidget {
-  const StoreDetailAppBer({required this.appBar, required this.title, required this.center, Key? key}) : super(key: key);
+class OrderAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const OrderAppBar({required this.appBar, required this.title, required this.center, Key? key}) : super(key: key);
   final AppBar appBar;
   final String title;
   final bool center;
   @override
   AppBar build(BuildContext context) {
     return AppBar(
-      title: Text("${title}"),
+      title: Text(
+        "${title}",
+        style: textTheme().headline1,
+      ),
       centerTitle: center,
       elevation: 1.0,
       leading: IconButton(
@@ -24,21 +27,6 @@ class StoreDetailAppBer extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.black,
         ),
       ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
-          },
-          icon: Icon(
-            CupertinoIcons.shopping_cart,
-            size: 28,
-            color: Colors.black,
-          ),
-        ),
-        SizedBox(
-          width: 16,
-        )
-      ],
     );
   }
 
