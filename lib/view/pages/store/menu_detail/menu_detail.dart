@@ -1,6 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
 import 'package:flutter/cupertino.dart';
@@ -206,7 +207,9 @@ class _MenuDetailState extends State<MenuDetail> {
                             action: SnackBarAction(
                               textColor: Colors.white,
                               label: '확인 하기',
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
+                              },
                             ),
                           ),
                         );
