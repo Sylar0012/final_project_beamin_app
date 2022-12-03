@@ -24,35 +24,10 @@ class JoinPage extends StatelessWidget {
                 Text("회원가입", style: textTheme().headline1),
                 SizedBox(height: gap_xl),
                 CustomFormJoin(),
-                _buildLoginButton(context),
                 SizedBox(height: gap_xl),
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Padding _buildLoginButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: gap_m),
-      child: Container(
-        width: double.infinity,
-        height: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: kMainColor),
-          color: kMainColor,
-        ),
-        child: TextButton(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
-          },
-          child: Text(
-            '회원 가입',
-            style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
-          ),
         ),
       ),
     );
