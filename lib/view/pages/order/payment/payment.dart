@@ -14,6 +14,7 @@ class Payment extends StatefulWidget {
 
 class _PaymentState extends State<Payment> {
   Comment? _comment = Comment.defaultMsg;
+  int selectedId = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +86,8 @@ class _PaymentState extends State<Payment> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _bulidPaymentButton("카카오 페이"),
-                      _bulidPaymentButton("네이버 페이"),
+                      _bulidPaymentButton(1, "카카오 페이"),
+                      _bulidPaymentButton(2, "네이버 페이"),
                     ],
                   ),
                 ),
@@ -96,8 +97,8 @@ class _PaymentState extends State<Payment> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _bulidPaymentButton("휴대폰 결제"),
-                      _bulidPaymentButton("카드 결제"),
+                      _bulidPaymentButton(3, "휴대폰 결제"),
+                      _bulidPaymentButton(4, "카드 결제"),
                     ],
                   ),
                 ),
@@ -178,6 +179,30 @@ class _PaymentState extends State<Payment> {
     );
   }
 
+  Widget _bulidPaymentButton(int id, String paymentWay) {
+    return Container(
+      width: 100,
+      height: 40,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey),
+        color: id == selectedId ? kMainColor : null,
+      ),
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            selectedId = id;
+          });
+          print("선택한 번호 : ${id}");
+        },
+        child: Text(
+          paymentWay,
+          style: TextStyle(color: id == selectedId ? Colors.white : Colors.grey, fontSize: 14, height: 1.0),
+        ),
+      ),
+    );
+  }
+
   Widget _bulidOrderType(Comment CT, String? msg) {
     return Row(
       // 가로로 진행 (버튼 + 이름)
@@ -211,24 +236,6 @@ AppBar _buildAppBar() {
     ),
     centerTitle: true,
     elevation: 1.0,
-  );
-}
-
-Widget _bulidPaymentButton(String paymentWay) {
-  return Container(
-    width: 100,
-    height: 40,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      border: Border.all(color: Colors.grey),
-    ),
-    child: TextButton(
-      onPressed: () {},
-      child: Text(
-        paymentWay,
-        style: TextStyle(color: Colors.grey, fontSize: 14, height: 1.0),
-      ),
-    ),
   );
 }
 
