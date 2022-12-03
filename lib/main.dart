@@ -1,7 +1,5 @@
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_detail.dart';
-import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
+import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: "beamin_ui",
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: MainPage(),
+      home: LoginPage(),
     );
   }
 }
