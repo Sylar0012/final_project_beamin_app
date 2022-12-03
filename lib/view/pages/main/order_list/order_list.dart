@@ -2,7 +2,7 @@ import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/my_alert_dialog.dart';
-import 'package:final_project_beamin_app/view/pages/review_write/review_write.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

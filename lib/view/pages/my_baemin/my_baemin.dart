@@ -2,8 +2,8 @@ import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
-import 'package:final_project_beamin_app/view/pages/review_list/reivew_list.dart';
-import 'package:final_project_beamin_app/view/pages/user_info/info_update.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/review_list/reivew_list.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/info_update.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -108,6 +108,9 @@ class MyBaemin extends StatelessWidget {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
       title: Text("My 배민", style: textTheme().headline1),
       centerTitle: true,
       elevation: 1.0,
