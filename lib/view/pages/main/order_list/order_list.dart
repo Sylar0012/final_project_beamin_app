@@ -98,13 +98,18 @@ Widget _bulidStore(BuildContext context, String orderDay, String ordeyState, Str
                       children: [
                         Row(
                           children: [
-                            Text(
-                              "${storeName}",
-                              style: textTheme().headline2,
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                              ),
+                              onPressed: () {},
+                              child: Text(
+                                "${storeName}  >",
+                                style: textTheme().headline2,
+                              ),
                             ),
                           ],
                         ),
-                        SizedBox(height: gap_s),
                         Text(
                           "${order}",
                           style: textTheme().subtitle1,

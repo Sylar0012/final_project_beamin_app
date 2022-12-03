@@ -40,7 +40,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
                     child: Container(
                       width: 50,
                       height: 30,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color.fromRGBO(125, 125, 125, 0.7)),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color.fromRGBO(221, 221, 221, 0.7)),
                       child: TextButton(
                         onPressed: () {},
                         child: Text(
@@ -98,7 +98,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
                         width: 300,
                         height: 30,
                         decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          color: Colors.grey[100],
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: _buildTextFormField("비밀번호"),
@@ -108,7 +108,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
                           width: 300,
                           height: 30,
                           decoration: BoxDecoration(
-                            color: Colors.grey[300],
+                            color: Colors.grey[100],
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: _buildTextFormField("비밀번호")),
@@ -117,7 +117,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
                         width: 300,
                         height: 30,
                         decoration: BoxDecoration(
-                          color: Colors.grey[300],
+                          color: Colors.grey[100],
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: _buildTextFormField("비밀번호"),
@@ -133,6 +133,9 @@ class _InfoUpdateState extends State<InfoUpdate> {
             child: Align(
               alignment: Alignment.topRight,
               child: TextButton(
+                style: ButtonStyle(
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
                 onPressed: () {},
                 child: Container(
                   width: 100,
@@ -179,7 +182,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
                     width: 60,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.grey[100],
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: _buildTextFormPhone()),
@@ -187,7 +190,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
                     width: 70,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.grey[100],
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: _buildTextFormPhone()),
@@ -195,7 +198,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
                     width: 70,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.grey[100],
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: _buildTextFormPhone()),
@@ -245,7 +248,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
               width: 200,
               height: 30,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: _buildTextFormField("주소"),
