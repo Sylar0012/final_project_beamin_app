@@ -114,6 +114,7 @@ class _HomePageState extends State<HomePage> {
 
 AppBar _buildAppBar() {
   return AppBar(
+    automaticallyImplyLeading: false,
     title: Align(alignment: AlignmentDirectional.bottomCenter, child: Text("김해시 외동 9999-9번지", style: textTheme().headline1)),
     centerTitle: true,
     elevation: 1.0,

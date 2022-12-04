@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/main/components/my_alert_dialog.dart';
+import 'package:final_project_beamin_app/view/pages/main/components/my_modal_bottom_sheet.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +74,7 @@ Widget _bulidStore(BuildContext context, String orderDay, String ordeyState, Str
                     ],
                   ),
                 ),
-                MyAlertDialog(text: "주문내역"),
+                MyModalBottomSheet(text: "주문내역"),
               ],
             ),
             SizedBox(height: gap_xs),
