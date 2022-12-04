@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/components/costom_form_join.dart';
+import 'package:final_project_beamin_app/view/pages/user/components/costom_form_join.dart';
 import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
