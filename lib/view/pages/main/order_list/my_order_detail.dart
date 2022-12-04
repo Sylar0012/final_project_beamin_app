@@ -146,11 +146,6 @@ Row _buildOrderProduct(String productName, String price) {
 
 AppBar _buildAppBar(context) {
   return AppBar(
-    automaticallyImplyLeading: false,
-    leading: IconButton(
-      onPressed: () {},
-      icon: Icon(CupertinoIcons.arrow_left),
-    ),
     iconTheme: IconThemeData(color: Colors.black),
     title: Text(
       "주문 내역",
