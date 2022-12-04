@@ -1,6 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/my_modal_bottom_sheet.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,43 +13,19 @@ class OrderList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: MainAppBar(appBar: AppBar(), title: "주문 내역"),
       body: Column(
         children: [
-          _bulidStore(context, "6/20 (월)", "배달중", "치킨", "네네치킨", "후라이드 치킨 외 2개 43,000원"),
-          _bulidStore(context, "6/19 (일)", "배달완료", "피자", "도미노피자", "포테이토 피자 14,000원"),
-          _bulidStore(context, "6/18 (토)", "배달완료", "보쌈", "원할머니보쌈", "수육 ( 중 ) 외 3개 57,000원"),
+          _bulidOrder(context, "6/20 (월)", "배달중", "치킨", "네네치킨", "후라이드 치킨 외 2개 43,000원"),
+          _bulidOrder(context, "6/19 (일)", "배달완료", "피자", "도미노피자", "포테이토 피자 14,000원"),
+          _bulidOrder(context, "6/18 (토)", "배달완료", "보쌈", "원할머니보쌈", "수육 ( 중 ) 외 3개 57,000원"),
         ],
       ),
     );
   }
-
-  AppBar _buildAppBar() {
-    return AppBar(
-      iconTheme: IconThemeData(
-        color: Colors.black,
-      ),
-      title: Text("주문내역", style: textTheme().headline1),
-      centerTitle: true,
-      elevation: 1,
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            CupertinoIcons.cart,
-            size: 28,
-            color: Colors.black,
-          ),
-        ),
-        SizedBox(
-          width: gap_xs,
-        )
-      ],
-    );
-  }
 }
 
-Widget _bulidStore(BuildContext context, String orderDay, String ordeyState, String img, String storeName, String order) {
+Widget _bulidOrder(BuildContext context, String orderDay, String ordeyState, String img, String storeName, String order) {
   return Column(
     children: [
       Padding(

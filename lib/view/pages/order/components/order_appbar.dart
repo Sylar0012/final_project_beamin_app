@@ -22,8 +22,8 @@ class OrderAppBar extends StatelessWidget implements PreferredSizeWidget {
           Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));
         },
         icon: Icon(
-          CupertinoIcons.left_chevron,
-          size: 28,
+          Icons.arrow_back,
+          size: 24,
           color: Colors.black,
         ),
       ),

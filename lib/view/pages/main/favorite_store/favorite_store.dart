@@ -1,5 +1,6 @@
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,25 +12,7 @@ class FavoriteStore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-        title: Text("찜", style: textTheme().headline1),
-        centerTitle: true,
-        elevation: 1.0,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              CupertinoIcons.shopping_cart,
-              size: 28,
-              color: Colors.black,
-            ),
-          ),
-          SizedBox(width: gap_xs),
-        ],
-      ),
+      appBar: MainAppBar(appBar: AppBar(), title: "찜"),
       body: ListView(
         children: [
           Column(

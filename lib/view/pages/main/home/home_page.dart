@@ -93,6 +93,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         height: 300,
         child: Swiper(
+          autoplay: true,
           itemBuilder: (BuildContext context, int index) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(20),
