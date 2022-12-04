@@ -1,5 +1,6 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
 
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,9 @@ class MyModalBottomSheet extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetail()));
+                      },
                       child: Text("가게보기", style: textTheme().bodyText2),
                     ),
                     TextButton(

@@ -2,7 +2,8 @@ import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
-import 'package:final_project_beamin_app/view/pages/main/components/my_modal_bottom_sheet.dart';
+import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_sheet.dart';
+import 'package:final_project_beamin_app/view/pages/main/order_list/my_order_detail.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,9 @@ Widget _bulidOrder(BuildContext context, String orderDay, String ordeyState, Str
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderDetail()));
+                              },
                               child: Text(
                                 "${storeName}  >",
                                 style: textTheme().headline2,

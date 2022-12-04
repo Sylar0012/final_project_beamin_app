@@ -4,8 +4,8 @@ import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OrderDetail extends StatelessWidget {
-  const OrderDetail({Key? key}) : super(key: key);
+class PaymentDetail extends StatelessWidget {
+  const PaymentDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +149,7 @@ AppBar _buildAppBar(context) {
     automaticallyImplyLeading: false,
     leading: IconButton(
       onPressed: () {
-        Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushNamed(context, "/home");
       },
       icon: Icon(CupertinoIcons.arrow_left),
     ),

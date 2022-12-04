@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_detail.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment_detail.dart';
 import 'package:flutter/material.dart';
 
 enum Comment { defaultMsg, costomMsg }
@@ -163,7 +163,7 @@ class _PaymentState extends State<Payment> {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetail()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentDetail()));
                       },
                       child: Text(
                         '주문 하기',

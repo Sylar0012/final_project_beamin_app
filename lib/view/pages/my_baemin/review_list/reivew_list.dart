@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_icons.dart';
-import 'package:final_project_beamin_app/view/pages/main/components/my_modal_bottom_sheet.dart';
+import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
