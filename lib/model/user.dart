@@ -1,24 +1,24 @@
 class User {
   int id;
-  String address;
+  String? address;
   String username;
-  String password;
-  String nickname;
-  String phone;
-  String photo;
-  String role;
-  bool isActive;
+  String? password;
+  String? nickname;
+  String? phone;
+  String? photo;
+  String? role;
+  bool? isActive;
 
   User({
     required this.id,
-    required this.address,
+    this.address,
     required this.username,
-    required this.password,
-    required this.nickname,
-    required this.phone,
-    required this.photo,
-    required this.role,
-    required this.isActive,
+    this.password,
+    this.nickname,
+    this.phone,
+    this.photo,
+    this.role,
+    this.isActive,
   });
 }
 
