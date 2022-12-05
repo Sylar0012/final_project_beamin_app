@@ -23,6 +23,9 @@ class _MainPageState extends State<MainPage> {
           setState(
             () {
               _selectedIndex = index;
+              if (_selectedIndex == null) {
+                _selectedIndex = 0;
+              }
               if (_selectedIndex == 4) {
                 _selectedIndex = 0;
                 Navigator.push(

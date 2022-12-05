@@ -1,15 +1,16 @@
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OrderDetail extends StatelessWidget {
-  const OrderDetail({Key? key}) : super(key: key);
+class PaymentDetail extends StatelessWidget {
+  const PaymentDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context),
       body: ListView(
         children: [
           Padding(
@@ -143,8 +144,15 @@ Row _buildOrderProduct(String productName, String price) {
   );
 }
 
-AppBar _buildAppBar() {
+AppBar _buildAppBar(context) {
   return AppBar(
+    automaticallyImplyLeading: false,
+    leading: IconButton(
+      onPressed: () {
+        Navigator.pushNamed(context, "/home");
+      },
+      icon: Icon(CupertinoIcons.arrow_left),
+    ),
     iconTheme: IconThemeData(color: Colors.black),
     title: Text(
       "결제 정보",

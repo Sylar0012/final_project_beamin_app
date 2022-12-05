@@ -12,6 +12,11 @@ class InfoUpdate extends StatefulWidget {
 }
 
 class _InfoUpdateState extends State<InfoUpdate> {
+  final _formKeyUserName = GlobalKey<FormState>();
+  final _formKeyPassword = GlobalKey<FormState>();
+  final _formKeyPhonen = GlobalKey<FormState>();
+  final _formKeyAddress = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,10 +58,39 @@ class _InfoUpdateState extends State<InfoUpdate> {
                 ],
               ),
               SizedBox(height: gap_s),
-              Container(
-                width: 170,
-                height: 30,
-                child: _buildTextFormField("이름"),
+              Form(
+                key: _formKeyUserName,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 170,
+                      height: 30,
+                      child: Container(child: _buildTextFormField("이름")),
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      onPressed: () {
+                        if (_formKeyUserName.currentState!.validate()) {}
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: kMainColor),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          '변경 하기',
+                          style: TextStyle(color: kMainColor, fontSize: 14, height: 1.7),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: gap_m),
               Divider(
@@ -69,87 +103,85 @@ class _InfoUpdateState extends State<InfoUpdate> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: gap_s),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Column(
+            child: Form(
+              key: _formKeyPassword,
+              child: Column(
+                children: [
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("아이디", style: textTheme().bodyText1),
-                      SizedBox(height: gap_l),
-                      Text("현재 비밀번호", style: textTheme().bodyText1),
-                      SizedBox(height: gap_l),
-                      Text("변경 비밀번호", style: textTheme().bodyText1),
-                      SizedBox(height: gap_l),
-                      Text("비밀번호 확인", style: textTheme().bodyText1),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("아이디", style: textTheme().bodyText1),
+                            SizedBox(height: gap_l),
+                            Text("현재 비밀번호", style: textTheme().bodyText1),
+                            SizedBox(height: gap_l),
+                            Text("변경 비밀번호", style: textTheme().bodyText1),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("ssar", style: textTheme().bodyText1),
+                            SizedBox(height: gap_m),
+                            Container(
+                              width: 300,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[100],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: _buildTextFormField("비밀번호"),
+                            ),
+                            SizedBox(height: gap_s),
+                            Container(
+                              width: 300,
+                              height: 30,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[100],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: _buildTextFormField("비밀번호"),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("ssar", style: textTheme().bodyText1),
-                      SizedBox(height: gap_m),
-                      Container(
-                        width: 300,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: TextButton(
+                        style: ButtonStyle(
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        child: _buildTextFormField("비밀번호"),
-                      ),
-                      SizedBox(height: gap_s),
-                      Container(
-                          width: 300,
+                        onPressed: () {
+                          if (_formKeyPassword.currentState!.validate()) {}
+                        },
+                        child: Container(
+                          width: 100,
                           height: 30,
                           decoration: BoxDecoration(
-                            color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(width: 1, color: kMainColor),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          child: _buildTextFormField("비밀번호")),
-                      SizedBox(height: gap_s),
-                      Container(
-                        width: 300,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(10),
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            '변경 하기',
+                            style: TextStyle(color: kMainColor, fontSize: 14, height: 1.7),
+                          ),
                         ),
-                        child: _buildTextFormField("비밀번호"),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: TextButton(
-                style: ButtonStyle(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-                onPressed: () {},
-                child: Container(
-                  width: 100,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: kMainColor),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    '변경 하기',
-                    style: TextStyle(color: kMainColor, fontSize: 14, height: 1.7),
-                  ),
-                ),
+                ],
               ),
             ),
           ),
@@ -175,50 +207,55 @@ class _InfoUpdateState extends State<InfoUpdate> {
           SizedBox(height: gap_xs),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: gap_s),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    width: 60,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: _buildTextFormPhone()),
-                Container(
-                    width: 70,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: _buildTextFormPhone()),
-                Container(
-                    width: 70,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: _buildTextFormPhone()),
-                TextButton(
-                  onPressed: () {},
-                  child: Container(
-                    width: 70,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: kMainColor),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      '재인증',
-                      style: TextStyle(color: kMainColor, fontSize: 14, height: 1.7),
+            child: Form(
+              key: _formKeyPhonen,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      width: 60,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: _buildTextFormPhone()),
+                  Container(
+                      width: 70,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: _buildTextFormPhone()),
+                  Container(
+                      width: 70,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: _buildTextFormPhone()),
+                  TextButton(
+                    onPressed: () {
+                      if (_formKeyPhonen.currentState!.validate()) {}
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1, color: kMainColor),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '재인증',
+                        style: TextStyle(color: kMainColor, fontSize: 14, height: 1.7),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           SizedBox(height: gap_s),
@@ -244,35 +281,38 @@ class _InfoUpdateState extends State<InfoUpdate> {
           SizedBox(height: gap_s),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: gap_s),
-            child: Container(
-              width: 200,
-              height: 30,
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: _buildTextFormField("주소"),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: gap_xs, vertical: gap_xs),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: () {},
-                child: Container(
-                  width: 100,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: kMainColor),
-                    borderRadius: BorderRadius.circular(20),
+            child: Form(
+              key: _formKeyAddress,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: _buildTextFormField("주소"),
                   ),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    '변경 하기',
-                    style: TextStyle(color: kMainColor, fontSize: 14, height: 1.7),
-                  ),
-                ),
+                  TextButton(
+                    onPressed: () {
+                      if (_formKeyAddress.currentState!.validate()) {}
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1, color: kMainColor),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        '변경 하기',
+                        style: TextStyle(color: kMainColor, fontSize: 14, height: 1.7),
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
@@ -308,7 +348,6 @@ class _InfoUpdateState extends State<InfoUpdate> {
       scrollPadding: EdgeInsets.zero,
       textAlign: TextAlign.center,
       textAlignVertical: TextAlignVertical.center,
-      validator: (value) => value!.isEmpty ? "값을 넣어 주세요" : null,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: kMenuIconColor),
@@ -332,10 +371,8 @@ class _InfoUpdateState extends State<InfoUpdate> {
 
   Widget _buildTextFormField(String? hintMsg) {
     return TextFormField(
-      scrollPadding: EdgeInsets.zero,
       textAlign: TextAlign.center,
       textAlignVertical: TextAlignVertical.bottom,
-      validator: (value) => value!.isEmpty ? "값을 넣어 주세요" : null,
       obscureText: hintMsg == "비밀번호" ? true : false,
       decoration: InputDecoration(
         hintText: "${hintMsg}를(을) 입력하세요",

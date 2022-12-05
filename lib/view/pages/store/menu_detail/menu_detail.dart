@@ -2,6 +2,7 @@ import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
 import 'package:flutter/cupertino.dart';
@@ -229,7 +230,9 @@ class _MenuDetailState extends State<MenuDetail> {
                     height: 40,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(color: kMainColor), color: kMainColor),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Payment()));
+                      },
                       child: Text(
                         '주문 하기',
                         style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),

@@ -2,6 +2,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/store_list.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/components/home_app_bar.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/components/store_category.dart';
 import 'package:final_project_beamin_app/view/pages/main/search/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: HomePageAppBar(appBar: AppBar(), userAddress: "외동 9999-9번지"),
       body: ListView(
         children: [
           _buildMainScreen(),
@@ -29,11 +31,11 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _bulidCategory("전체보기"),
-                    _bulidCategory("치킨"),
-                    _bulidCategory("피자"),
-                    _bulidCategory("버거"),
-                    _bulidCategory("분식"),
+                    StoreCatagory(text: "전체보기"),
+                    StoreCatagory(text: "치킨"),
+                    StoreCatagory(text: "피자"),
+                    StoreCatagory(text: "버거"),
+                    StoreCatagory(text: "분식"),
                   ],
                 ),
               ),
@@ -42,11 +44,11 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _bulidCategory("한식"),
-                    _bulidCategory("중식"),
-                    _bulidCategory("일식"),
-                    _bulidCategory("보쌈"),
-                    _bulidCategory("죽"),
+                    StoreCatagory(text: "한식"),
+                    StoreCatagory(text: "중식"),
+                    StoreCatagory(text: "일식"),
+                    StoreCatagory(text: "보쌈"),
+                    StoreCatagory(text: "죽"),
                   ],
                 ),
               ),
@@ -66,33 +68,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _bulidCategory(String text) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Search()));
-      },
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset("assets/images/category/${text}.jpg", width: 50, height: 50, fit: BoxFit.cover),
-          ),
-          SizedBox(height: gap_xs),
-          Text(
-            "${text}",
-            style: textTheme().bodyText2,
-          ),
-        ],
-      ),
-    );
-  }
-
   Padding _buildMainScreen() {
     return Padding(
       padding: const EdgeInsets.all(gap_s),
       child: Container(
         height: 300,
         child: Swiper(
+          autoplay: true,
           itemBuilder: (BuildContext context, int index) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(20),
@@ -110,35 +92,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
-
-AppBar _buildAppBar() {
-  return AppBar(
-    title: Align(alignment: AlignmentDirectional.bottomCenter, child: Text("김해시 외동 9999-9번지", style: textTheme().headline1)),
-    centerTitle: true,
-    elevation: 1.0,
-    actions: [
-      IconButton(
-        padding: EdgeInsets.zero, // 패딩 설정
-        constraints: BoxConstraints(),
-        onPressed: () {},
-        icon: Icon(
-          CupertinoIcons.bell,
-          size: 28,
-          color: Colors.black,
-        ),
-      ),
-      IconButton(
-        onPressed: () {},
-        icon: Icon(
-          CupertinoIcons.shopping_cart,
-          size: 28,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(
-        width: gap_xs,
-      )
-    ],
-  );
 }
