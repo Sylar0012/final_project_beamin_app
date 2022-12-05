@@ -9,16 +9,23 @@ class CustomFormLogin extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   CustomFormLogin({Key? key}) : super(key: key);
-
+  final username = TextEditingController();
+  final password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          CustomTextFormField(text: "아이디"),
+          CustomTextFormField(
+            text: "아이디",
+            controller: username,
+          ),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "비밀번호"),
+          CustomTextFormField(
+            text: "비밀번호",
+            controller: password,
+          ),
           SizedBox(height: gap_l),
           _buildLoginButton(context),
         ],
@@ -40,7 +47,16 @@ class CustomFormLogin extends StatelessWidget {
         child: TextButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+              if (username.text == "ssar" && password.text == "1234") {
+                Navigator.pushNamed(context, "/home");
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Color.fromRGBO(251, 82, 28, 0.8),
+                    content: Text("아이디 또는 비밀번호가 다릅니다."),
+                  ),
+                );
+              }
             }
           },
           child: Text(
