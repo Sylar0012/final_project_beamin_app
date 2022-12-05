@@ -1,3 +1,4 @@
+import 'package:final_project_beamin_app/model/store.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
@@ -17,12 +18,21 @@ class FavoriteStore extends StatelessWidget {
         children: [
           Column(
             children: [
-              // StoreList(img: "치킨", storeName: "네네치킨", starPoint: 4),
-              // StoreList(img: "피자", storeName: "도미노피자", starPoint: 5),
-              // StoreList(img: "버거", storeName: "롯데리아", starPoint: 3),
-              // StoreList(img: "분식", storeName: "신전떡볶이", starPoint: 5),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: storeList.length,
+                itemBuilder: (context, index) => StoreList(
+                  store: storeList[index],
+                ),
+                separatorBuilder: (context, index) => Divider(
+                  indent: 16, // 시작점 ( 앞에 공간 생김 )
+                  endIndent: 16, // 끝점 ( 뒤에 공간 생김 )
+                  color: Colors.grey,
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

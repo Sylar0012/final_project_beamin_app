@@ -1,4 +1,5 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/model/store.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,14 +50,19 @@ class _SearchState extends State<Search> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // StoreList(img: "치킨", storeName: "네네치킨", starPoint: 4),
-                  // StoreList(img: "피자", storeName: "도미노피자", starPoint: 5),
-                  // StoreList(img: "버거", storeName: "롯데리아", starPoint: 3),
-                  // StoreList(img: "분식", storeName: "신전떡볶이", starPoint: 5),
-                  // StoreList(img: "한식", storeName: "본비빔밥", starPoint: 4),
-                  // StoreList(img: "중식", storeName: "홍콩반점", starPoint: 3),
-                  // StoreList(img: "보쌈", storeName: "원할머니보쌈", starPoint: 3),
-                  // StoreList(img: "죽", storeName: "본죽", starPoint: 1),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: storeList.length,
+                    itemBuilder: (context, index) => StoreList(
+                      store: storeList[index],
+                    ),
+                    separatorBuilder: (context, index) => Divider(
+                      indent: 16, // 시작점 ( 앞에 공간 생김 )
+                      endIndent: 16, // 끝점 ( 뒤에 공간 생김 )
+                      color: Colors.grey,
+                    ),
+                  ),
                 ],
               ),
             ),

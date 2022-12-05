@@ -62,7 +62,7 @@ List<Store> storeList = [
     deliveryHour: "25 ~ 30 분",
     deliveryCost: 3000,
     intro: "굽네치킨 시켜먹어라",
-    notice: "굽네치킨 시켜먹으세요 여기 노맛임",
+    notice: "굽네치킨도 노맛인듯",
     starPoint: 4,
     isOpend: true,
     isAccept: true,
