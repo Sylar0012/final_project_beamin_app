@@ -1,9 +1,9 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../theme.dart';
 import '../components/store_list.dart';
 
 class Search extends StatefulWidget {
@@ -15,6 +15,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   int selectedId = 1;
+  String text = '';
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,6 @@ class _SearchState extends State<Search> {
             setState(() {
               selectedId = id;
             });
-            print("선택한 번호 : ${id}");
           },
           child: Text(
             Filter,
@@ -89,50 +89,75 @@ class _SearchState extends State<Search> {
       ),
     );
   }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pushNamed(context, "/home");
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          size: 24,
+          color: Colors.black,
+        ),
+      ),
+      elevation: 1.0,
+      title: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Colors.grey[200],
+        ),
+        width: double.infinity,
+        height: 40,
+        child: Center(
+          child: SearchTextField(
+            fieldValue: (String value) {
+              setState(() {
+                text = value;
+              });
+            },
+          ),
+        ),
+      ),
+      actions: [
+        IconButton(
+          padding: EdgeInsets.zero, // 패딩 설정
+          constraints: BoxConstraints(),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
+          },
+          icon: Icon(
+            CupertinoIcons.cart,
+            color: Colors.black,
+            size: 28,
+          ),
+        ),
+        SizedBox(
+          width: 22,
+        )
+      ],
+    );
+  }
 }
 
-AppBar _buildAppBar() {
-  return AppBar(
-    iconTheme: IconThemeData(
-      color: Colors.black,
-    ),
-    elevation: 1.0,
-    title: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.grey[200],
-      ),
-      width: double.infinity,
-      height: 40,
-      child: Align(
-        alignment: AlignmentDirectional.centerStart,
-        child: Row(
-          children: [
-            SizedBox(width: gap_xs),
-            Icon(
-              size: 24,
-              CupertinoIcons.search,
-              color: Colors.grey,
-            ),
-            Text("검색", style: textTheme().bodyText2),
-          ],
-        ),
-      ),
-    ),
-    actions: [
-      IconButton(
-        padding: EdgeInsets.zero, // 패딩 설정
-        constraints: BoxConstraints(),
-        onPressed: () {},
-        icon: Icon(
-          CupertinoIcons.cart,
-          color: Colors.black,
-          size: 28,
-        ),
-      ),
-      SizedBox(
-        width: 22,
-      )
-    ],
-  );
+class SearchTextField extends StatelessWidget {
+  const SearchTextField({
+    super.key,
+    required this.fieldValue,
+  });
+
+  final ValueChanged<String> fieldValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoSearchTextField(
+      onChanged: (String value) {
+        fieldValue('The text has changed to: $value');
+      },
+      onSubmitted: (String value) {
+        fieldValue('Submitted text: $value');
+      },
+    );
+  }
 }

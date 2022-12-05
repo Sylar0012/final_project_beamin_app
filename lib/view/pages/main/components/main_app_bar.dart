@@ -1,23 +1,23 @@
+import 'package:final_project_beamin_app/size.dart';
+import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
+import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class StoreDetailAppBer extends StatelessWidget implements PreferredSizeWidget {
-  const StoreDetailAppBer({required this.appBar, required this.title, required this.center, Key? key}) : super(key: key);
+class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const MainAppBar({required this.appBar, required this.title, Key? key}) : super(key: key);
   final AppBar appBar;
   final String title;
-  final bool center;
+
   @override
   AppBar build(BuildContext context) {
     return AppBar(
-      title: Text("${title}"),
-      centerTitle: center,
-      elevation: 1.0,
       automaticallyImplyLeading: false,
       leading: IconButton(
         onPressed: () {
-          Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.pushNamed(context, "/home");
         },
         icon: Icon(
           Icons.arrow_back,
@@ -25,6 +25,12 @@ class StoreDetailAppBer extends StatelessWidget implements PreferredSizeWidget {
           color: Colors.black,
         ),
       ),
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
+      title: Text("${title}", style: textTheme().headline1),
+      centerTitle: true,
+      elevation: 1.0,
       actions: [
         IconButton(
           onPressed: () {
@@ -36,9 +42,7 @@ class StoreDetailAppBer extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.black,
           ),
         ),
-        SizedBox(
-          width: 16,
-        )
+        SizedBox(width: gap_xs),
       ],
     );
   }
