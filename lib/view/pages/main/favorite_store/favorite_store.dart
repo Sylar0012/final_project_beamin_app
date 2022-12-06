@@ -1,4 +1,4 @@
-import 'package:final_project_beamin_app/model/store_list_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class FavoriteStore extends StatelessWidget {
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: storeFindAllRespDtoList.length,
+                itemCount: 1,
                 itemBuilder: (context, index) => StoreList(
                   storeFindAllRespDto: storeFindAllRespDtoList[index],
                 ),

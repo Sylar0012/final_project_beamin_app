@@ -348,6 +348,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
       scrollPadding: EdgeInsets.zero,
       textAlign: TextAlign.center,
       textAlignVertical: TextAlignVertical.center,
+      validator: (value) => value!.isEmpty ? null : null,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: kMenuIconColor),
@@ -373,6 +374,7 @@ class _InfoUpdateState extends State<InfoUpdate> {
     return TextFormField(
       textAlign: TextAlign.center,
       textAlignVertical: TextAlignVertical.bottom,
+      validator: (value) => value!.isEmpty ? null : null,
       obscureText: hintMsg == "비밀번호" ? true : false,
       decoration: InputDecoration(
         hintText: "${hintMsg}를(을) 입력하세요",

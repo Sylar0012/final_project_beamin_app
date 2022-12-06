@@ -1,5 +1,5 @@
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
-import 'package:final_project_beamin_app/model/store_list_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';

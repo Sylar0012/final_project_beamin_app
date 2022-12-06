@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/model/store.dart';
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
-import 'package:final_project_beamin_app/model/store_list_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 
 class MenuDetail extends StatefulWidget {
   const MenuDetail({Key? key}) : super(key: key);
-
   @override
   State<MenuDetail> createState() => _MenuDetailState();
 }
