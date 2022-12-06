@@ -64,7 +64,7 @@ class CustomFormJoin extends StatelessWidget {
         child: TextButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.pushNamed(context, "/login");
             }
           },
           child: Text(

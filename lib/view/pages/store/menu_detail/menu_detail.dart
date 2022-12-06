@@ -1,5 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/model/store.dart';
+import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_list_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
@@ -210,12 +212,17 @@ class _MenuDetailState extends State<MenuDetail> {
                               textColor: Colors.white,
                               label: '확인 하기',
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
+                                Navigator.pushNamed(context, "/myOrderList");
                               },
                             ),
                           ),
                         );
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetail()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StoreDetail(
+                                      storeDetailRespDto: storeDetailRespDtoList[0],
+                                    )));
                       },
                       child: Text(
                         '장바구니에 담기',

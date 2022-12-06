@@ -168,7 +168,7 @@ class _MyOrderListState extends State<MyOrderList> {
             ),
             child: TextButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Payment()));
+                Navigator.pushNamed(context, "/payment");
               },
               child: Text(
                 '${numberPriceFormat("${orderCount * price}")} 주문 하기',
@@ -216,7 +216,7 @@ class _MyOrderListState extends State<MyOrderList> {
             ),
             child: TextButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Payment()));
+                Navigator.pushNamed(context, "/payment");
               },
               child: Text(
                 '${numberPriceFormat("${deliveryCost + orderCount * price}")} 주문 하기',

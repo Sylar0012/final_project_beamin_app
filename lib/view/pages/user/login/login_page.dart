@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: gap_xl),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => JoinPage()));
+                    Navigator.pushNamed(context, "/join");
                   },
                   child: Text("아직 회원이 아니신가요?"),
                 ),

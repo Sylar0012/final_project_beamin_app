@@ -60,7 +60,15 @@ class _UserInactiveState extends State<UserInactive> {
           Align(
             alignment: Alignment.center,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Color.fromRGBO(251, 82, 28, 0.8),
+                    content: Text("아이디가 비활성화 되었습니다."),
+                  ),
+                );
+                Navigator.pushNamed(context, "/login");
+              },
               child: Container(
                 width: 200,
                 height: 30,

@@ -56,8 +56,6 @@ class _SearchState extends State<Search> {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: storeFindAllRespDtoList.length,
                     itemBuilder: (context, index) {
-                      int count = index;
-                      print("count : ${count}");
                       return StoreList(
                         storeFindAllRespDto: storeFindAllRespDtoList[index],
                       );

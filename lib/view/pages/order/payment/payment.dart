@@ -163,7 +163,7 @@ class _PaymentState extends State<Payment> {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentDetail()));
+                        Navigator.pushNamed(context, "/paymentDetail");
                       },
                       child: Text(
                         '주문 하기',

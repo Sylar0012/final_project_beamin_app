@@ -1,14 +1,9 @@
 import 'package:final_project_beamin_app/size.dart';
-import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
-import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
-import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/review_list/reivew_list.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/info_update.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../theme.dart';
-import '../main/home/home_page.dart';
 
 class MyBaemin extends StatelessWidget {
   const MyBaemin({Key? key}) : super(key: key);
@@ -22,9 +17,9 @@ class MyBaemin extends StatelessWidget {
           _buildUserTitle(context, InfoUpdate()),
           Row(
             children: [
-              _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", OrderList()),
-              _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", ReviewList()),
-              _buildMenu(context, CupertinoIcons.heart, "찜한 가게", FavoriteStore()),
+              _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", "/orderList"),
+              _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", "/reviewList"),
+              _buildMenu(context, CupertinoIcons.heart, "찜한 가게", "/favoriteStore"),
             ],
           ),
           Divider(
@@ -65,7 +60,7 @@ class MyBaemin extends StatelessWidget {
     );
   }
 
-  Widget _buildUserTitle(BuildContext context, settings) {
+  Widget _buildUserTitle(BuildContext context, msg) {
     return Column(
       children: [
         Padding(
@@ -87,7 +82,7 @@ class MyBaemin extends StatelessWidget {
                 Align(alignment: Alignment.center, child: Text("ssar님 반갑습니다!", style: textTheme().headline1)),
                 IconButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => settings));
+                      Navigator.pushNamed(context, msg);
                     },
                     icon: Icon(
                       CupertinoIcons.right_chevron,
@@ -117,7 +112,7 @@ class MyBaemin extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));
+            Navigator.popAndPushNamed(context, "/home");
           },
           icon: Icon(
             CupertinoIcons.home,
