@@ -4,7 +4,7 @@ import 'package:final_project_beamin_app/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:final_project_beamin_app/view/pages/components/my_icons.dart';
+import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
 
 class ReviewWrite extends StatefulWidget {
   const ReviewWrite({Key? key}) : super(key: key);
@@ -32,11 +32,11 @@ class _ReviewWriteState extends State<ReviewWrite> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    StarIcon(CupertinoIcons.star_fill, 40),
-                    StarIcon(CupertinoIcons.star_fill, 40),
-                    StarIcon(CupertinoIcons.star_fill, 40),
-                    StarIcon(CupertinoIcons.star_fill, 40),
-                    StarIcon(CupertinoIcons.star_fill, 40),
+                    MyStarIcon(CupertinoIcons.star_fill, 40),
+                    MyStarIcon(CupertinoIcons.star_fill, 40),
+                    MyStarIcon(CupertinoIcons.star_fill, 40),
+                    MyStarIcon(CupertinoIcons.star_fill, 40),
+                    MyStarIcon(CupertinoIcons.star_fill, 40),
                   ],
                 ),
                 SizedBox(height: gap_m),

@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/components/my_icons.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_sheet.dart';
+import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -166,9 +166,9 @@ Widget _bulidUserReview(String nickName, String orderList, starPoint) {
           ),
         ),
         SizedBox(width: gap_l),
-        for (int i = 0; i < starPoint; i++) StarIcon(CupertinoIcons.star_fill, 16),
+        for (int i = 0; i < starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 16),
         if (starPoint < 5)
-          for (int i = 0; i < 5 - starPoint; i++) StarIcon(CupertinoIcons.star, 16),
+          for (int i = 0; i < 5 - starPoint; i++) MyStarIcon(CupertinoIcons.star, 16),
         SizedBox(width: gap_xs),
         Container(
           height: 48,

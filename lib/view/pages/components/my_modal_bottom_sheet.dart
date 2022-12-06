@@ -1,6 +1,6 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
 
 import 'package:flutter/material.dart';
 

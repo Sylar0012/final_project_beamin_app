@@ -1,12 +1,13 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:final_project_beamin_app/model/store.dart';
+import 'package:final_project_beamin_app/model/store_list_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/store_list.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/home_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/store_category.dart';
 import 'package:final_project_beamin_app/view/pages/main/search/search.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -60,9 +61,9 @@ class _HomePageState extends State<HomePage> {
                   ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: storeList.length,
+                    itemCount: storeFindAllRespDtoList.length,
                     itemBuilder: (context, index) => StoreList(
-                      store: storeList[index],
+                      storeFindAllRespDto: storeFindAllRespDtoList[index],
                     ),
                     separatorBuilder: (context, index) => Divider(
                       indent: 16, // 시작점 ( 앞에 공간 생김 )

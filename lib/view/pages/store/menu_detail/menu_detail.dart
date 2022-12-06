@@ -1,10 +1,11 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/model/store.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

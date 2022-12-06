@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:flutter/material.dart';
 
-Widget StarIcon(CupertinoIcons, double sizeNum) {
+Widget MyStarIcon(CupertinoIcons, double sizeNum) {
   return Icon(
     CupertinoIcons,
     size: sizeNum,

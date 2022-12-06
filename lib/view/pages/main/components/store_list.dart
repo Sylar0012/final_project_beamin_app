@@ -1,19 +1,21 @@
-import 'package:final_project_beamin_app/constants.dart';
-import 'package:final_project_beamin_app/model/store.dart';
+import 'package:final_project_beamin_app/model/store_list_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
+import 'package:final_project_beamin_app/view/pages/util/number_formet/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../components/my_icons.dart';
+import '../../components/my_star_icon.dart';
 
 class StoreList extends StatelessWidget {
-  final Store store;
-  const StoreList({required this.store, Key? key}) : super(key: key);
+  const StoreList({required this.storeFindAllRespDto, Key? key}) : super(key: key);
+  final StoreFindAllRespDto storeFindAllRespDto;
 
   @override
   Widget build(BuildContext context) {
+    int count = storeFindAllRespDto.id - 1;
+    print("count : ${count}");
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetail()));
@@ -25,7 +27,7 @@ class StoreList extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.asset(
-                store.thumbnail,
+                storeFindAllRespDto.thumbnail,
                 width: 115,
                 height: 115,
                 fit: BoxFit.cover,
@@ -36,7 +38,7 @@ class StoreList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  store.name,
+                  storeFindAllRespDto.name,
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
@@ -54,18 +56,18 @@ class StoreList extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    for (int i = 0; i < store.starPoint; i++) StarIcon(CupertinoIcons.star_fill, 16),
-                    if (store.starPoint < 5)
-                      for (int i = 0; i < 5 - store.starPoint; i++) StarIcon(CupertinoIcons.star, 16),
+                    for (int i = 0; i < storeFindAllRespDto.starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 16),
+                    if (storeFindAllRespDto.starPoint < 5)
+                      for (int i = 0; i < 5 - storeFindAllRespDto.starPoint; i++) MyStarIcon(CupertinoIcons.star, 16),
                   ],
                 ),
                 SizedBox(height: gap_s),
                 Text(
-                  store.deliveryHour,
+                  "배달 요금 : " + numberPriceFormat("${storeFindAllRespDto.deliveryCost}"),
                   style: textTheme().bodyText2,
                 ),
                 SizedBox(height: gap_s),
-                Text(store.intro, style: textTheme().bodyText2),
+                Text(storeFindAllRespDto.intro, style: textTheme().bodyText2),
               ],
             ),
           ],

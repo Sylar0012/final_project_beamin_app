@@ -1,5 +1,6 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/model/store.dart';
+import 'package:final_project_beamin_app/model/store_list_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -53,10 +54,14 @@ class _SearchState extends State<Search> {
                   ListView.separated(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: storeList.length,
-                    itemBuilder: (context, index) => StoreList(
-                      store: storeList[index],
-                    ),
+                    itemCount: storeFindAllRespDtoList.length,
+                    itemBuilder: (context, index) {
+                      int count = index;
+                      print("count : ${count}");
+                      return StoreList(
+                        storeFindAllRespDto: storeFindAllRespDtoList[index],
+                      );
+                    },
                     separatorBuilder: (context, index) => Divider(
                       indent: 16, // 시작점 ( 앞에 공간 생김 )
                       endIndent: 16, // 끝점 ( 뒤에 공간 생김 )
