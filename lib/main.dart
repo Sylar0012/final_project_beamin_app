@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         "/myBaemin": (context) => MyBaemin(),
         "/favoriteStore": (context) => FavoriteStore(), // 더미 완
         "/orderDetail": (context) => MyOrderDetail(),
-        "/storeDetail": (context) => StoreDetail(),
+        "/storeDetail": (context) => StoreDetail(), // 더미 완
         "/orderList": (context) => OrderList(),
         "/myReview": (context) => ReviewList(),
         "/reviewWrite": (context) => ReviewWrite(),
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         "/myOrderList": (context) => MyOrderList(),
         "/payment": (context) => Payment(),
         "/paymentDetail": (context) => PaymentDetail(),
-        "/menuDetail": (context) => MenuDetail(),
+        "/menuDetail": (context) => MenuDetail(), // 더미 완
       },
       title: "beamin_ui",
       debugShowCheckedModeBanner: false,

@@ -44,6 +44,57 @@ class StoreReviewBody extends StatelessWidget {
       ],
     );
   }
+
+  Widget _bulidUserReview(String nickName, String orderList, String elseMenu, starPoint) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: gap_s),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(24),
+            child: Container(
+              height: 48,
+              width: 48,
+              child: Image.asset(
+                "${storeReviewFindByStoreIdRespDto.user.photo}",
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(width: gap_s),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${nickName}",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(1),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0,
+                        offset: const Offset(0.5, 1),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: gap_xs),
+                Text("${orderList} ${elseMenu}", style: textTheme().bodyText2),
+              ],
+            ),
+          ),
+          SizedBox(width: gap_l),
+          for (int i = 0; i < starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 24),
+          if (starPoint < 5)
+            for (int i = 0; i < 5 - starPoint; i++) MyStarIcon(CupertinoIcons.star, 24),
+        ],
+      ),
+    );
+  }
 }
 
 Widget _bulidOwnerComent(String Comment) {
@@ -100,49 +151,4 @@ Widget _bulidReviewImg({String? img}) {
   } else {
     return Container();
   }
-}
-
-Widget _bulidUserReview(String nickName, String orderList, String elseMenu, starPoint) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: gap_s),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          CupertinoIcons.person_alt_circle_fill,
-          size: 48,
-          color: Color(0xFF1E2D2A),
-        ),
-        SizedBox(width: gap_s),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${nickName}",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(1),
-                      blurRadius: 1.0,
-                      spreadRadius: 1.0,
-                      offset: const Offset(0.5, 1),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: gap_xs),
-              Text("${orderList} ${elseMenu}", style: textTheme().bodyText2),
-            ],
-          ),
-        ),
-        SizedBox(width: gap_l),
-        for (int i = 0; i < starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 24),
-        if (starPoint < 5)
-          for (int i = 0; i < 5 - starPoint; i++) MyStarIcon(CupertinoIcons.star, 24),
-      ],
-    ),
-  );
 }
