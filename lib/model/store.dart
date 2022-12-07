@@ -2,46 +2,46 @@ import 'package:final_project_beamin_app/model/user.dart';
 
 class Store {
   int id;
-  String category;
-  String name;
+  String? category;
+  String? name;
   String? phone;
-  String thumbnail;
+  String? thumbnail;
   String? ceoName;
   String? businessNumber;
   String? businessAddress;
   String? openTime;
   String? closeTime;
   int? minAmount;
-  String deliveryHour;
+  String? deliveryHour;
   int? deliveryCost;
-  String intro;
+  String? intro;
   String? notice;
-  double starPoint;
-  bool isOpend;
-  bool isAccept;
-  bool isClosure;
+  double? starPoint;
+  bool? isOpend;
+  bool? isAccept;
+  bool? isClosure;
   User? user;
 
   Store({
     required this.id,
-    required this.category,
-    required this.name,
+    this.category,
+    this.name,
     this.phone,
-    required this.thumbnail,
+    this.thumbnail,
     this.ceoName,
     this.businessNumber,
     this.businessAddress,
     this.openTime,
     this.closeTime,
     this.minAmount,
-    required this.deliveryHour,
+    this.deliveryHour,
     this.deliveryCost,
-    required this.intro,
+    this.intro,
     this.notice,
-    required this.starPoint,
-    required this.isOpend,
-    required this.isAccept,
-    required this.isClosure,
+    this.starPoint,
+    this.isOpend,
+    this.isAccept,
+    this.isClosure,
     this.user,
   });
 }

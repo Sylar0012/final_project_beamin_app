@@ -194,7 +194,6 @@ class _PaymentState extends State<Payment> {
           setState(() {
             selectedId = id;
           });
-          print("선택한 번호 : ${id}");
         },
         child: Text(
           paymentWay,

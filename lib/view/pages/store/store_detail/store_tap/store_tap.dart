@@ -6,8 +6,8 @@ import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap
 import 'package:flutter/material.dart';
 
 class StoreTap extends StatefulWidget {
-  const StoreTap({Key? key}) : super(key: key);
-
+  const StoreTap({required this.id, Key? key}) : super(key: key);
+  final int id;
   @override
   State<StoreTap> createState() => _StoreTapState();
 }
@@ -39,7 +39,7 @@ class _StoreTapState extends State<StoreTap> with SingleTickerProviderStateMixin
           child: TabBarView(
             controller: _tabController,
             children: [
-              MenuList(),
+              MenuList(id: widget.id),
               StoreInfo(),
               StoreReview(),
             ],
@@ -71,27 +71,4 @@ class _StoreTapState extends State<StoreTap> with SingleTickerProviderStateMixin
       ),
     );
   }
-}
-
-Widget _bulidStoreCategory(String text) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: gap_s),
-    child: Container(
-      child: Text(
-        text,
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 16,
-          shadows: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(1),
-              blurRadius: 1.0,
-              spreadRadius: 1.0,
-              offset: const Offset(0.5, 1),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
 }

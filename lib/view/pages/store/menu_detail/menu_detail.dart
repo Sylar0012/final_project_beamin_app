@@ -216,12 +216,7 @@ class _MenuDetailState extends State<MenuDetail> {
                             ),
                           ),
                         );
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => StoreDetail(
-                                      storeDetailRespDto: storeDetailRespDtoList[0],
-                                    )));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetail()));
                       },
                       child: Text(
                         '장바구니에 담기',

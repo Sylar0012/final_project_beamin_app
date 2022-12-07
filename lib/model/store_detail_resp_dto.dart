@@ -2,7 +2,7 @@ class StoreDetailRespDto {
   int id;
   String name;
   String thumbnail;
-  int starPoint;
+  double starPoint;
   String phone;
   int minAmount;
   String deliveryHour;
@@ -41,19 +41,6 @@ List<StoreDetailRespDto> storeDetailRespDtoList = [
     likeCount: 20,
   ),
   StoreDetailRespDto(
-    id: 2,
-    name: "굽네치킨 김해 외동점",
-    thumbnail: "assets/images/category/양념치킨.jpg",
-    deliveryHour: "35 ~ 40 분",
-    starPoint: 5,
-    phone: "055-000-0000",
-    minAmount: 14000,
-    deliveryCost: 4000,
-    ceoReviewCount: 30,
-    customerReviewCount: 203,
-    likeCount: 100,
-  ),
-  StoreDetailRespDto(
     id: 3,
     name: "도미노 피자 김해 외동점",
     thumbnail: "assets/images/store/피자.jpg",
@@ -65,19 +52,6 @@ List<StoreDetailRespDto> storeDetailRespDtoList = [
     ceoReviewCount: 71,
     customerReviewCount: 223,
     likeCount: 151,
-  ),
-  StoreDetailRespDto(
-    id: 4,
-    name: "피자 알볼로 김해 외동점",
-    thumbnail: "assets/images/store/피자.jpg",
-    deliveryHour: "25 ~ 30 분",
-    starPoint: 4,
-    phone: "055-000-0000",
-    minAmount: 12000,
-    deliveryCost: 2000,
-    ceoReviewCount: 11,
-    customerReviewCount: 273,
-    likeCount: 541,
   ),
   StoreDetailRespDto(
     id: 5,
@@ -93,19 +67,6 @@ List<StoreDetailRespDto> storeDetailRespDtoList = [
     likeCount: 1251,
   ),
   StoreDetailRespDto(
-    id: 6,
-    name: "맥도날드 김해 외동점",
-    thumbnail: "assets/images/store/버거.png",
-    deliveryHour: "25 ~ 30 분",
-    starPoint: 3,
-    phone: "055-000-0000",
-    minAmount: 5500,
-    deliveryCost: 3000,
-    ceoReviewCount: 541,
-    customerReviewCount: 4321,
-    likeCount: 3241,
-  ),
-  StoreDetailRespDto(
     id: 7,
     name: "죠스 떡볶이 김해 외동점",
     thumbnail: "assets/images/store/떡볶이.jpg",
@@ -119,19 +80,6 @@ List<StoreDetailRespDto> storeDetailRespDtoList = [
     likeCount: 351,
   ),
   StoreDetailRespDto(
-    id: 8,
-    name: "신전 떡볶이 김해 외동점",
-    thumbnail: "assets/images/store/떡볶이.jpg",
-    deliveryHour: "25 ~ 30 분",
-    starPoint: 2,
-    phone: "055-000-0000",
-    minAmount: 13000,
-    deliveryCost: 4000,
-    ceoReviewCount: 124,
-    customerReviewCount: 541,
-    likeCount: 640,
-  ),
-  StoreDetailRespDto(
     id: 9,
     name: "본 비빔밥 김해 외동점",
     thumbnail: "assets/images/store/비빔밥.jpg",
@@ -143,18 +91,5 @@ List<StoreDetailRespDto> storeDetailRespDtoList = [
     ceoReviewCount: 97,
     customerReviewCount: 131,
     likeCount: 120,
-  ),
-  StoreDetailRespDto(
-    id: 10,
-    name: "한솥 도시락 김해 외동점",
-    thumbnail: "assets/images/store/비빔밥.jpg",
-    deliveryHour: "25 ~ 30 분",
-    starPoint: 3,
-    phone: "055-000-0000",
-    minAmount: 15000,
-    deliveryCost: 2000,
-    ceoReviewCount: 0,
-    customerReviewCount: 1,
-    likeCount: 1,
   ),
 ];

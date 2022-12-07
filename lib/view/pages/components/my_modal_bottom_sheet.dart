@@ -35,12 +35,7 @@ class MyModalBottomSheet extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => StoreDetail(
-                                      storeDetailRespDto: storeDetailRespDtoList[0],
-                                    )));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetail()));
                       },
                       child: Text("가게보기", style: textTheme().bodyText2),
                     ),

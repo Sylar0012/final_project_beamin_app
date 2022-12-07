@@ -10,11 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 
 class StoreDetail extends StatelessWidget {
-  const StoreDetail({required this.storeDetailRespDto, Key? key}) : super(key: key);
-  final StoreDetailRespDto storeDetailRespDto;
-
+  const StoreDetail({Key? key}) : super(key: key);
+  static const storeDetail = "/storeDetail";
   @override
   Widget build(BuildContext context) {
+    var storeDetailRespDto = ModalRoute.of(context)!.settings.arguments as StoreDetailRespDto;
+    for (int i = 0; i < storeDetailRespDtoList.length; i++)
+      if (storeDetailRespDto.id == storeDetailRespDtoList[i].id) {
+        storeDetailRespDto = storeDetailRespDtoList[i];
+      }
+    print("storeDetailRespDto.id : ${storeDetailRespDto.id}");
     return Scaffold(
       appBar: StoreDetailAppBer(appBar: AppBar(), title: "", center: false),
       body: NestedScrollView(
@@ -29,7 +34,7 @@ class StoreDetail extends StatelessWidget {
             ),
           ];
         },
-        body: StoreTap(),
+        body: StoreTap(id: storeDetailRespDto.id),
       ),
     );
   }

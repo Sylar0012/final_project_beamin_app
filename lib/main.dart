@@ -12,6 +12,7 @@ import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_li
 import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment_detail.dart';
 import 'package:final_project_beamin_app/view/pages/store/menu_detail/menu_detail.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/components/store_detail_header.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
 import 'package:final_project_beamin_app/view/pages/user/join/join_Page.dart';
 import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
@@ -30,10 +31,11 @@ class MyApp extends StatelessWidget {
       routes: {
         "/login": (context) => LoginPage(),
         "/join": (context) => JoinPage(),
-        "/home": (context) => MainPage(),
+        "/home": (context) => MainPage(), // 더미 완
         "/myBaemin": (context) => MyBaemin(),
-        "/favoriteStore": (context) => FavoriteStore(),
+        "/favoriteStore": (context) => FavoriteStore(), // 더미 완
         "/orderDetail": (context) => MyOrderDetail(),
+        StoreDetail.storeDetail: (context) => StoreDetail(),
         "/orderList": (context) => OrderList(),
         "/myReview": (context) => ReviewList(),
         "/reviewWrite": (context) => ReviewWrite(),

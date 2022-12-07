@@ -2,6 +2,7 @@ import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
 import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/components/store_detail_header.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
 import 'package:final_project_beamin_app/view/pages/util/number_formet/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
@@ -55,9 +56,9 @@ class StoreList extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      for (int i = 0; i < storeFindAllRespDtoList[index].starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 16),
+                      for (double i = 0; i < storeFindAllRespDtoList[index].starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 16),
                       if (storeFindAllRespDtoList[index].starPoint < 5)
-                        for (int i = 0; i < 5 - storeFindAllRespDtoList[index].starPoint; i++) MyStarIcon(CupertinoIcons.star, 16),
+                        for (double i = 0; i < 5 - storeFindAllRespDtoList[index].starPoint; i++) MyStarIcon(CupertinoIcons.star, 16),
                     ],
                   ),
                   SizedBox(height: gap_s),
@@ -72,12 +73,21 @@ class StoreList extends StatelessWidget {
             ],
           ),
           onTap: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) => StoreDetail(
-                  storeDetailRespDto: storeDetailRespDtoList[index],
-                ),
+              StoreDetail.storeDetail,
+              arguments: StoreDetailRespDto(
+                id: storeFindAllRespDtoList[index].id,
+                name: "",
+                likeCount: 0,
+                thumbnail: "",
+                starPoint: storeFindAllRespDtoList[index].starPoint,
+                customerReviewCount: 0,
+                ceoReviewCount: 0,
+                deliveryCost: 0,
+                phone: "",
+                deliveryHour: "",
+                minAmount: 0,
               ),
             );
           },

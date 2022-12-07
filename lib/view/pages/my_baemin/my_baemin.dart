@@ -18,7 +18,7 @@ class MyBaemin extends StatelessWidget {
           Row(
             children: [
               _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", "/orderList"),
-              _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", "/reviewList"),
+              _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", "/myReview"),
               _buildMenu(context, CupertinoIcons.heart, "찜한 가게", "/favoriteStore"),
             ],
           ),
@@ -32,11 +32,11 @@ class MyBaemin extends StatelessWidget {
     );
   }
 
-  Widget _buildMenu(BuildContext context, CupertinoIcons, String msg, settings) {
+  Widget _buildMenu(BuildContext context, CupertinoIcons, String msg, String page) {
     return Expanded(
       child: TextButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => settings));
+          Navigator.pushNamed(context, page);
         },
         child: Container(
           height: 75,
