@@ -1,5 +1,6 @@
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -149,26 +150,10 @@ Widget _bulidUserReview(String nickName, String orderList, starPoint) {
           ),
         ),
         SizedBox(width: gap_l),
-        for (int i = 0; i < starPoint; i++) _bulidStarIcon(CupertinoIcons.star_fill),
+        for (int i = 0; i < starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 24),
         if (starPoint < 5)
-          for (int i = 0; i < 5 - starPoint; i++) _bulidStarIcon(CupertinoIcons.star),
+          for (int i = 0; i < 5 - starPoint; i++) MyStarIcon(CupertinoIcons.star, 24),
       ],
     ),
-  );
-}
-
-Widget _bulidStarIcon(CupertinoIcons) {
-  return Icon(
-    CupertinoIcons,
-    size: 24,
-    color: Color(0xFFFF521C),
-    shadows: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(1),
-        blurRadius: 1.0,
-        spreadRadius: 1.0,
-        offset: const Offset(0.5, 1),
-      )
-    ],
   );
 }

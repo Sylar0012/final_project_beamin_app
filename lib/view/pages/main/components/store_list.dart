@@ -57,8 +57,8 @@ class StoreList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       for (double i = 0; i < storeFindAllRespDtoList[index].starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 16),
-                      if (storeFindAllRespDtoList[index].starPoint < 5)
-                        for (double i = 0; i < 5 - storeFindAllRespDtoList[index].starPoint; i++) MyStarIcon(CupertinoIcons.star, 16),
+                      if (storeFindAllRespDtoList[index].starPoint < 5 && 1 < storeFindAllRespDtoList[index].starPoint)
+                        for (double i = 1; i <= 5 - storeFindAllRespDtoList[index].starPoint; i++) MyStarIcon(CupertinoIcons.star, 16),
                     ],
                   ),
                   SizedBox(height: gap_s),
