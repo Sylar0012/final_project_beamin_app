@@ -11,7 +11,7 @@ import 'package:like_button/like_button.dart';
 
 class StoreDetail extends StatelessWidget {
   const StoreDetail({Key? key}) : super(key: key);
-  static const storeDetail = "/storeDetail";
+
   @override
   Widget build(BuildContext context) {
     var storeDetailRespDto = ModalRoute.of(context)!.settings.arguments as StoreDetailRespDto;

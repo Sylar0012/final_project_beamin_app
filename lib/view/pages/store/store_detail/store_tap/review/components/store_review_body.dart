@@ -1,59 +1,61 @@
+import 'package:final_project_beamin_app/model/store_review_find_by_store_id_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_sheet.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ReviewList extends StatelessWidget {
-  const ReviewList({Key? key}) : super(key: key);
+class StoreReviewBody extends StatelessWidget {
+  const StoreReviewBody({required this.storeReviewFindByStoreIdRespDto, Key? key}) : super(key: key);
+  final StoreReviewFindByStoreIdRespDto storeReviewFindByStoreIdRespDto;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      body: ListView(
-        children: [
-          SizedBox(height: gap_s),
-          _bulidUserReview("ssar", "양념치킨, 후라이드 치킨", 4),
-          SizedBox(height: gap_s),
-          _bulidReviewImg(img: "치킨"),
-          SizedBox(height: gap_s),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: gap_s),
+    int a = storeReviewFindByStoreIdRespDto.orderDetailList.length;
+    String elseMenu = "";
+    if (1 < a) {
+      elseMenu = "외 ${a - 1}개";
+    }
+    for (int i = 1; i < a; i++) {}
+    return Column(
+      children: [
+        SizedBox(height: gap_s),
+        _bulidUserReview(
+          "${storeReviewFindByStoreIdRespDto.user.nickname}",
+          "${storeReviewFindByStoreIdRespDto.orderDetailList[0].menu.name}",
+          "${elseMenu}",
+          storeReviewFindByStoreIdRespDto.starPoint,
+        ),
+        SizedBox(height: gap_s),
+        _bulidReviewImg(img: "${storeReviewFindByStoreIdRespDto.photo}"),
+        SizedBox(height: gap_s),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: gap_s),
+          child: Align(
+            alignment: Alignment.centerLeft,
             child: Text(
-              "바삭하게 잘 튀겨주셔서 잘 먹고 갑니다 근데 왜 후라이드가 2마리 온거죠?",
+              "${storeReviewFindByStoreIdRespDto.content}",
               style: TextTheme().bodyText1,
             ),
           ),
-          SizedBox(height: gap_s),
-          _bulidOwnerComent("고객님은 나쁜 사람입니다. 착한 사람눈에는 양념치킨으로 보였을 텐데 말이죠...."),
-        ],
-      ),
+        ),
+        SizedBox(height: gap_s),
+        _bulidOwnerComent("${storeReviewFindByStoreIdRespDto.ceoReview?.content}"),
+      ],
     );
   }
-}
-
-AppBar _buildAppBar(BuildContext context) {
-  return AppBar(
-    iconTheme: IconThemeData(
-      color: Colors.black,
-    ),
-    title: Text("내 리뷰 목록", style: textTheme().headline1),
-    centerTitle: true,
-    elevation: 1.0,
-  );
 }
 
 Widget _bulidOwnerComent(String Comment) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: gap_s),
     child: Container(
-      color: Colors.grey[300],
+      color: Colors.grey[200],
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_s),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
               "사장님 댓글",
@@ -82,7 +84,7 @@ Widget _bulidOwnerComent(String Comment) {
 }
 
 Widget _bulidReviewImg({String? img}) {
-  if (img != null) {
+  if (img != "null") {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: gap_s),
       height: 200,
@@ -90,7 +92,7 @@ Widget _bulidReviewImg({String? img}) {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Image.asset(
-          "assets/images/category/${img}.jpg",
+          img!,
           fit: BoxFit.cover,
         ),
       ),
@@ -100,7 +102,7 @@ Widget _bulidReviewImg({String? img}) {
   }
 }
 
-Widget _bulidUserReview(String nickName, String orderList, starPoint) {
+Widget _bulidUserReview(String nickName, String orderList, String elseMenu, starPoint) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: gap_s),
     child: Row(
@@ -132,19 +134,14 @@ Widget _bulidUserReview(String nickName, String orderList, starPoint) {
                 ),
               ),
               SizedBox(height: gap_xs),
-              Text("${orderList}", style: textTheme().bodyText2),
+              Text("${orderList} ${elseMenu}", style: textTheme().bodyText2),
             ],
           ),
         ),
         SizedBox(width: gap_l),
-        for (int i = 0; i < starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 16),
+        for (int i = 0; i < starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 24),
         if (starPoint < 5)
-          for (int i = 0; i < 5 - starPoint; i++) MyStarIcon(CupertinoIcons.star, 16),
-        SizedBox(width: gap_xs),
-        Container(
-          height: 48,
-          child: Align(alignment: Alignment.topCenter, child: MyModalBottomSheet(text: "리뷰")),
-        ),
+          for (int i = 0; i < 5 - starPoint; i++) MyStarIcon(CupertinoIcons.star, 24),
       ],
     ),
   );

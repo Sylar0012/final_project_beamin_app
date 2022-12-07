@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         "/myBaemin": (context) => MyBaemin(),
         "/favoriteStore": (context) => FavoriteStore(), // 더미 완
         "/orderDetail": (context) => MyOrderDetail(),
-        StoreDetail.storeDetail: (context) => StoreDetail(),
+        "/storeDetail": (context) => StoreDetail(),
         "/orderList": (context) => OrderList(),
         "/myReview": (context) => ReviewList(),
         "/reviewWrite": (context) => ReviewWrite(),

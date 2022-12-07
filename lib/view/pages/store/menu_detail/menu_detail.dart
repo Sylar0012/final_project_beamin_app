@@ -211,7 +211,7 @@ class _MenuDetailState extends State<MenuDetail> {
                               textColor: Colors.white,
                               label: '확인 하기',
                               onPressed: () {
-                                Navigator.pushNamed(context, "/myOrderList");
+                                Navigator.pushNamed(context, "/myOrderList", arguments: 1);
                               },
                             ),
                           ),

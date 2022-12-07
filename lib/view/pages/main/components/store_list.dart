@@ -75,7 +75,7 @@ class StoreList extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(
               context,
-              StoreDetail.storeDetail,
+              "/storeDetail",
               arguments: StoreDetailRespDto(
                 id: storeFindAllRespDtoList[index].id,
                 name: "",

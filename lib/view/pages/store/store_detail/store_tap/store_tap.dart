@@ -41,7 +41,7 @@ class _StoreTapState extends State<StoreTap> with SingleTickerProviderStateMixin
             children: [
               MenuList(id: widget.id),
               StoreInfo(id: widget.id),
-              StoreReview(),
+              StoreReview(id: widget.id),
             ],
           ),
         ),
