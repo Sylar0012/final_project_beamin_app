@@ -59,6 +59,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Container(color: Colors.grey[200], height: 8),
+                  SizedBox(height: gap_s),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -69,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   ),
+                  SizedBox(height: gap_s),
                 ],
               ),
             ],

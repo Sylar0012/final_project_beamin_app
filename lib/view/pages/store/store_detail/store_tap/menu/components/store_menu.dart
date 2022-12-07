@@ -1,6 +1,6 @@
+import 'package:final_project_beamin_app/model/menu_find_by_id_resp_dto.dart';
 import 'package:final_project_beamin_app/model/menu_find_by_store_id_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
-import 'package:final_project_beamin_app/view/pages/store/menu_detail/menu_detail.dart';
 import 'package:final_project_beamin_app/view/pages/util/number_formet/my_number_formet.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,18 @@ class StoreMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push((context), MaterialPageRoute(builder: (context) => MenuDetail()));
+        Navigator.pushNamed(
+          context,
+          "/menuDetail",
+          arguments: MenuFindByStoreIdRespDto(
+            id: menuFindByStoreIdRespDto.id,
+            name: menuFindByStoreIdRespDto.name,
+            thumbnail: menuFindByStoreIdRespDto.thumbnail,
+            intro: menuFindByStoreIdRespDto.intro,
+            price: menuFindByStoreIdRespDto.price,
+            store: menuFindByStoreIdRespDto.store,
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(16),
