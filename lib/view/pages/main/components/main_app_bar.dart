@@ -34,7 +34,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyOrderList(
+                          id: 0,
+                        )));
           },
           icon: Icon(
             CupertinoIcons.shopping_cart,

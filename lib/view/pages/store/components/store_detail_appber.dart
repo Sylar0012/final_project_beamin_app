@@ -28,7 +28,7 @@ class StoreDetailAppBer extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
+            Navigator.pushNamed(context, "/myOrderList");
           },
           icon: Icon(
             CupertinoIcons.shopping_cart,

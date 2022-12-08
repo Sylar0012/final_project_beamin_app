@@ -5,13 +5,13 @@ import 'package:final_project_beamin_app/view/pages/order/order_list/components/
 import 'package:flutter/material.dart';
 
 class MyOrderList extends StatelessWidget {
-  const MyOrderList({Key? key}) : super(key: key);
+  final int id;
+  const MyOrderList({required this.id, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var menuFindByIdRespDto = ModalRoute.of(context)!.settings.arguments as MenuFindByIdRespDto?;
-
-    if (menuFindByIdRespDto == null) {
+    print("MyOrderList 페이지에 id값 : ${id}");
+    if (id == 0) {
       return Scaffold(
         appBar: OrderAppBar(appBar: AppBar(), center: true, title: "장바구니"),
         body: Center(child: Text("장바구니가 비었습니다 !", style: textTheme().headline1)),
@@ -19,7 +19,7 @@ class MyOrderList extends StatelessWidget {
     }
     final list = [];
     for (int i = 0; i < menuFindByIdRespDtoList.length; i++) {
-      if (menuFindByIdRespDto.id == menuFindByIdRespDtoList[i].id) {
+      if (id == menuFindByIdRespDtoList[i].id) {
         list.add(menuFindByIdRespDtoList[i]);
       }
     }
@@ -29,7 +29,9 @@ class MyOrderList extends StatelessWidget {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemCount: list.length,
-        itemBuilder: (context, index) => MyOrderListBody(),
+        itemBuilder: (context, index) => MyOrderListBody(
+          myOrderModal: list[index],
+        ),
       ),
     );
   }

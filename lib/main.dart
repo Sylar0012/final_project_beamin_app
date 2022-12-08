@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         "/reviewWrite": (context) => ReviewWrite(),
         "/inactive": (context) => UserInactive(),
         "/update": (context) => InfoUpdate(),
-        "/myOrderList": (context) => MyOrderList(),
+        "/myOrderList": (context) => MyOrderList(id: 0),
         "/payment": (context) => Payment(),
         "/paymentDetail": (context) => PaymentDetail(),
         "/menuDetail": (context) => MenuDetail(), // 더미 완

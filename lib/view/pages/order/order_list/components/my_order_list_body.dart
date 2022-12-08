@@ -1,5 +1,6 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/model/menu_find_by_id_resp_dto.dart';
+import 'package:final_project_beamin_app/model/my_order_modal.dart';
 
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
@@ -10,8 +11,8 @@ import 'package:flutter/material.dart';
 enum OrderType { delivery, pickup }
 
 class MyOrderListBody extends StatefulWidget {
-  const MyOrderListBody({Key? key}) : super(key: key);
-
+  const MyOrderListBody({required this.myOrderModal, Key? key}) : super(key: key);
+  final MyOrderModal myOrderModal;
   @override
   State<MyOrderListBody> createState() => _MyOrderListBodyState();
 }
@@ -34,8 +35,8 @@ class _MyOrderListBodyState extends State<MyOrderListBody> {
 
   @override
   Widget build(BuildContext context) {
-    var menuFindByIdRespDto = ModalRoute.of(context)!.settings.arguments as MenuFindByIdRespDto?;
-    print(menuFindByIdRespDto?.id);
+    myOrderListModal.add(widget.myOrderModal);
+    print("내 장바구니 목록 : ${myOrderListModal[0]}");
     return Container();
     // return Column(
     //   children: [
