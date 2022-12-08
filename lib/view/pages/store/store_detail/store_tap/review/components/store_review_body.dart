@@ -16,7 +16,7 @@ class StoreReviewBody extends StatelessWidget {
     if (1 < a) {
       elseMenu = "외 ${a - 1}개";
     }
-    for (int i = 1; i < a; i++) {}
+
     return Column(
       children: [
         SizedBox(height: gap_s),

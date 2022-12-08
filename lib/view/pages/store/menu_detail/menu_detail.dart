@@ -49,7 +49,7 @@ class _MenuDetailState extends State<MenuDetail> {
       }
     }
     MenuFindByIdRespDto menuFindByIdRespDto = list[0];
-    print(menuFindByIdRespDto.store.id);
+    print("fsdafsdafsadfsdfa : ${menuFindByIdRespDto.store.id}");
     print(menuFindByIdRespDto.store.name);
     return Scaffold(
       appBar: StoreDetailAppBer(appBar: AppBar(), title: "", center: false),
@@ -226,12 +226,22 @@ class _MenuDetailState extends State<MenuDetail> {
                               textColor: Colors.white,
                               label: '확인 하기',
                               onPressed: () {
-                                Navigator.pushNamed(context, "/myOrderList");
+                                Navigator.pushNamed(
+                                  context,
+                                  "/myOrderList",
+                                  arguments: MenuFindByIdRespDto(
+                                      id: menuFindByIdRespDto.id,
+                                      name: menuFindByIdRespDto.name,
+                                      thumbnail: menuFindByIdRespDto.thumbnail,
+                                      intro: menuFindByIdRespDto.intro,
+                                      price: menuFindByIdRespDto.price,
+                                      store: menuFindByIdRespDto.store),
+                                );
                               },
                             ),
                           ),
                         );
-                        Navigator.pushNamed(
+                        Navigator.popAndPushNamed(
                           context,
                           "/storeDetail",
                           arguments: StoreDetailRespDto(
