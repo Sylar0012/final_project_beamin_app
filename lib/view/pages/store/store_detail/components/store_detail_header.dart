@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
-import 'package:final_project_beamin_app/view/pages/util/number_formet/my_number_formet.dart';
+import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';

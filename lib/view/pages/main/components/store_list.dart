@@ -2,9 +2,7 @@ import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
 import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/components/store_detail_header.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
-import 'package:final_project_beamin_app/view/pages/util/number_formet/my_number_formet.dart';
+import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

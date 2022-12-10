@@ -17,10 +17,13 @@ import 'package:final_project_beamin_app/view/pages/store/store_detail/store_det
 import 'package:final_project_beamin_app/view/pages/user/join/join_Page.dart';
 import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

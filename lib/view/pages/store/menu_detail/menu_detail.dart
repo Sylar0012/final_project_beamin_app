@@ -12,7 +12,7 @@ import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_li
 import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
-import 'package:final_project_beamin_app/view/pages/util/number_formet/my_number_formet.dart';
+import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

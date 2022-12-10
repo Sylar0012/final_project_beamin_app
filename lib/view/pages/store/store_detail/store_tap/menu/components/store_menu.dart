@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/model/menu_find_by_id_resp_dto.dart';
 import 'package:final_project_beamin_app/model/menu_find_by_store_id_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
-import 'package:final_project_beamin_app/view/pages/util/number_formet/my_number_formet.dart';
+import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/material.dart';
 
 class StoreMenu extends StatelessWidget {
