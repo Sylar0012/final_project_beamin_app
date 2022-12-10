@@ -30,12 +30,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         IconButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => MyOrderList(
-                          id: 0,
-                        )));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
           },
           icon: Icon(
             CupertinoIcons.shopping_cart,

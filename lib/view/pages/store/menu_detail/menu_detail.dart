@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/model/menu_find_by_id_resp_dto.dart';
 import 'package:final_project_beamin_app/model/menu_find_by_store_id_resp_dto.dart';
+import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/model/store.dart';
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
 import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
@@ -15,6 +17,7 @@ import 'package:final_project_beamin_app/view/pages/store/store_detail/store_det
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 class MenuDetail extends StatefulWidget {
   const MenuDetail({Key? key}) : super(key: key);
@@ -220,34 +223,19 @@ class _MenuDetailState extends State<MenuDetail> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: Color.fromRGBO(251, 82, 28, 0.8),
-                            content: Text("장바구니에 담았습니다!"),
-                            action: SnackBarAction(
-                              textColor: Colors.white,
-                              label: '확인 하기',
-                              onPressed: () {
-                                print("스낵바에서 id값 던지나요? 이거 메뉴 아이디임 ${menuFindByIdRespDto.id}");
-                                print("혹시 이거 몇개인지 못알아서 터지는 건가요? ${menuFindByIdRespDtoList.length}");
-                                Navigator.pushNamed(context, "/myOrderList", arguments: menuFindByIdRespDto.id);
-                              },
-                            ),
+                            content: Text("장바구니에 담았습니다! "),
                           ),
                         );
-
-                        Navigator.popAndPushNamed(
+                        Navigator.pushNamed(
                           context,
-                          "/storeDetail",
-                          arguments: StoreDetailRespDto(
-                              id: menuFindByStoreIdRespDto.store.id,
-                              name: "",
-                              thumbnail: "",
-                              starPoint: 0,
-                              phone: "",
-                              minAmount: 0,
-                              deliveryHour: "",
-                              deliveryCost: 0,
-                              customerReviewCount: 0,
-                              ceoReviewCount: 0,
-                              likeCount: 0),
+                          Routers.myOrderList,
+                          arguments: MyOrderRespDto(
+                            id: menuFindByIdRespDto.id,
+                            name: menuFindByIdRespDto.name,
+                            thumbnail: menuFindByIdRespDto.thumbnail,
+                            intro: menuFindByIdRespDto.intro,
+                            price: menuFindByIdRespDto.price,
+                          ),
                         );
                       },
                       child: Text(

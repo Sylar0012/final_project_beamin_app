@@ -134,12 +134,7 @@ class _SearchState extends State<Search> {
           padding: EdgeInsets.zero, // 패딩 설정
           constraints: BoxConstraints(),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => MyOrderList(
-                          id: 0,
-                        )));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
           },
           icon: Icon(
             CupertinoIcons.cart,

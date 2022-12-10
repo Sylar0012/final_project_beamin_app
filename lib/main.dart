@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         Routers.reviewWrite: (context) => ReviewWrite(),
         Routers.inactive: (context) => UserInactive(),
         Routers.infoUpdate: (context) => InfoUpdate(),
-        Routers.myOrderList: (context) => MyOrderList(id: 0),
+        Routers.myOrderList: (context) => MyOrderList(),
         Routers.payment: (context) => Payment(),
         Routers.paymentDetail: (context) => PaymentDetail(),
         Routers.menuDetail: (context) => MenuDetail(), // 더미 완
