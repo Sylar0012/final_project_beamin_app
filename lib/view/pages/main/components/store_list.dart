@@ -10,7 +10,7 @@ import '../../components/my_star_icon.dart';
 
 class StoreList extends StatelessWidget {
   const StoreList({required this.storeFindAllList, Key? key}) : super(key: key);
-  final StoreFindAllRespDto storeFindAllList;
+  final Stores storeFindAllList;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -30,7 +30,7 @@ class StoreList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                storeFindAllList.storename,
+                storeFindAllList.storeName,
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,

@@ -2,6 +2,7 @@ import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/service/local_service.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/my_order_detail.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: navigatorKey,
+      initialRoute: Routers.login,
       routes: {
         Routers.login: (context) => LoginPage(),
         Routers.join: (context) => JoinPage(),
@@ -57,7 +59,6 @@ class MyApp extends StatelessWidget {
       title: "beamin_ui",
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: LoginPage(),
     );
   }
 }

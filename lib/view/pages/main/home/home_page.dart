@@ -76,10 +76,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                         return ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
-                          itemCount: model.storeFindAllList.length,
+                          itemCount: model.storesList.length,
                           itemBuilder: (context, index) {
                             return StoreList(
-                              storeFindAllList: model.storeFindAllList[index],
+                              storeFindAllList: model.storesList[index],
                             );
                           },
                         );

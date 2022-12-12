@@ -47,7 +47,7 @@ class UserService {
     // 6. AuthProvider에 로긴 정보 저장
     User user = User.fromJson(responseDto.data);
     UserSession.successAuthentication(user, jwtToken);
-
+    Logger().d("로그인시 id 값 저장 하나여 ${UserSession.user.id}");
     return responseDto; // ResponseDto 응답
   }
 
