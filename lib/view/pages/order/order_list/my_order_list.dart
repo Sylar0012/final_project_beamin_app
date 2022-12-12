@@ -12,8 +12,9 @@ class MyOrderList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var myOrderRespDto = ModalRoute.of(context)!.settings.arguments as MyOrderRespDto?;
+    final list = [];
 
-    if (myOrderRespDto?.id == null) {
+    if (myOrderRespDto?.id == null && list.length == 0) {
       Logger().d(myOrderRespDto?.id);
       return Scaffold(
         appBar: OrderAppBar(appBar: AppBar(), center: true, title: "장바구니"),
@@ -21,12 +22,14 @@ class MyOrderList extends StatelessWidget {
       );
     } else {
       Logger().d(myOrderRespDto?.id);
-      final list = [];
+
       for (int i = 0; i < myOrderRespDtoList.length; i++) {
         if (myOrderRespDto?.id == myOrderRespDtoList[i].id) {
           list.add(myOrderRespDtoList[i]);
         }
       }
+      Logger().d("리스트의 크기 : ${list.length}");
+
       return Scaffold(
         appBar: OrderAppBar(appBar: AppBar(), center: true, title: "장바구니"),
         body: ListView.builder(
