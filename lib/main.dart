@@ -1,4 +1,5 @@
 import 'package:final_project_beamin_app/core/routers.dart';
+import 'package:final_project_beamin_app/service/local_service.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
@@ -19,7 +20,10 @@ import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalService().fetchJwtToken();
+  // 자동 로그인시 필요
   runApp(ProviderScope(child: const MyApp()));
 }
 
@@ -31,6 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       routes: {
         Routers.login: (context) => LoginPage(),
         Routers.join: (context) => JoinPage(),

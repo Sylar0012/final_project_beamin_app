@@ -10,6 +10,13 @@ class HttpConnector {
   final headers = {"Content-Type": "application/json; charset=utf-8"};
   final Client _client = Client();
 
+  Future<Response> getInitSession(String path, String? jwtToken) async {
+    Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
+    Uri uri = Uri.parse("${host}${path}");
+    Response response = await Client().get(uri, headers: requestHeader);
+    return response;
+  }
+
   Future<Response> get(String path) async {
     Uri uri = Uri.parse("${host}${path}");
     Response response = await _client.get(uri);

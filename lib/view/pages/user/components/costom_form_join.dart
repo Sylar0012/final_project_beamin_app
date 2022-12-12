@@ -2,6 +2,7 @@ import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/components/costom_text_form_field.dart';
 import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
+import 'package:final_project_beamin_app/view/pages/util/validator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -22,9 +23,13 @@ class CustomFormJoin extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          CustomTextFormField(text: "아이디", controller: username),
+          CustomTextFormField(text: "아이디", controller: username, funValidator: validateUsername()),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "비밀번호", controller: password),
+          CustomTextFormField(
+            text: "비밀번호",
+            controller: password,
+            funValidator: validatePassword(),
+          ),
           SizedBox(height: gap_s),
           Divider(
             height: 1,
@@ -32,11 +37,19 @@ class CustomFormJoin extends StatelessWidget {
             color: Colors.grey[300],
           ),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "닉네임", controller: nickname),
+          CustomTextFormField(
+            text: "닉네임",
+            controller: nickname,
+            funValidator: validateNickName(),
+          ),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "휴대폰 번호", controller: phone),
+          CustomTextFormField(text: "휴대폰 번호", controller: phone, funValidator: validateTitle()),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "주소", controller: address),
+          CustomTextFormField(
+            text: "주소",
+            controller: address,
+            funValidator: validateTitle(),
+          ),
           SizedBox(height: gap_s),
           Divider(
             height: 1,

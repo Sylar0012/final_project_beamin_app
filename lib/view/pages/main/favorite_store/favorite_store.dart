@@ -16,19 +16,19 @@ class FavoriteStore extends StatelessWidget {
         children: [
           Column(
             children: [
-              ListView.separated(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 1,
-                itemBuilder: (context, index) => StoreList(
-                  storeFindAllRespDto: storeFindAllRespDtoList[index],
-                ),
-                separatorBuilder: (context, index) => Divider(
-                  indent: 16, // 시작점 ( 앞에 공간 생김 )
-                  endIndent: 16, // 끝점 ( 뒤에 공간 생김 )
-                  color: Colors.grey,
-                ),
-              ),
+              // ListView.separated(
+              //   shrinkWrap: true,
+              //   physics: NeverScrollableScrollPhysics(),
+              //   itemCount: 1,
+              //   itemBuilder: (context, index) => StoreList(
+              //     storeFindAllRespDto: storeFindAllRespDtoList[index],
+              //   ),
+              //   separatorBuilder: (context, index) => Divider(
+              //     indent: 16, // 시작점 ( 앞에 공간 생김 )
+              //     endIndent: 16, // 끝점 ( 뒤에 공간 생김 )
+              //     color: Colors.grey,
+              //   ),
+              // ),
             ],
           ),
         ],

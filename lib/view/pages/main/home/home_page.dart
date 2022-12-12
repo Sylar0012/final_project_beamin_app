@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:final_project_beamin_app/controller/main_controller.dart';
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
 import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
@@ -7,21 +8,27 @@ import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart
 import 'package:final_project_beamin_app/view/pages/main/components/store_list.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/home_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/store_category.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
-import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/model/home_page_model.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/model/home_page_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+final scaffoldKey = GlobalKey<ScaffoldState>();
+final refreshKey = GlobalKey<RefreshIndicatorState>();
+
+class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
+    MainController mainCT = ref.read(mainController);
+
     return Scaffold(
       appBar: HomePageAppBar(appBar: AppBar(), userAddress: "외동 9999-9번지"),
       body: ListView(
@@ -60,14 +67,23 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(color: Colors.grey[200], height: 8),
                   SizedBox(height: gap_s),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return StoreList(
-                        storeFindAllRespDto: storeFindAllRespDtoList[index],
-                      );
+                  Consumer(
+                    builder: (context, ref, child) {
+                      HomePageModel? model = ref.read(homePageViewModel);
+                      if (model == null) {
+                        return Text("잠시 기다려주세요");
+                      } else {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: model.storeFindAllList.length,
+                          itemBuilder: (context, index) {
+                            return StoreList(
+                              storeFindAllList: model.storeFindAllList[index],
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                   SizedBox(height: gap_s),

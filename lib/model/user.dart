@@ -1,5 +1,5 @@
 class User {
-  int id;
+  int? id;
   String? address;
   String username;
   String? password;
@@ -10,7 +10,7 @@ class User {
   bool? isActive;
 
   User({
-    required this.id,
+    this.id,
     this.address,
     required this.username,
     this.password,
@@ -20,6 +20,15 @@ class User {
     this.role,
     this.isActive,
   });
+
+  Map<String, dynamic> toJson() => {
+        "username": username,
+        "password": password,
+      };
+
+  User.fromJson(Map<String, dynamic> json)
+      : username = json["username"],
+        password = json["password"];
 }
 
 List<User> userList = [
