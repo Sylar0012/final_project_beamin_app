@@ -23,6 +23,7 @@ class HomePageViewModel extends StateNotifier<HomePageModel?> {
     ResponseDto responseDto = await mainService.fetchStoreList(UserSession.user.id);
 
     if (responseDto.data != null) {
+      Logger().d("영재 기분 좋아보이네");
       state = HomePageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(

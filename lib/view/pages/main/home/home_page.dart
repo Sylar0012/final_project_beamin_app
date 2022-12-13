@@ -69,7 +69,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   SizedBox(height: gap_s),
                   Consumer(
                     builder: (context, ref, child) {
-                      HomePageModel? model = ref.read(homePageViewModel);
+                      HomePageModel? model = ref.watch(homePageViewModel);
                       if (model == null) {
                         return Text("잠시 기다려주세요");
                       } else {

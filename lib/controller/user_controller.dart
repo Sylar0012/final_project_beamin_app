@@ -52,7 +52,7 @@ class UserController {
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
 
     // 3. 비지니스 로직 처리
-    if (responseDto.code == 1) {
+    if (responseDto.msg != null) {
       Navigator.popAndPushNamed(mContext!, Routers.login);
       // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
     } else {

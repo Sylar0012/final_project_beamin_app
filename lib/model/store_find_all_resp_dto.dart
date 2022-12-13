@@ -1,9 +1,18 @@
+class StoreFindAllRespDto {
+  List<Stores> stores;
+
+  StoreFindAllRespDto({required this.stores});
+
+  StoreFindAllRespDto.fromJson(Map<String, dynamic> json) : stores = json['stores'];
+}
+
 class Stores {
   int storeId;
   String storeName;
   String thumbnail;
-  int deliveryCost;
+  String deliveryCost;
   String intro;
+  int count;
   double starPoint;
 
   Stores({
@@ -12,14 +21,28 @@ class Stores {
     required this.thumbnail,
     required this.deliveryCost,
     required this.intro,
+    required this.count,
     required this.starPoint,
   });
+
+  /**
+   *   {
+      I/flutter ( 4533): │ 🐛     "storeId": 2,
+      I/flutter ( 4533): │ 🐛     "storeName": "그린치킨",
+      I/flutter ( 4533): │ 🐛     "deliveryCost": "2000",
+      I/flutter ( 4533): │ 🐛     "intro": "그린 치킨입니다.",
+      I/flutter ( 4533): │ 🐛     "thumbnail": null,
+      I/flutter ( 4533): │ 🐛     "count": 1,
+      I/flutter ( 4533): │ 🐛     "starPoint": 4.0
+      I/flutter ( 4533): │ 🐛   }
+   */
   Stores.fromJson(Map<String, dynamic> json)
       : storeId = json["storeId"],
         storeName = json["storeName"],
-        thumbnail = json["thumbnail"],
         deliveryCost = json["deliveryCost"],
         intro = json["intro"],
+        thumbnail = json["thumbnail"] ?? "",
+        count = json["count"],
         starPoint = json["starPoint"];
 }
 
