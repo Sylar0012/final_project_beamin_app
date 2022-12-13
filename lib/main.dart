@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
       routes: {
         Routers.login: (context) => LoginPage(),
         Routers.myBaemin: (context) => MyBaemin(),
+        Routers.home: (context) => HomePage(),
         Routers.favoriteStore: (context) => FavoriteStore(), // 더미 완
         Routers.myOrderList: (context) => MyOrderDetail(),
         Routers.orderList: (context) => OrderList(),

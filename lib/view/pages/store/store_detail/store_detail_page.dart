@@ -1,3 +1,4 @@
+import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/controller/store_controller.dart';
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
@@ -19,21 +20,14 @@ class StoreDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final scaffoldKey = GlobalKey<ScaffoldState>();
-    final refreshKey = GlobalKey<RefreshIndicatorState>();
-    StoreController StoreCT = StoreController();
     StoreDetailPageModel? model = ref.watch(storeDetailPageViewModel(storeId));
     return Scaffold(
       appBar: StoreDetailAppBer(appBar: AppBar(), title: "", center: false),
-      body: model == null
-          ? const Center(
-              child: Text("잠시 기다려주세요"),
-            )
-          : _buildNestedScrollView(model, StoreCT),
+      body: model == null ? const Center(child: CircularProgressIndicator(color: kMainColor)) : _buildNestedScrollView(model),
     );
   }
 
-  NestedScrollView _buildNestedScrollView(StoreDetailPageModel model, StoreController StoreCT) {
+  NestedScrollView _buildNestedScrollView(StoreDetailPageModel model) {
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [

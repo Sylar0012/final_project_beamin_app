@@ -17,7 +17,15 @@ class StoreDetailHeader extends StatelessWidget {
         Container(
           height: 300,
           decoration: BoxDecoration(
-            border: BorderDirectional(bottom: BorderSide(width: 1, color: Color.fromRGBO(221, 221, 221, 1))),
+            border: BorderDirectional(
+                bottom: BorderSide(
+              width: 1,
+              color: Color.fromRGBO(221, 221, 221, 1),
+            )),
+            image: DecorationImage(
+              image: AssetImage("${storeDetailRespDto.thumbnail}"),
+              fit: BoxFit.cover,
+            ),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

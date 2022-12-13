@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-final homePageViewModel = StateNotifierProvider.autoDispose<HomePageViewModel, HomePageModel?>((ref) {
+final homePageViewModel = StateNotifierProvider<HomePageViewModel, HomePageModel?>((ref) {
   return HomePageViewModel(null)..notifyViewModel();
 });
+
+//.autoDispose : 화면이 날아가면 데이터도 같이 날림
 
 class HomePageViewModel extends StateNotifier<HomePageModel?> {
   final MainService mainService = MainService();
