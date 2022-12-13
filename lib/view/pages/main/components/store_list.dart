@@ -1,5 +1,7 @@
+import 'package:final_project_beamin_app/controller/store_controller.dart';
+import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
-import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
+import 'package:final_project_beamin_app/model/home.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
@@ -13,13 +15,14 @@ class StoreList extends StatelessWidget {
   final Stores storeFindAllList;
   @override
   Widget build(BuildContext context) {
+    StoreController StoreCT = StoreController();
     return ListTile(
       title: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
-              storeFindAllList.thumbnail,
+              "${storeFindAllList.thumbnail}",
               width: 115,
               height: 115,
               fit: BoxFit.cover,
@@ -30,7 +33,7 @@ class StoreList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                storeFindAllList.storeName,
+                "${storeFindAllList.storeName}",
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -65,23 +68,7 @@ class StoreList extends StatelessWidget {
         ],
       ),
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          "/storeDetail",
-          arguments: StoreDetailRespDto(
-            id: storeFindAllList.storeId,
-            name: "",
-            likeCount: 0,
-            thumbnail: "",
-            starPoint: storeFindAllList.starPoint,
-            customerReviewCount: 0,
-            ceoReviewCount: 0,
-            deliveryCost: 0,
-            phone: "",
-            deliveryHour: "",
-            minAmount: 0,
-          ),
-        );
+        StoreCT.storeDetailPage(storeFindAllList.storeId);
       },
     );
   }

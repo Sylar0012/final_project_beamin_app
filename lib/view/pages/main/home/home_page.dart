@@ -1,7 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:final_project_beamin_app/controller/main_controller.dart';
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
-import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
+import 'package:final_project_beamin_app/model/home.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
@@ -27,8 +27,8 @@ final refreshKey = GlobalKey<RefreshIndicatorState>();
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
-    MainController mainCT = ref.read(mainController);
-
+    MainController mainCT = ref.watch(mainController);
+    HomePageModel? model = ref.watch(homePageViewModel);
     return Scaffold(
       appBar: HomePageAppBar(appBar: AppBar(), userAddress: "외동 9999-9번지"),
       body: ListView(

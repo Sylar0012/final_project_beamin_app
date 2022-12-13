@@ -15,7 +15,7 @@ import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_li
 import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment_detail.dart';
 import 'package:final_project_beamin_app/view/pages/store/menu_detail/menu_detail.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail_page.dart';
 import 'package:final_project_beamin_app/view/pages/user/join/join_Page.dart';
 import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
 import 'package:flutter/material.dart';
@@ -40,21 +40,12 @@ class MyApp extends StatelessWidget {
       initialRoute: Routers.login,
       routes: {
         Routers.login: (context) => LoginPage(),
-        Routers.join: (context) => JoinPage(),
-        Routers.home: (context) => MainPage(), // 더미 완
         Routers.myBaemin: (context) => MyBaemin(),
         Routers.favoriteStore: (context) => FavoriteStore(), // 더미 완
         Routers.myOrderList: (context) => MyOrderDetail(),
-        Routers.storeDetail: (context) => StoreDetail(), // 더미 완
         Routers.orderList: (context) => OrderList(),
         Routers.reviewList: (context) => ReviewList(),
-        Routers.reviewWrite: (context) => ReviewWrite(),
-        Routers.inactive: (context) => UserInactive(),
-        Routers.infoUpdate: (context) => InfoUpdate(),
         Routers.myOrderList: (context) => MyOrderList(),
-        Routers.payment: (context) => Payment(),
-        Routers.paymentDetail: (context) => PaymentDetail(),
-        Routers.menuDetail: (context) => MenuDetail(), // 더미 완
       },
       title: "beamin_ui",
       debugShowCheckedModeBanner: false,

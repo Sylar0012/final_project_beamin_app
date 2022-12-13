@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:final_project_beamin_app/core/http_connector.dart';
 import 'package:final_project_beamin_app/dto/response_dto.dart';
-import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
+import 'package:final_project_beamin_app/model/home.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/view/pages/util/parsing_util.dart';
 import 'package:http/http.dart';

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 class StoreTap extends StatefulWidget {
   const StoreTap({required this.id, Key? key}) : super(key: key);
   final int id;
+
   @override
   State<StoreTap> createState() => _StoreTapState();
 }

@@ -1,28 +1,25 @@
 import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
-import 'package:final_project_beamin_app/model/user_session.dart';
-import 'package:final_project_beamin_app/service/main_service.dart';
-import 'package:final_project_beamin_app/view/pages/main/home/model/home_page_model.dart';
+import 'package:final_project_beamin_app/service/store_service.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/model/store_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
-final homePageViewModel = StateNotifierProvider.autoDispose<HomePageViewModel, HomePageModel?>((ref) {
-  return HomePageViewModel(null)..notifyViewModel();
+final storeDetailPageViewModel = StateNotifierProvider.family.autoDispose<StoreDetailPageViewModel, StoreDetailPageModel?, int>((ref, storeId) {
+  return StoreDetailPageViewModel(null, storeId)..notifyViewModel();
 });
 
-class HomePageViewModel extends StateNotifier<HomePageModel?> {
-  final MainService mainService = MainService();
+class StoreDetailPageViewModel extends StateNotifier<StoreDetailPageModel?> {
+  final StoreService storeService = StoreService();
   final mContext = navigatorKey.currentContext;
-
-  HomePageViewModel(super.state);
-
+  final int storeId;
+  StoreDetailPageViewModel(super.state, this.storeId);
   Future<void> notifyViewModel() async {
-    ResponseDto responseDto = await mainService.fetchStoreList(UserSession.user.id);
+    ResponseDto responseDto = await storeService.fetchStoreDetail(storeId);
 
     if (responseDto.data != null) {
-      state = HomePageModel(responseDto.data);
+      state = StoreDetailPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         const SnackBar(content: Text("Jwt 토큰이 만료되었습니다. 로그인 페이지로 이동합니다.")),

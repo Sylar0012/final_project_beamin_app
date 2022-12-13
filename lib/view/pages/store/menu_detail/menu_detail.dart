@@ -1,23 +1,15 @@
-import 'dart:math';
-
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/model/menu_find_by_id_resp_dto.dart';
 import 'package:final_project_beamin_app/model/menu_find_by_store_id_resp_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
-import 'package:final_project_beamin_app/model/store.dart';
-import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
-import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 class MenuDetail extends StatefulWidget {
   const MenuDetail({Key? key}) : super(key: key);
@@ -46,9 +38,9 @@ class _MenuDetailState extends State<MenuDetail> {
     var menuFindByStoreIdRespDto = ModalRoute.of(context)!.settings.arguments as MenuFindByStoreIdRespDto;
 
     final list = [];
-    for (int i = 0; i < menuFindByIdRespDtoList.length; i++) {
-      if (menuFindByStoreIdRespDto.id == menuFindByIdRespDtoList[i].id) {
-        list.add(menuFindByIdRespDtoList[i]);
+    for (int i = 0; i < menuFindByStoreIdRespDtoList.length; i++) {
+      if (menuFindByStoreIdRespDto.id == menuFindByStoreIdRespDtoList[i].id) {
+        list.add(menuFindByStoreIdRespDtoList[i]);
       }
     }
     MenuFindByIdRespDto menuFindByIdRespDto = list[0];

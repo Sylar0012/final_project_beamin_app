@@ -10,7 +10,7 @@ class Stores {
   int storeId;
   String storeName;
   String thumbnail;
-  String deliveryCost;
+  int deliveryCost;
   String intro;
   int count;
   double starPoint;
@@ -41,7 +41,7 @@ class Stores {
         storeName = json["storeName"],
         deliveryCost = json["deliveryCost"],
         intro = json["intro"],
-        thumbnail = json["thumbnail"] ?? "",
+        thumbnail = json["thumbnail"],
         count = json["count"],
         starPoint = json["starPoint"];
 }

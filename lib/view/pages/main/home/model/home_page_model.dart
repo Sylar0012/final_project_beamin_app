@@ -1,4 +1,4 @@
-import 'package:final_project_beamin_app/model/store_find_all_resp_dto.dart';
+import 'package:final_project_beamin_app/model/home.dart';
 
 class HomePageModel {
   List<Stores> storesList;

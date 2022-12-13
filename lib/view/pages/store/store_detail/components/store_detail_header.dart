@@ -18,10 +18,6 @@ class StoreDetailHeader extends StatelessWidget {
           height: 300,
           decoration: BoxDecoration(
             border: BorderDirectional(bottom: BorderSide(width: 1, color: Color.fromRGBO(221, 221, 221, 1))),
-            image: DecorationImage(
-              image: AssetImage(storeDetailRespDto.thumbnail),
-              fit: BoxFit.cover,
-            ),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +57,7 @@ class StoreDetailHeader extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              "리뷰 : " + numberReviewFormat("${storeDetailRespDto.customerReviewCount}"),
+                              "리뷰 : " + numberReviewFormat("${storeDetailRespDto.reviewCount}"),
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Color(
@@ -79,7 +75,7 @@ class StoreDetailHeader extends StatelessWidget {
                             ),
                             SizedBox(width: gap_xl),
                             Text(
-                              "사장님 댓글 : " + numberReviewFormat("${storeDetailRespDto.ceoReviewCount}"),
+                              "사장님 댓글 : " + numberReviewFormat("${storeDetailRespDto.commentCount}"),
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Color(0xFF1E2D2A),

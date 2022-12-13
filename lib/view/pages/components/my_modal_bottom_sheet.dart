@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_detail_page.dart';
 
 import 'package:flutter/material.dart';
 
@@ -35,7 +35,7 @@ class MyModalBottomSheet extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetail()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetailPage(storeId: 1)));
                       },
                       child: Text("가게보기", style: textTheme().bodyText2),
                     ),
