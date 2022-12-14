@@ -28,7 +28,6 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     MainController mainCT = ref.watch(mainController);
-    HomePageModel? model = ref.watch(homePageViewModel);
     return Scaffold(
       appBar: HomePageAppBar(appBar: AppBar(), userAddress: "외동 9999-9번지"),
       body: ListView(

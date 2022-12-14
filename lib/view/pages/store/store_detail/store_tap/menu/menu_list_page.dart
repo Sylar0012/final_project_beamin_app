@@ -1,4 +1,5 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/dto/menu_req_dto.dart';
 import 'package:final_project_beamin_app/model/menu_find_by_store_id_resp_dto.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/components/store_menu.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/model/menu_list_model.dart';
@@ -26,6 +27,7 @@ class MenuList extends ConsumerWidget {
       itemBuilder: (context, index) {
         return StoreMenu(
           menuFindByStoreIdRespDto: model.menuList[index],
+          menuDetailReqDto: MenuDetailReqDto(storeId: id, menuId: model.menuList[index].id),
         );
       },
     );

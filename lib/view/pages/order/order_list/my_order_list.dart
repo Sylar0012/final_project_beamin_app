@@ -1,4 +1,4 @@
-import 'package:final_project_beamin_app/model/menu_find_by_id_resp_dto.dart';
+import 'package:final_project_beamin_app/model/menu_detail.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/components/order_appbar.dart';

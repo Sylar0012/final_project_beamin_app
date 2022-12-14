@@ -1,35 +1,21 @@
-import 'package:final_project_beamin_app/model/store_detail.dart';
-import 'package:final_project_beamin_app/model/home.dart';
-
-class MenuFindByIdRespDto {
-  int id;
+class MenuDetail {
   String name;
-  String thumbnail;
   String intro;
   int price;
-  Store store;
+  String thumbnail;
 
-  MenuFindByIdRespDto({
-    required this.id,
+  MenuDetail({
     required this.name,
     required this.thumbnail,
     required this.intro,
     required this.price,
-    required this.store,
   });
-}
 
-class Store {
-  int id;
-  String name;
-  int deliveryCost;
-  String deliveryHour;
-  Store({
-    required this.id,
-    required this.name,
-    required this.deliveryCost,
-    required this.deliveryHour,
-  });
+  MenuDetail.fromJson(Map<String, dynamic> json)
+      : name = json["name"],
+        thumbnail = json["thumbnail"],
+        intro = json["intro"],
+        price = json["price"];
 }
 
 // List<MenuFindByIdRespDto> menuFindByIdRespDtoList = [
