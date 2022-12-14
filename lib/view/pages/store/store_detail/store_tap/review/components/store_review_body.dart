@@ -35,12 +35,23 @@ class StoreReviewBody extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               "${model.content}",
-              style: TextTheme().bodyText1,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+                shadows: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(1),
+                    blurRadius: 1.0,
+                    spreadRadius: 1.0,
+                    offset: const Offset(0.5, 1),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         SizedBox(height: gap_s),
-        model.comment == "" ? Container() : _bulidOwnerComent("${model.comment}"),
+        model.comment == null ? Container() : _bulidOwnerComent("${model.comment}"),
       ],
     );
   }

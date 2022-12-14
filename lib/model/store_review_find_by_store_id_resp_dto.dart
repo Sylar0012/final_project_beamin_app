@@ -4,7 +4,7 @@ class CustomerReviewDto {
   String? crPhoto;
   String content;
   double starPoint;
-  String comment;
+  String? comment;
   List<CustomerMenuDtos> customerMenuDtos;
   String uphoto;
 
@@ -14,7 +14,7 @@ class CustomerReviewDto {
     this.crPhoto,
     required this.content,
     required this.starPoint,
-    required this.comment,
+    this.comment,
     required this.customerMenuDtos,
     required this.uphoto,
   });

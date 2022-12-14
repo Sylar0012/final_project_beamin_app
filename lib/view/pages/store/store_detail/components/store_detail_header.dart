@@ -123,7 +123,7 @@ class StoreDetailHeader extends StatelessWidget {
           color: Color.fromRGBO(221, 221, 221, 1),
         ),
         _buildStioreInfoText("최소 주문 금액 : " + numberPriceFormat("${storeDetailRespDto.minAmount}")),
-        _buildStioreInfoText("배달 예상 시간 : " + "${storeDetailRespDto.deliveryHour}"),
+        _buildStioreInfoText("배달 예상 시간 : " + "${storeDetailRespDto.deliveryHour} 분"),
         _buildStioreInfoText("배달 팁 : " + numberPriceFormat("${storeDetailRespDto.deliveryCost}")),
         SizedBox(height: gap_s),
       ],
