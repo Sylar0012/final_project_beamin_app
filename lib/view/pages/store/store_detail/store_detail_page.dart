@@ -1,6 +1,6 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/controller/store_controller.dart';
-import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_detail.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';

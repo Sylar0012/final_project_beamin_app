@@ -1,4 +1,4 @@
-import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_detail.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
@@ -23,7 +23,7 @@ class StoreDetailHeader extends StatelessWidget {
               color: Color.fromRGBO(221, 221, 221, 1),
             )),
             image: DecorationImage(
-              image: AssetImage("${storeDetailRespDto.thumbnail}"),
+              image: AssetImage("${storeDetailRespDto.thumbnail == "" ? 'assets/images/category/간장치킨.jpg' : storeDetailRespDto.thumbnail}"),
               fit: BoxFit.cover,
             ),
           ),

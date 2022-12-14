@@ -1,6 +1,6 @@
 import 'package:final_project_beamin_app/controller/store_controller.dart';
 import 'package:final_project_beamin_app/core/routers.dart';
-import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_detail.dart';
 import 'package:final_project_beamin_app/model/home.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';

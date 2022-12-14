@@ -6,7 +6,7 @@ import 'package:final_project_beamin_app/view/pages/store/store_detail/model/sto
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final storeDetailPageViewModel = StateNotifierProvider.family.autoDispose<StoreDetailPageViewModel, StoreDetailPageModel?, int>((ref, storeId) {
+final storeDetailPageViewModel = StateNotifierProvider.family<StoreDetailPageViewModel, StoreDetailPageModel?, int>((ref, storeId) {
   return StoreDetailPageViewModel(null, storeId)..notifyViewModel();
 });
 

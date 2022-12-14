@@ -13,20 +13,24 @@ class StoreReview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = [];
-    for (int i = 0; i < storeReviewFindByStoreIdRespDtoList.length; i++)
-      if (id == storeReviewFindByStoreIdRespDtoList[i].orderDetailList[0].order.storeId) {
-        list.add(storeReviewFindByStoreIdRespDtoList[i]);
-      }
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: list.length,
-      itemBuilder: (context, index) {
-        return StoreReviewBody(
-          storeReviewFindByStoreIdRespDto: list[index],
-        );
-      },
-    );
+    // final list = [];
+    // for (int i = 0; i < storeReviewFindByStoreIdRespDtoList.length; i++)
+    //   if (id == storeReviewFindByStoreIdRespDtoList[i].orderDetailList[0].order.storeId) {
+    //     list.add(storeReviewFindByStoreIdRespDtoList[i]);
+    //   }
+//     return ListView.builder(
+//       shrinkWrap: true,
+//       physics: NeverScrollableScrollPhysics(),
+//       itemCount: list.length,
+//       itemBuilder: (context, index) {
+//         return StoreReviewBody(
+//           storeReviewFindByStoreIdRespDto: list[index],
+//         );
+//       },
+//     );
+//   }
+// }
+
+    return Container();
   }
 }

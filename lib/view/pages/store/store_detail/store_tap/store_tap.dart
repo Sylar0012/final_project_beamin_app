@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/info/store_info.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/menu_list.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/menu_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/review/store_review.dart';
 import 'package:flutter/material.dart';
 

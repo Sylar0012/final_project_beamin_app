@@ -1,4 +1,4 @@
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/menu_list.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/menu_list_page.dart';
 
 class StoreDetailRespDto {
   String name;

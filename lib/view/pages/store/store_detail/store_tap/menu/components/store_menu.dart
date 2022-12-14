@@ -1,29 +1,15 @@
-import 'package:final_project_beamin_app/model/menu_find_by_id_resp_dto.dart';
-import 'package:final_project_beamin_app/model/menu_find_by_store_id_resp_dto.dart';
+import 'package:final_project_beamin_app/model/menu_list.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/material.dart';
 
 class StoreMenu extends StatelessWidget {
   const StoreMenu({required this.menuFindByStoreIdRespDto, Key? key}) : super(key: key);
-  final MenuFindByStoreIdRespDto menuFindByStoreIdRespDto;
+  final Menus menuFindByStoreIdRespDto;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          "/menuDetail",
-          arguments: MenuFindByStoreIdRespDto(
-            id: menuFindByStoreIdRespDto.id,
-            name: menuFindByStoreIdRespDto.name,
-            thumbnail: menuFindByStoreIdRespDto.thumbnail,
-            intro: menuFindByStoreIdRespDto.intro,
-            price: menuFindByStoreIdRespDto.price,
-            store: menuFindByStoreIdRespDto.store,
-          ),
-        );
-      },
+      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -32,7 +18,7 @@ class StoreMenu extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  menuFindByStoreIdRespDto.thumbnail,
+                  menuFindByStoreIdRespDto.thumbnail == "" ? "assets/images/category/간장치킨.jpg" : menuFindByStoreIdRespDto.thumbnail,
                   width: 115,
                   height: 115,
                   fit: BoxFit.cover,

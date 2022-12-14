@@ -1,4 +1,4 @@
-import 'package:final_project_beamin_app/model/store_detail_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_detail.dart';
 
 class StoreDetailPageModel {
   StoreDetailRespDto storeDetail;
