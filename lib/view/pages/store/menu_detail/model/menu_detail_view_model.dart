@@ -3,9 +3,7 @@ import 'package:final_project_beamin_app/dto/menu_req_dto.dart';
 import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/service/menu_service.dart';
-import 'package:final_project_beamin_app/service/store_service.dart';
 import 'package:final_project_beamin_app/view/pages/store/menu_detail/model/menu_detail_model.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/model/store_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

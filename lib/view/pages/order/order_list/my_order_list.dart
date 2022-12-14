@@ -1,46 +1,25 @@
-import 'package:final_project_beamin_app/model/menu_detail.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/components/order_appbar.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/components/my_order_list_body.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 class MyOrderList extends StatelessWidget {
-  const MyOrderList({Key? key}) : super(key: key);
-
+  const MyOrderList({this.myOrderRespDto, Key? key}) : super(key: key);
+  final MyOrderRespDto? myOrderRespDto;
   @override
   Widget build(BuildContext context) {
-    var myOrderRespDto = ModalRoute.of(context)!.settings.arguments as MyOrderRespDto?;
-    final list = [];
-
-    if (myOrderRespDto?.id == null && list.length == 0) {
-      Logger().d(myOrderRespDto?.id);
-      return Scaffold(
-        appBar: OrderAppBar(appBar: AppBar(), center: true, title: "장바구니"),
-        body: Center(child: Text("장바구니가 비었습니다 !", style: textTheme().headline1)),
-      );
-    } else {
-      Logger().d(myOrderRespDto?.id);
-
-      for (int i = 0; i < myOrderRespDtoList.length; i++) {
-        if (myOrderRespDto?.id == myOrderRespDtoList[i].id) {
-          list.add(myOrderRespDtoList[i]);
-        }
-      }
-      Logger().d("리스트의 크기 : ${list.length}");
-
-      return Scaffold(
-        appBar: OrderAppBar(appBar: AppBar(), center: true, title: "장바구니"),
-        body: ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: list.length,
-          itemBuilder: (context, index) => MyOrderListBody(
-            myOrderRespDto: list[index],
-          ),
-        ),
-      );
-    }
+    return Scaffold(
+      appBar: OrderAppBar(appBar: AppBar(), center: true, title: "장바구니"),
+      body: myOrderRespDto?.menuList == null ? _buildNullStoreId() : _buildNotNullStoreId(myOrderRespDto!),
+    );
   }
+}
+
+Widget _buildNullStoreId() {
+  return Center(child: Text("장바구니가 비었습니다 !", style: textTheme().headline1));
+}
+
+Widget _buildNotNullStoreId(MyOrderRespDto myOrderRespDto) {
+  return MyOrderListBody(myOrderRespDto: myOrderRespDto);
 }

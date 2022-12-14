@@ -1,11 +1,9 @@
 import 'package:final_project_beamin_app/constants.dart';
-import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/dto/menu_req_dto.dart';
-import 'package:final_project_beamin_app/model/menu_detail.dart';
-import 'package:final_project_beamin_app/model/menu_find_by_store_id_resp_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
 import 'package:final_project_beamin_app/view/pages/store/menu_detail/model/menu_detail_model.dart';
@@ -79,7 +77,7 @@ class _MenuDetailPageState extends ConsumerState<MenuDetailPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(model.menuDetail.name,
+                              Text(model.menuDetail.menuName,
                                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Color(0xFF1E2D2A), shadows: [
                                     BoxShadow(
                                       color: Colors.grey.withOpacity(1),
@@ -217,9 +215,20 @@ class _MenuDetailPageState extends ConsumerState<MenuDetailPage> {
                             content: Text("장바구니에 담았습니다! "),
                           ),
                         );
-                        Navigator.pushNamed(
+                        Navigator.push(
                           context,
-                          Routers.myOrderList,
+                          MaterialPageRoute(
+                            builder: (context) => MyOrderList(
+                              myOrderRespDto: MyOrderRespDto(
+                                storeId: widget.menuDetailReqDto.storeId,
+                                deliveryHour: model.menuDetail.deliveryHour,
+                                minAmount: model.menuDetail.minAmount,
+                                storeName: model.menuDetail.storeName,
+                                deliveryCost: model.menuDetail.deliveryCost,
+                                menuList: <OrderMenu>[OrderMenu(name: model.menuDetail.menuName, price: model.menuDetail.price, conut: orderCount)],
+                              ),
+                            ),
+                          ),
                         );
                       },
                       child: Text(

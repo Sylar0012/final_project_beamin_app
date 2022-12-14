@@ -1,7 +1,5 @@
 import 'package:final_project_beamin_app/constants.dart';
-import 'package:final_project_beamin_app/model/menu_detail.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
-
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
@@ -47,11 +45,11 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: gap_s),
-              Text("${widget.myOrderRespDto.store?.name}", style: textTheme().headline1),
+              Text("${widget.myOrderRespDto.storeName}", style: textTheme().headline1),
               SizedBox(height: gap_s),
-              _bulidOrderType("배달", OrderType.delivery, "최소 주문 금액 : ${numberPriceFormat("${widget.myOrderRespDto.price}")}"),
+              _bulidOrderType("배달", OrderType.delivery, "최소 주문 금액 : ${numberPriceFormat("${widget.myOrderRespDto.minAmount}")}"),
               SizedBox(height: gap_s),
-              _bulidOrderType("포장", OrderType.pickup, "포장 시간 : ${widget.myOrderRespDto.store?.deliveryHour}"),
+              _bulidOrderType("포장", OrderType.pickup, "포장 시간 : ${widget.myOrderRespDto.deliveryHour}분"),
               SizedBox(height: gap_s),
             ],
           ),
@@ -62,12 +60,28 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
           color: Colors.grey[300],
         ),
         SizedBox(height: gap_m),
+        _buildMenuList(),
+        SizedBox(height: gap_m),
+        Divider(
+          height: 1,
+          thickness: 1,
+          color: Colors.grey[300],
+        ),
+        if (_orderType == OrderType.delivery) _buildDelivery(),
+        if (_orderType == OrderType.pickup) _buildPickUp(),
+      ],
+    );
+  }
+
+  Widget _buildMenuList() {
+    return Column(
+      children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: gap_s),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("${widget.myOrderRespDto.name}", style: textTheme().headline2),
+              Text("${widget.myOrderRespDto.menuList[0].name}", style: textTheme().headline2),
               IconButton(
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
@@ -86,7 +100,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(numberPriceFormat("${widget.myOrderRespDto.price}"), style: textTheme().bodyText1),
+              Text(numberPriceFormat("${widget.myOrderRespDto.menuList[0].price}"), style: textTheme().bodyText1),
               Row(
                 children: [
                   IconButton(
@@ -122,14 +136,6 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             ],
           ),
         ),
-        SizedBox(height: gap_m),
-        Divider(
-          height: 1,
-          thickness: 1,
-          color: Colors.grey[300],
-        ),
-        if (_orderType == OrderType.delivery) _buildDelivery(),
-        if (_orderType == OrderType.pickup) _buildPickUp(),
       ],
     );
   }
@@ -142,9 +148,9 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
           child: Column(
             children: [
               SizedBox(height: gap_m),
-              _buildOrderPrice("상품 금액", numberPriceFormat("${widget.myOrderRespDto.price}")),
+              _buildOrderPrice("상품 금액", numberPriceFormat("${widget.myOrderRespDto.menuList[0].price}")),
               SizedBox(height: gap_s),
-              _buildOrderPrice("결제 금액", numberPriceFormat("${widget.myOrderRespDto.price * orderCount}")),
+              _buildOrderPrice("결제 금액", numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * orderCount}")),
               SizedBox(height: gap_m),
             ],
           ),
@@ -170,7 +176,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
                 Navigator.pushNamed(context, "/payment");
               },
               child: Text(
-                '${numberPriceFormat("${widget.myOrderRespDto.price * orderCount}")} 주문 하기',
+                '${numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * orderCount}")} 주문 하기',
                 style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
               ),
             ),
@@ -188,11 +194,12 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
           child: Column(
             children: [
               SizedBox(height: gap_m),
-              _buildOrderPrice("상품 금액", numberPriceFormat("${widget.myOrderRespDto.price}")),
+              _buildOrderPrice("상품 금액", numberPriceFormat("${widget.myOrderRespDto.menuList[0].price}")),
               SizedBox(height: gap_s),
-              _buildOrderPrice("배달 비용", numberPriceFormat("${widget.myOrderRespDto.store?.deliveryCost}")),
+              _buildOrderPrice("배달 비용", numberPriceFormat("${widget.myOrderRespDto.deliveryCost}")),
               SizedBox(height: gap_s),
-              _buildOrderPrice("결제 금액", numberPriceFormat("${widget.myOrderRespDto.price * orderCount + widget.myOrderRespDto.store!.deliveryCost}")),
+              _buildOrderPrice(
+                  "결제 금액", numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * orderCount + widget.myOrderRespDto.deliveryCost}")),
               SizedBox(height: gap_m),
             ],
           ),
@@ -218,7 +225,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
                 Navigator.pushNamed(context, "/payment");
               },
               child: Text(
-                '${numberPriceFormat("${widget.myOrderRespDto.price * orderCount + widget.myOrderRespDto.store!.deliveryCost}")} 주문 하기',
+                '${numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * orderCount + widget.myOrderRespDto.deliveryCost}")} 주문 하기',
                 style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
               ),
             ),

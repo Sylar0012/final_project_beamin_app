@@ -1,21 +1,33 @@
 class MenuDetail {
-  String name;
+  String menuName;
+  String thumbnail;
   String intro;
   int price;
-  String thumbnail;
+  String deliveryHour;
+  String storeName;
+  int minAmount;
+  int deliveryCost;
 
   MenuDetail({
-    required this.name,
+    required this.menuName,
     required this.thumbnail,
     required this.intro,
     required this.price,
+    required this.deliveryHour,
+    required this.storeName,
+    required this.minAmount,
+    required this.deliveryCost,
   });
 
   MenuDetail.fromJson(Map<String, dynamic> json)
-      : name = json["name"],
+      : menuName = json["menuName"],
         thumbnail = json["thumbnail"],
         intro = json["intro"],
-        price = json["price"];
+        price = json["price"],
+        deliveryHour = json["deliveryHour"],
+        storeName = json["storeName"],
+        minAmount = json["minAmount"],
+        deliveryCost = json["deliveryCost"];
 }
 
 // List<MenuFindByIdRespDto> menuFindByIdRespDtoList = [
