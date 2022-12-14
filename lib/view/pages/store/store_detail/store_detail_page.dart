@@ -22,7 +22,7 @@ class StoreDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     StoreDetailPageModel? model = ref.watch(storeDetailPageViewModel(storeId));
     return Scaffold(
-      appBar: StoreDetailAppBer(appBar: AppBar(), title: "", center: false),
+      appBar: StoreDetailAppBer(appBar: AppBar(), title: "${model?.storeDetail.name}", center: false),
       body: model == null ? const Center(child: CircularProgressIndicator(color: kMainColor)) : _buildNestedScrollView(model),
     );
   }

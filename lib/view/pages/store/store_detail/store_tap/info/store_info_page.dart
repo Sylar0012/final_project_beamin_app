@@ -11,7 +11,7 @@ class StoreInfo extends ConsumerWidget {
   final int id;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    StoreInfoModel? model = ref.read(storeInfoViewModel(id));
+    StoreInfoModel? model = ref.watch(storeInfoViewModel(id));
     return model == null ? const Center(child: CircularProgressIndicator(color: kMainColor)) : _bulidContainer(model);
   }
 

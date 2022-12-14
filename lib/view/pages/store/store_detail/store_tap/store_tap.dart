@@ -2,7 +2,7 @@ import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/info/store_info_page.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/menu_list_page.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/review/store_review.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/review/store_review_page.dart';
 import 'package:flutter/material.dart';
 
 class StoreTap extends StatefulWidget {
@@ -42,7 +42,7 @@ class _StoreTapState extends State<StoreTap> with SingleTickerProviderStateMixin
             children: [
               MenuList(id: widget.id),
               StoreInfo(id: widget.id),
-              StoreReview(id: widget.id),
+              StoreReviewPage(id: widget.id),
             ],
           ),
         ),

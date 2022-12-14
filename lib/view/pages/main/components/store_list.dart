@@ -22,7 +22,7 @@ class StoreList extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
-              "${storeFindAllList.thumbnail}",
+              storeFindAllList.thumbnail == "" ? "assets/images/category/치킨.jpg" : storeFindAllList.thumbnail,
               width: 115,
               height: 115,
               fit: BoxFit.cover,

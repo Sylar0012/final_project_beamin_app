@@ -6,12 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StoreReviewBody extends StatelessWidget {
-  const StoreReviewBody({required this.storeReviewFindByStoreIdRespDto, Key? key}) : super(key: key);
-  final StoreReviewFindByStoreIdRespDto storeReviewFindByStoreIdRespDto;
+  const StoreReviewBody({required this.model, Key? key}) : super(key: key);
+  final CustomerReviewDto model;
 
   @override
   Widget build(BuildContext context) {
-    int a = storeReviewFindByStoreIdRespDto.orderDetailList.length;
+    int a = model.customerMenuDtos.length;
     String elseMenu = "";
     if (1 < a) {
       elseMenu = "외 ${a - 1}개";
@@ -21,26 +21,26 @@ class StoreReviewBody extends StatelessWidget {
       children: [
         SizedBox(height: gap_s),
         _bulidUserReview(
-          "${storeReviewFindByStoreIdRespDto.user.nickname}",
-          "${storeReviewFindByStoreIdRespDto.orderDetailList[0].menu.name}",
+          "${model.nickname}",
+          "${model.customerMenuDtos[0].menuName}",
           "${elseMenu}",
-          storeReviewFindByStoreIdRespDto.starPoint,
+          model.starPoint,
         ),
         SizedBox(height: gap_s),
-        _bulidReviewImg(img: "${storeReviewFindByStoreIdRespDto.photo}"),
+        model.uphoto == "" ? Container() : _bulidReviewImg(img: "${model.uphoto}"),
         SizedBox(height: gap_s),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: gap_s),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "${storeReviewFindByStoreIdRespDto.content}",
+              "${model.content}",
               style: TextTheme().bodyText1,
             ),
           ),
         ),
         SizedBox(height: gap_s),
-        _bulidOwnerComent("${storeReviewFindByStoreIdRespDto.ceoReview?.content}"),
+        model.comment == "" ? Container() : _bulidOwnerComent("${model.comment}"),
       ],
     );
   }
@@ -56,10 +56,12 @@ class StoreReviewBody extends StatelessWidget {
             child: Container(
               height: 48,
               width: 48,
-              child: Image.asset(
-                "${storeReviewFindByStoreIdRespDto.user.photo}",
-                fit: BoxFit.cover,
-              ),
+              child: model.uphoto == ""
+                  ? Icon(CupertinoIcons.person_alt_circle_fill, size: 48, color: Colors.grey[400])
+                  : Image.asset(
+                      "${model.uphoto}",
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           SizedBox(width: gap_s),
@@ -135,20 +137,16 @@ Widget _bulidOwnerComent(String Comment) {
 }
 
 Widget _bulidReviewImg({String? img}) {
-  if (img != "null") {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: gap_s),
-      height: 200,
-      width: double.infinity,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Image.asset(
-          img!,
-          fit: BoxFit.cover,
-        ),
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: gap_s),
+    height: 200,
+    width: double.infinity,
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Image.asset(
+        img!,
+        fit: BoxFit.cover,
       ),
-    );
-  } else {
-    return Container();
-  }
+    ),
+  );
 }

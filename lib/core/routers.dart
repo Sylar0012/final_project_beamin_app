@@ -17,4 +17,5 @@ class Routers {
   static String storeDetail = "/storeDetail";
   static String reviewList = "/reviewList";
   static String infoUpdate = "/infoUpdate";
+  static String main = "/mainPage";
 }

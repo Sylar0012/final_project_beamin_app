@@ -4,6 +4,7 @@ import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/service/user_service.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -69,9 +70,9 @@ class UserController {
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchLogin(loginReqDto);
     //3. 비지니스 로직 처리
-    if (responseDto.msg == "로그인 성공") {
+    if (responseDto.code == 1) {
       Logger().d("로그인 성공시 바디 데이터 : ${responseDto.data}");
-      Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(Routers.home, (route) => false);
+      Navigator.popAndPushNamed(mContext!, Routers.main);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         const SnackBar(
