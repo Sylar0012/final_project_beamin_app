@@ -71,6 +71,30 @@ Function validateTitle() {
   };
 }
 
+Function validatePhoneNumber() {
+  return (String? value) {
+    if (value!.isEmpty) {
+      return "전화번호는 공백이 들어갈 수 없습니다.";
+    } else if (value.length > 11) {
+      return "전화번호의 길이를 초과하였습니다.";
+    } else {
+      return null;
+    }
+  };
+}
+
+Function validateAddress() {
+  return (String? value) {
+    if (value!.isEmpty) {
+      return "주소는 공백이 들어갈 수 없습니다.";
+    } else if (value.length > 50) {
+      return "주소의 길이를 초과하였습니다.";
+    } else {
+      return null;
+    }
+  };
+}
+
 Function validateContent() {
   return (String? value) {
     if (value!.isEmpty) {

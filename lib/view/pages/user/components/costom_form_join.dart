@@ -13,21 +13,25 @@ class CustomFormJoin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var username;
-    var password;
-    var nickname;
-    var phone;
-    var address;
+    final _username = TextEditingController();
+    final _password = TextEditingController();
+    final _nickname = TextEditingController();
+    final _phone = TextEditingController();
+    final _address = TextEditingController();
 
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          CustomTextFormField(text: "아이디", controller: username, funValidator: validateUsername()),
+          CustomTextFormField(
+            text: "아이디",
+            controller: _username,
+            funValidator: validateUsername(),
+          ),
           SizedBox(height: gap_s),
           CustomTextFormField(
             text: "비밀번호",
-            controller: password,
+            controller: _password,
             funValidator: validatePassword(),
           ),
           SizedBox(height: gap_s),
@@ -39,16 +43,20 @@ class CustomFormJoin extends StatelessWidget {
           SizedBox(height: gap_s),
           CustomTextFormField(
             text: "닉네임",
-            controller: nickname,
+            controller: _nickname,
             funValidator: validateNickName(),
           ),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "휴대폰 번호", controller: phone, funValidator: validateTitle()),
+          CustomTextFormField(
+            text: "휴대폰 번호",
+            controller: _phone,
+            funValidator: validatePhoneNumber(),
+          ),
           SizedBox(height: gap_s),
           CustomTextFormField(
             text: "주소",
-            controller: address,
-            funValidator: validateTitle(),
+            controller: _address,
+            funValidator: validateAddress(),
           ),
           SizedBox(height: gap_s),
           Divider(

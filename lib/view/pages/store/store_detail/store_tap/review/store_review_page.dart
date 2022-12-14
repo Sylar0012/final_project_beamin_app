@@ -1,4 +1,5 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/review/components/store_review_body.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/review/model/store_review_model.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/review/model/store_review_view_model.dart';
@@ -15,7 +16,7 @@ class StoreReviewPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     StoreReviewModel? model = ref.watch(storeReviewViewModel(id));
 
-    return model == null ? const Center(child: CircularProgressIndicator(color: kMainColor)) : _bulidListView(model);
+    return model == null ? Center(child: Text("리뷰가 없습니다!", style: textTheme().subtitle1)) : _bulidListView(model);
   }
 
   Widget _bulidListView(StoreReviewModel model) {

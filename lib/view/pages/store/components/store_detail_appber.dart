@@ -1,5 +1,6 @@
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
+import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class StoreDetailAppBer extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       leading: IconButton(
         onPressed: () {
-          Navigator.pop(context, MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.pop(context, MaterialPageRoute(builder: (context) => MainPage()));
         },
         icon: Icon(
           Icons.arrow_back,

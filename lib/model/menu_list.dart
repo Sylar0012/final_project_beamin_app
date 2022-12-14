@@ -7,6 +7,7 @@ class MenuListRespDto {
 }
 
 class Menus {
+  int id;
   String name;
   String intro;
   String thumbnail;
@@ -14,6 +15,7 @@ class Menus {
   String category;
 
   Menus({
+    required this.id,
     required this.name,
     required this.intro,
     required this.thumbnail,
@@ -22,7 +24,8 @@ class Menus {
   });
 
   Menus.fromJson(Map<String, dynamic> json)
-      : name = json["name"],
+      : id = json["id"],
+        name = json["name"],
         intro = json["intro"],
         thumbnail = json["thumbnail"],
         price = json["price"],

@@ -12,6 +12,20 @@ class JoinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context, LoginPage());
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            size: 24,
+            color: Colors.black,
+          ),
+        ),
+        title: Text("회원가입", style: textTheme().headline1),
+      ),
       body: Padding(
         padding: EdgeInsets.all(gap_s),
         child: ListView(
@@ -20,9 +34,6 @@ class JoinPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: gap_xl),
-                Text("회원가입", style: textTheme().headline1),
-                SizedBox(height: gap_xl),
                 CustomFormJoin(),
                 SizedBox(height: gap_xl),
               ],
