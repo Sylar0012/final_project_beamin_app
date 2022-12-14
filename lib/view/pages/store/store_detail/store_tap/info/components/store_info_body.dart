@@ -1,4 +1,4 @@
-import 'package:final_project_beamin_app/model/store_info_find_by_store_id_resp_dto.dart';
+import 'package:final_project_beamin_app/model/store_info.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class StoreInfoBody extends StatelessWidget {
   const StoreInfoBody({required this.storeInfoFindByStoreIdRespDto, Key? key}) : super(key: key);
-  final StoreInfoFindByStoreIdRespDto storeInfoFindByStoreIdRespDto;
+  final StoreInfo storeInfoFindByStoreIdRespDto;
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -33,8 +33,9 @@ class StoreInfoBody extends StatelessWidget {
         SizedBox(height: gap_m),
         _buildStoreInfo(CupertinoIcons.doc_text_search, "사업자 정보"),
         _buildStioreInfoText("상호명 : ${storeInfoFindByStoreIdRespDto.name}"),
-        _buildStioreInfoText("사업자 명 : ${storeInfoFindByStoreIdRespDto.ceoName}"),
+        _buildStioreInfoText("사업자 이름 : ${storeInfoFindByStoreIdRespDto.ceoName}"),
         _buildStioreInfoText("사업자 번호 : ${storeInfoFindByStoreIdRespDto.businessNumber}"),
+        _buildStioreInfoText("가게 주소 : ${storeInfoFindByStoreIdRespDto.businessAddress}"),
         SizedBox(height: gap_s),
       ],
     );
