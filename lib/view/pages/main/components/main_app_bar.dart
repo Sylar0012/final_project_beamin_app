@@ -1,3 +1,4 @@
+import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
@@ -17,7 +18,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       leading: IconButton(
         onPressed: () {
-          Navigator.pushNamed(context, "/home");
+          Navigator.pushNamed(context, Routers.main);
         },
         icon: Icon(
           Icons.arrow_back,

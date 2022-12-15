@@ -1,36 +1,43 @@
 import 'package:final_project_beamin_app/model/home.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
+import 'package:final_project_beamin_app/view/pages/main/favorite_store/model/favorite_store_page_model.dart';
+import 'package:final_project_beamin_app/view/pages/main/favorite_store/model/favorite_store_page_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/store_list.dart';
 
-class FavoriteStore extends StatelessWidget {
+class FavoriteStore extends ConsumerWidget {
   const FavoriteStore({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    FavoriteStorePageModel? model = ref.watch(favoriteStorePageViewModel);
     return Scaffold(
       appBar: MainAppBar(appBar: AppBar(), title: "찜"),
-      body: ListView(
+      body: Column(
         children: [
-          Column(
-            children: [
-              // ListView.separated(
-              //   shrinkWrap: true,
-              //   physics: NeverScrollableScrollPhysics(),
-              //   itemCount: 1,
-              //   itemBuilder: (context, index) => StoreList(
-              //     storeFindAllRespDto: storeFindAllRespDtoList[index],
-              //   ),
-              //   separatorBuilder: (context, index) => Divider(
-              //     indent: 16, // 시작점 ( 앞에 공간 생김 )
-              //     endIndent: 16, // 끝점 ( 뒤에 공간 생김 )
-              //     color: Colors.grey,
-              //   ),
-              // ),
-            ],
-          ),
+          model == null
+              ? Text("잠시 기다려주세요")
+              : Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: model.storesList.length,
+                          itemBuilder: (context, index) {
+                            return StoreList(
+                              storeFindAllList: model.storesList[index],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
         ],
       ),
     );
