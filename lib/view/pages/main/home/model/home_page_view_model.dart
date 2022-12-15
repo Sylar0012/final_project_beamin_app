@@ -22,16 +22,11 @@ class HomePageViewModel extends StateNotifier<HomePageModel?> {
 
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await mainService.fetchStoreList();
+    Logger().d("responseDto? ${responseDto.code}");
 
-    if (responseDto.data != null) {
+    if (responseDto.code == 1) {
       state = HomePageModel(responseDto.data);
-    } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-        const SnackBar(content: Text("Jwt 토큰이 만료되었습니다. 로그인 페이지로 이동합니다.")),
-      );
-      Future.delayed(const Duration(seconds: 1), () {
-        Navigator.pushNamedAndRemoveUntil(mContext!, Routers.login, (route) => false);
-      });
+      Logger().d("state? ${state?.storesList.length}");
     }
   }
 }

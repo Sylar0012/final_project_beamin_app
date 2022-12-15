@@ -24,15 +24,8 @@ class FavoriteStorePageViewModel extends StateNotifier<FavoriteStorePageModel?> 
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await mainService.fetchFavoriteStoreList();
 
-    if (responseDto.data != null) {
+    if (responseDto.code == 1) {
       state = FavoriteStorePageModel(responseDto.data);
-    } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-        const SnackBar(content: Text("Jwt 토큰이 만료되었습니다. 로그인 페이지로 이동합니다.")),
-      );
-      Future.delayed(const Duration(seconds: 1), () {
-        Navigator.pushNamedAndRemoveUntil(mContext!, Routers.login, (route) => false);
-      });
     }
   }
 }

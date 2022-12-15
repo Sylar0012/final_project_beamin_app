@@ -1,4 +1,5 @@
 import 'package:final_project_beamin_app/model/home.dart';
+import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/main/favorite_store/model/favorite_store_page_model.dart';
 import 'package:final_project_beamin_app/view/pages/main/favorite_store/model/favorite_store_page_view_model.dart';
@@ -19,7 +20,15 @@ class FavoriteStore extends ConsumerWidget {
       body: Column(
         children: [
           model == null
-              ? Text("잠시 기다려주세요")
+              ? Expanded(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "찜한 가게가 없어요 !",
+                      style: textTheme().headline1,
+                    ),
+                  ),
+                )
               : Expanded(
                   child: SingleChildScrollView(
                     child: Column(
