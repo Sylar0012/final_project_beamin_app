@@ -2,7 +2,7 @@ import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +34,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderListPage()));
           },
           icon: Icon(
             CupertinoIcons.shopping_cart,

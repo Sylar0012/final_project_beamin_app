@@ -4,14 +4,14 @@ import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
-import 'package:final_project_beamin_app/view/pages/main/order_list/my_order_detail.dart';
-import 'package:final_project_beamin_app/view/pages/main/order_list/order_list.dart';
+import 'package:final_project_beamin_app/view/pages/main/order_list/my_order_detial/my_order_detail.dart';
+import 'package:final_project_beamin_app/view/pages/main/order_list/order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/my_baemin.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/review_list/reivew_list.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_inactive/user_inactive.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/info_update.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment_detail.dart';
 import 'package:final_project_beamin_app/view/pages/store/menu_detail/menu_detail_page.dart';
@@ -44,10 +44,9 @@ class MyApp extends StatelessWidget {
         Routers.home: (context) => HomePage(),
         Routers.main: (context) => MainPage(),
         Routers.favoriteStore: (context) => FavoriteStore(), // 더미 완
-        Routers.myOrderList: (context) => MyOrderDetail(),
-        Routers.orderList: (context) => OrderList(),
+        Routers.orderList: (context) => OrderListPage(),
+        Routers.myOrderList: (context) => MyOrderListPage(),
         Routers.reviewList: (context) => ReviewList(),
-        Routers.myOrderList: (context) => MyOrderList(),
       },
       title: "beamin_ui",
       debugShowCheckedModeBanner: false,

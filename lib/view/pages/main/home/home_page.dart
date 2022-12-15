@@ -27,9 +27,8 @@ final refreshKey = GlobalKey<RefreshIndicatorState>();
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
-    MainController mainCT = ref.watch(mainController);
     return Scaffold(
-      appBar: HomePageAppBar(appBar: AppBar(), userAddress: "외동 9999-9번지"),
+      appBar: HomePageAppBar(appBar: AppBar()),
       body: ListView(
         children: [
           Column(

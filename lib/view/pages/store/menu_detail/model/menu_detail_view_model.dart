@@ -7,8 +7,7 @@ import 'package:final_project_beamin_app/view/pages/store/menu_detail/model/menu
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final menuDetailPageViewModel =
-    StateNotifierProvider.family.autoDispose<MenuDetailPageViewModel, MenuDetailPageModel?, MenuDetailReqDto>((ref, MenuDetailReqDto) {
+final menuDetailPageViewModel = StateNotifierProvider.family.autoDispose<MenuDetailPageViewModel, MenuDetailPageModel?, MenuDetailReqDto>((ref, MenuDetailReqDto) {
   return MenuDetailPageViewModel(null, MenuDetailReqDto)..notifyViewModel();
 });
 
@@ -21,7 +20,7 @@ class MenuDetailPageViewModel extends StateNotifier<MenuDetailPageModel?> {
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await menuService.fetchMenuDetail(menuDetailReqDto.storeId, menuDetailReqDto.menuId);
 
-    if (responseDto.data != null) {
+    if (responseDto.code == 1) {
       state = MenuDetailPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(

@@ -3,7 +3,7 @@ import 'package:final_project_beamin_app/dto/menu_req_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/payment.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
 import 'package:final_project_beamin_app/view/pages/store/menu_detail/model/menu_detail_model.dart';
@@ -218,7 +218,7 @@ class _MenuDetailPageState extends ConsumerState<MenuDetailPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MyOrderList(
+                            builder: (context) => MyOrderListPage(
                               myOrderRespDto: MyOrderRespDto(
                                 storeId: widget.menuDetailReqDto.storeId,
                                 deliveryHour: model.menuDetail.deliveryHour,

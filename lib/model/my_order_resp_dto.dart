@@ -22,8 +22,8 @@ class MyOrderRespDto {
     required this.storeName,
     required this.minAmount,
     required this.deliveryHour,
-    required this.menuList,
     required this.deliveryCost,
+    required this.menuList,
   });
 }
 

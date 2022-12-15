@@ -3,13 +3,13 @@ import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_sheet.dart';
-import 'package:final_project_beamin_app/view/pages/main/order_list/my_order_detail.dart';
+import 'package:final_project_beamin_app/view/pages/main/order_list/my_order_detial/my_order_detail.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OrderList extends StatelessWidget {
-  const OrderList({Key? key}) : super(key: key);
+class OrderListPage extends StatelessWidget {
+  const OrderListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

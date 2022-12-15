@@ -82,7 +82,7 @@ class MyBaemin extends StatelessWidget {
                 Align(alignment: Alignment.center, child: Text("ssar님 반갑습니다!", style: textTheme().headline1)),
                 IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, msg);
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => InfoUpdate()));
                     },
                     icon: Icon(
                       CupertinoIcons.right_chevron,
@@ -112,7 +112,7 @@ class MyBaemin extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, "/home");
+            Navigator.popAndPushNamed(context, "/main");
           },
           icon: Icon(
             CupertinoIcons.home,

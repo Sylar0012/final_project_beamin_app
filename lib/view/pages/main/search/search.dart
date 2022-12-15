@@ -1,26 +1,33 @@
 import 'package:final_project_beamin_app/constants.dart';
-import 'package:final_project_beamin_app/model/store.dart';
-import 'package:final_project_beamin_app/model/home.dart';
 import 'package:final_project_beamin_app/size.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list.dart';
+import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
+import 'package:final_project_beamin_app/view/pages/main/search/model/search_page_model.dart';
+import 'package:final_project_beamin_app/view/pages/main/search/model/search_page_view_model.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/store_list.dart';
 
-class Search extends StatefulWidget {
+class Search extends ConsumerStatefulWidget {
   const Search({Key? key}) : super(key: key);
 
   @override
-  State<Search> createState() => _SearchState();
+  ConsumerState<Search> createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchState extends ConsumerState<Search> {
   int selectedId = 1;
   String text = '';
 
   @override
   Widget build(BuildContext context) {
+    String enumName = "";
+    ModalRoute.of(context)!.settings.arguments == null ? enumName = "" : enumName = ModalRoute.of(context)!.settings.arguments as String;
+
+    SearchPageModel? model = ref.watch(searchPageViewModel(enumName));
+
     return Scaffold(
       appBar: _buildAppBar(),
       body: Column(
@@ -47,29 +54,26 @@ class _SearchState extends State<Search> {
             ),
           ),
           Container(color: Colors.grey[200], height: 2),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  // ListView.separated(
-                  //   shrinkWrap: true,
-                  //   physics: NeverScrollableScrollPhysics(),
-                  //   itemCount: 1,
-                  //   itemBuilder: (context, index) {
-                  //     return StoreList(
-                  //       storeFindAllRespDto: storeFindAllRespDtoList[index],
-                  //     );
-                  //   },
-                  //   separatorBuilder: (context, index) => Divider(
-                  //     indent: 16, // 시작점 ( 앞에 공간 생김 )
-                  //     endIndent: 16, // 끝점 ( 뒤에 공간 생김 )
-                  //     color: Colors.grey,
-                  //   ),
-                  // ),
-                ],
-              ),
-            ),
-          ),
+          model == null
+              ? Text("잠시 기다려주세요")
+              : Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: model.storesList.length,
+                          itemBuilder: (context, index) {
+                            return StoreList(
+                              storeFindAllList: model.storesList[index],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
         ],
       ),
     );
@@ -103,7 +107,7 @@ class _SearchState extends State<Search> {
     return AppBar(
       leading: IconButton(
         onPressed: () {
-          Navigator.pushNamed(context, "/home");
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
         },
         icon: Icon(
           Icons.arrow_back,
@@ -134,7 +138,7 @@ class _SearchState extends State<Search> {
           padding: EdgeInsets.zero, // 패딩 설정
           constraints: BoxConstraints(),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderList()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderListPage()));
           },
           icon: Icon(
             CupertinoIcons.cart,
