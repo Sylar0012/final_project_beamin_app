@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/model/user_info_update.dart';
 import 'package:final_project_beamin_app/size.dart';
+import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
+import 'package:final_project_beamin_app/view/pages/main/order_list/order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/model/my_info_model.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/model/my_info_view_model.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/review_list/reivew_list.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/info_update_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +30,9 @@ class MyInfoPage extends ConsumerWidget {
                 _buildUserTitle(context, "/update", model),
                 Row(
                   children: [
-                    _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", "/orderList"),
-                    _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", "/myReview"),
-                    _buildMenu(context, CupertinoIcons.heart, "찜한 가게", "/favoriteStore"),
+                    _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", OrderListPage()),
+                    _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", ReviewList()),
+                    _buildMenu(context, CupertinoIcons.heart, "찜한 가게", FavoriteStore()),
                   ],
                 ),
                 Divider(
@@ -40,11 +45,11 @@ class MyInfoPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildMenu(BuildContext context, CupertinoIcons, String msg, String page) {
+  Widget _buildMenu(BuildContext context, CupertinoIcons, String msg, settings) {
     return Expanded(
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, msg);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => settings));
         },
         child: Container(
           height: 75,
@@ -76,18 +81,13 @@ class MyInfoPage extends ConsumerWidget {
           child: Container(
             height: 75,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 model.userInfo.photo == ""
                     ? Icon(CupertinoIcons.person_alt_circle_fill, size: 48, color: Colors.grey[400])
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(50),
-                        child: Image.asset(
-                          model.userInfo.photo,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                        ),
+                        child: Image.memory(base64Decode(model.userInfo.photo), fit: BoxFit.cover, height: 48, width: 48),
                       ),
                 Align(alignment: Alignment.center, child: Text("${model.userInfo.nickname} 반갑습니다!", style: textTheme().headline1)),
                 IconButton(

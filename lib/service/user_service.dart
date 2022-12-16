@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:final_project_beamin_app/core/http_connector.dart';
 import 'package:final_project_beamin_app/dto/auth_req_dto.dart';
 import 'package:final_project_beamin_app/dto/response_dto.dart';
+import 'package:final_project_beamin_app/dto/user_info_update_req_dto.dart';
 import 'package:final_project_beamin_app/model/user.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/view/pages/util/parsing_util.dart';
@@ -18,6 +19,16 @@ class UserService {
   UserService._single();
   factory UserService() {
     return _instance;
+  }
+
+  Future<ResponseDto> fetchInfoUpdate(UserInfoUpdateReqDto userInfoUpdateReqDto) async {
+    String requestBody = jsonEncode(userInfoUpdateReqDto.toJson());
+    Response response = await httpConnector.put("/api/user/${UserSession.user.id}/update", requestBody, UserSession.jwtToken);
+    ResponseDto responseDto = toResponseDto(response);
+    if (responseDto.code == 1) {
+      responseDto.data = User.fromJson(responseDto.data);
+    }
+    return responseDto;
   }
 
   Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {

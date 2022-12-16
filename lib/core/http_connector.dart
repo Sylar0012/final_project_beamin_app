@@ -29,9 +29,10 @@ class HttpConnector {
     return response;
   }
 
-  Future<Response> put(String path, String body) async {
+  Future<Response> put(String path, String body, String? jwtToken) async {
+    Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
     Uri uri = Uri.parse("${host}${path}");
-    Response response = await _client.put(uri, body: body, headers: headers);
+    Response response = await _client.put(uri, body: body, headers: requestHeader);
     return response;
   }
 

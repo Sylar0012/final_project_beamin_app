@@ -1,10 +1,14 @@
+import 'package:final_project_beamin_app/core/http_connector.dart';
 import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/dto/auth_req_dto.dart';
 import 'package:final_project_beamin_app/dto/response_dto.dart';
+import 'package:final_project_beamin_app/dto/user_info_update_req_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/service/user_service.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/model/my_info_view_model.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/my_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -36,6 +40,19 @@ class UserController {
   final Ref _ref;
 
   UserController(this._ref);
+
+  Future<void> updatePost(
+      {required int id, required String oldPassword, required String newPassword, required String address, required String nickname, required String phone, required String photo}) async {
+    UserInfoUpdateReqDto userInfoUpdateReqDto = UserInfoUpdateReqDto(id: id, oldPassword: oldPassword, newPassword: newPassword, address: address, nickname: nickname, phone: phone, photo: photo);
+    ResponseDto responseDto = await userService.fetchInfoUpdate(userInfoUpdateReqDto);
+    if (responseDto.code == 1) {
+      Navigator.pop(mContext!, MaterialPageRoute(builder: (mContext) => MyInfoPage()));
+    } else {
+      ScaffoldMessenger.of(mContext!).showSnackBar(
+        SnackBar(content: Text("내정보 수정 실패 : ${responseDto.msg}")),
+      );
+    }
+  }
 
   Future<void> moveLoginPage() async {
     Navigator.popAndPushNamed(mContext!, Routers.login);

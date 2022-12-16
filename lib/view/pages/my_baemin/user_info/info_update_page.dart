@@ -1,31 +1,100 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/controller/user_controller.dart';
 import 'package:final_project_beamin_app/model/user_info_update.dart';
+import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_inactive/user_inactive.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/components/user_info_update_text_form_field.dart';
 import 'package:final_project_beamin_app/view/pages/util/validator_util.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 
-class InfoUpdatePage extends StatefulWidget {
+class InfoUpdatePage extends ConsumerStatefulWidget {
   const InfoUpdatePage({required this.userInfoUpdate, Key? key}) : super(key: key);
   final UserInfoUpdate userInfoUpdate;
   @override
-  State<InfoUpdatePage> createState() => _InfoUpdatePageState();
+  ConsumerState<InfoUpdatePage> createState() => _InfoUpdatePageState();
 }
 
-class _InfoUpdatePageState extends State<InfoUpdatePage> {
+class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
   final _username = TextEditingController();
   final _oldPassword = TextEditingController();
   final _newPassword = TextEditingController();
   final _phone = TextEditingController();
   final _address = TextEditingController();
-  final _photo = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+  XFile? _pickedFile;
+  String base64Image = "";
+  // 갤러리에 있는 사진 업로드
+  _getPhotoLibraryImage() async {
+    Logger().d("이거 실행됨?");
+
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    Logger().d("이거 실행됨??");
+
+    if (pickedFile != null) {
+      setState(() {
+        Logger().d("이거 실행됨? setstate");
+
+        _pickedFile = pickedFile;
+        postRequest(_pickedFile);
+      });
+    } else {
+      if (kDebugMode) {
+        print('이미지 선택안함');
+      }
+    }
+  }
+
+  // 카메라로 사진 업로드
+  _getCameraImage() async {
+    Logger().d("이거 실행됨?");
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
+    Logger().d("이거 실행됨???");
+
+    if (pickedFile != null) {
+      setState(() {
+        _pickedFile = pickedFile;
+        postRequest(_pickedFile);
+      });
+    } else {
+      if (kDebugMode) {
+        print('이미지 선택안함');
+      }
+    }
+  }
+
+  Uint8List userImage = new Uint8List(0);
+
+  // 이미지 base64로 전환
+  postRequest(_pickedFile) {
+    File imageFile = File(_pickedFile.path);
+    List<int> imageBytes = imageFile.readAsBytesSync();
+    base64Image = base64Encode(imageBytes);
+    decodeImage(base64Image);
+  }
+
+  decodeImage(base64Image) {
+    setState(() {
+      userImage = base64Decode(base64Image);
+      widget.userInfoUpdate.photo = base64Image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    UserController userCT = ref.read(userController);
+    base64Image = widget.userInfoUpdate.photo;
     return Scaffold(
       appBar: _buildAppBar(),
       body: Form(
@@ -43,7 +112,7 @@ class _InfoUpdatePageState extends State<InfoUpdatePage> {
             _buildAddressUpdate(),
             _buildDivider(),
             SizedBox(height: gap_s),
-            _buildUpdateButton(context),
+            _buildUpdateButton(context, userCT),
             SizedBox(height: gap_s),
             _buildDivider(),
             _bulidLogOutAndDisableUser(context),
@@ -54,7 +123,40 @@ class _InfoUpdatePageState extends State<InfoUpdatePage> {
     );
   }
 
-  Padding _buildUpdateButton(BuildContext context) {
+  _showBottomSheet() {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25),
+        ),
+      ),
+      builder: (context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () {
+                _getCameraImage();
+              },
+              child: const Text('사진찍기'),
+            ),
+            TextButton(
+              onPressed: () {
+                _getPhotoLibraryImage();
+              },
+              child: const Text('라이브러리에서 불러오기'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Padding _buildUpdateButton(BuildContext context, UserController userCT) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: gap_m),
       child: Container(
@@ -67,7 +169,16 @@ class _InfoUpdatePageState extends State<InfoUpdatePage> {
         ),
         child: TextButton(
           onPressed: () {
-            if (_formKey.currentState!.validate()) {}
+            if (_formKey.currentState!.validate()) {
+              userCT.updatePost(
+                  id: UserSession.user.id,
+                  oldPassword: _oldPassword.text.trim(),
+                  newPassword: _newPassword.text.trim(),
+                  address: _address.text,
+                  nickname: _username.text.trim(),
+                  phone: _phone.text.trim(),
+                  photo: base64Image);
+            }
           },
           child: Text(
             '회원 정보 수정',
@@ -87,10 +198,14 @@ class _InfoUpdatePageState extends State<InfoUpdatePage> {
           TextButton(onPressed: () {}, child: Text("로그아웃", style: textTheme().bodyText2)),
           SizedBox(width: gap_s),
           TextButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => UserInactive()));
-              },
-              child: Text("비활성화", style: TextStyle(color: Colors.red[600], fontSize: 14, height: 1.0))),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => UserInactive()));
+            },
+            child: Text(
+              "비활성화",
+              style: TextStyle(color: Colors.red[600], fontSize: 14, height: 1.0),
+            ),
+          ),
         ],
       ),
     );
@@ -193,7 +308,7 @@ class _InfoUpdatePageState extends State<InfoUpdatePage> {
             children: [
               Text("현재 아이디", style: textTheme().bodyText1),
               SizedBox(width: gap_xl),
-              Text("ssar", style: textTheme().bodyText1),
+              Text(widget.userInfoUpdate.username, style: textTheme().bodyText1),
             ],
           ),
           SizedBox(height: gap_l),
@@ -247,10 +362,7 @@ class _InfoUpdatePageState extends State<InfoUpdatePage> {
                   ? Icon(CupertinoIcons.person_alt_circle_fill, size: 85, color: Colors.grey[400])
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(50),
-                      child: Image.asset(
-                        widget.userInfoUpdate.photo,
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.memory(base64Decode(base64Image), fit: BoxFit.cover),
                     ),
             ),
             Positioned(
@@ -261,7 +373,9 @@ class _InfoUpdatePageState extends State<InfoUpdatePage> {
                 height: 30,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color.fromRGBO(221, 221, 221, 0.7)),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _showBottomSheet();
+                  },
                   child: Text(
                     "편집",
                     style: textTheme().bodyText1,
