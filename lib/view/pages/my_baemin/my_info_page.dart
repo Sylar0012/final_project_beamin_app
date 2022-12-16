@@ -1,34 +1,41 @@
+import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/model/my_info_model.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/model/my_info_view_model.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/info_update.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../theme.dart';
 
-class MyBaemin extends StatelessWidget {
-  const MyBaemin({Key? key}) : super(key: key);
+class MyInfoPage extends ConsumerWidget {
+  const MyInfoPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    MyInfoPageModel? model = ref.watch(myInfoViewModel);
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: Column(
-        children: [
-          _buildUserTitle(context, "/update"),
-          Row(
-            children: [
-              _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", "/orderList"),
-              _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", "/myReview"),
-              _buildMenu(context, CupertinoIcons.heart, "찜한 가게", "/favoriteStore"),
-            ],
-          ),
-          Divider(
-            height: 10,
-            thickness: 10,
-            color: Colors.grey[200],
-          ),
-        ],
-      ),
+      body: model == null
+          ? const Center(child: CircularProgressIndicator(color: kMainColor))
+          : Column(
+              children: [
+                _buildUserTitle(context, "/update", model),
+                Row(
+                  children: [
+                    _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", "/orderList"),
+                    _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", "/myReview"),
+                    _buildMenu(context, CupertinoIcons.heart, "찜한 가게", "/favoriteStore"),
+                  ],
+                ),
+                Divider(
+                  height: 10,
+                  thickness: 10,
+                  color: Colors.grey[200],
+                ),
+              ],
+            ),
     );
   }
 
@@ -60,7 +67,7 @@ class MyBaemin extends StatelessWidget {
     );
   }
 
-  Widget _buildUserTitle(BuildContext context, msg) {
+  Widget _buildUserTitle(BuildContext context, msg, MyInfoPageModel model) {
     return Column(
       children: [
         Padding(
@@ -70,15 +77,17 @@ class MyBaemin extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(
-                    "assets/images/category/피자.jpg",
-                    width: 50,
-                    height: 50,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                model.userInfo.photo == ""
+                    ? Icon(CupertinoIcons.person_alt_circle_fill, size: 48, color: Colors.grey[400])
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: Image.asset(
+                          model.userInfo.photo,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                 Align(alignment: Alignment.center, child: Text("ssar님 반갑습니다!", style: textTheme().headline1)),
                 IconButton(
                     onPressed: () {
@@ -106,7 +115,7 @@ class MyBaemin extends StatelessWidget {
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
-      title: Text("My 배민", style: textTheme().headline1),
+      title: Text("내 정보", style: textTheme().headline1),
       centerTitle: true,
       elevation: 1.0,
       actions: [

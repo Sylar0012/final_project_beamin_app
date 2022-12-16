@@ -2,7 +2,7 @@ class Routers {
   static String login = "/login";
   static String join = "/join";
   static String home = "/home";
-  static String myBaemin = "/myBaemin";
+  static String myInfo = "/myBaemin";
   static String store = "/store";
   static String favoriteStore = "/favoriteStore";
   static String orderDetail = "/orderDetail";

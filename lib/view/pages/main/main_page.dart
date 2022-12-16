@@ -2,7 +2,7 @@ import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/search/search_page.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/my_baemin.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/my_info_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
                 _selectedIndex = 0;
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyBaemin()),
+                  MaterialPageRoute(builder: (context) => MyInfoPage()),
                 );
               }
             },
@@ -43,12 +43,12 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(label: "찜한가게", icon: Icon(CupertinoIcons.heart)),
           BottomNavigationBarItem(label: "주문내역", icon: Icon(CupertinoIcons.doc_plaintext)),
           BottomNavigationBarItem(
-            label: "My 배민",
+            label: "내 정보",
             icon: IconButton(
               padding: EdgeInsets.zero, // 패딩 설정
               constraints: BoxConstraints(),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MyBaemin()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MyInfoPage()));
               },
               icon: Icon(
                 CupertinoIcons.person_circle,

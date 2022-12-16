@@ -5,7 +5,7 @@ import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list_page.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/my_baemin.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/my_info_page.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/review_list/reivew_list.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Routers.login,
       routes: {
         Routers.login: (context) => LoginPage(),
-        Routers.myBaemin: (context) => MyBaemin(),
+        Routers.myInfo: (context) => MyInfoPage(),
         Routers.home: (context) => HomePage(),
         Routers.main: (context) => MainPage(),
         Routers.favoriteStore: (context) => FavoriteStore(), // 더미 완

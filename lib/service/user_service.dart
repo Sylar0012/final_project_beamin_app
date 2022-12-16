@@ -51,12 +51,12 @@ class UserService {
     return responseDto; // ResponseDto 응답
   }
 
-  Future<ResponseDto> fetchUserInfo(int id) async {
-    Response response = await httpConnector.get("/user/$id");
+  Future<ResponseDto> fetchUserInfo() async {
+    Response response = await httpConnector.getInitSession("/api/user/${UserSession.user.id}/detail", UserSession.jwtToken);
     ResponseDto responseDto = toResponseDto(response);
     if (responseDto.data != null) {
       // 통신이 성공했을 때만 파싱을 해줘야 한다.
-      responseDto.data = User.fromJson(responseDto.data);
+      responseDto.data = UserInfo.fromJson(responseDto.data);
     }
     return responseDto;
   }
