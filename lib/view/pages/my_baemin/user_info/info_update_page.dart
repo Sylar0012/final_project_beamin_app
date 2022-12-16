@@ -115,7 +115,7 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
             _buildUpdateButton(context, userCT),
             SizedBox(height: gap_s),
             _buildDivider(),
-            _bulidLogOutAndDisableUser(context),
+            _bulidLogOutAndDisableUser(context, userCT),
             SizedBox(height: gap_s),
           ],
         ),
@@ -189,13 +189,17 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
     );
   }
 
-  Padding _bulidLogOutAndDisableUser(BuildContext context) {
+  Padding _bulidLogOutAndDisableUser(BuildContext context, UserController userCT) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: gap_s),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          TextButton(onPressed: () {}, child: Text("로그아웃", style: textTheme().bodyText2)),
+          TextButton(
+              onPressed: () {
+                userCT.logout();
+              },
+              child: Text("로그아웃", style: textTheme().bodyText2)),
           SizedBox(width: gap_s),
           TextButton(
             onPressed: () {
