@@ -54,6 +54,7 @@ class _SearchState extends ConsumerState<Search> {
             ),
           ),
           Container(color: Colors.grey[200], height: 2),
+          SizedBox(height: gap_xs),
           model == null
               ? Text("잠시 기다려주세요")
               : Expanded(

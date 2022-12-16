@@ -1,4 +1,5 @@
 import 'package:final_project_beamin_app/model/home.dart';
+import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/main_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/main/favorite_store/model/favorite_store_page_model.dart';
@@ -19,6 +20,7 @@ class FavoriteStore extends ConsumerWidget {
       appBar: MainAppBar(appBar: AppBar(), title: "찜"),
       body: Column(
         children: [
+          SizedBox(height: gap_xs),
           model == null
               ? Expanded(
                   child: Align(
@@ -47,6 +49,7 @@ class FavoriteStore extends ConsumerWidget {
                     ),
                   ),
                 ),
+          SizedBox(height: gap_xs),
         ],
       ),
     );
