@@ -21,7 +21,9 @@ class _InfoUpdatePageState extends State<InfoUpdatePage> {
   final _newPassword = TextEditingController();
   final _phone = TextEditingController();
   final _address = TextEditingController();
+  final _photo = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
