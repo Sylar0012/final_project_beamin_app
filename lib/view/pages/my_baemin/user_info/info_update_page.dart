@@ -203,7 +203,7 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
           SizedBox(width: gap_s),
           TextButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => UserInactive()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => UserInactivePage()));
             },
             child: Text(
               "비활성화",

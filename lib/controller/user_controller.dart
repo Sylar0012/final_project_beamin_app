@@ -41,9 +41,25 @@ class UserController {
 
   UserController(this._ref);
 
+  Future<void> inactive({required bool isActive}) async {
+    ResponseDto responseDto = await userService.fetchInactive(isActive);
+
+    if (responseDto.code == 1) {
+      await UserSession.removeAuthentication();
+      await Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil(Routers.login, (route) => false);
+    }
+  }
+
   Future<void> updatePost(
-      {required int id, required String oldPassword, required String newPassword, required String address, required String nickname, required String phone, required String photo}) async {
-    UserInfoUpdateReqDto userInfoUpdateReqDto = UserInfoUpdateReqDto(id: id, oldPassword: oldPassword, newPassword: newPassword, address: address, nickname: nickname, phone: phone, photo: photo);
+      {required int id,
+      required String oldPassword,
+      required String newPassword,
+      required String address,
+      required String nickname,
+      required String phone,
+      required String photo}) async {
+    UserInfoUpdateReqDto userInfoUpdateReqDto = UserInfoUpdateReqDto(
+        id: id, oldPassword: oldPassword, newPassword: newPassword, address: address, nickname: nickname, phone: phone, photo: photo);
     ResponseDto responseDto = await userService.fetchInfoUpdate(userInfoUpdateReqDto);
     if (responseDto.code == 1) {
       Navigator.pop(mContext!, MaterialPageRoute(builder: (mContext) => MyInfoPage()));

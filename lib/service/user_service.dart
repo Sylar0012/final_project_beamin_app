@@ -21,6 +21,13 @@ class UserService {
     return _instance;
   }
 
+  Future<ResponseDto> fetchInactive(bool isActive) async {
+    String requestBody = jsonEncode(isActive);
+    Response response = await httpConnector.put("/api/user/${UserSession.user.id}/delete", requestBody, UserSession.jwtToken);
+    ResponseDto responseDto = toResponseDto(response);
+    return responseDto;
+  }
+
   Future<ResponseDto> fetchInfoUpdate(UserInfoUpdateReqDto userInfoUpdateReqDto) async {
     String requestBody = jsonEncode(userInfoUpdateReqDto.toJson());
     Response response = await httpConnector.put("/api/user/${UserSession.user.id}/update", requestBody, UserSession.jwtToken);
@@ -65,7 +72,7 @@ class UserService {
   Future<ResponseDto> fetchUserInfo() async {
     Response response = await httpConnector.getInitSession("/api/user/${UserSession.user.id}/detail", UserSession.jwtToken);
     ResponseDto responseDto = toResponseDto(response);
-    if (responseDto.data != null) {
+    if (responseDto.code == 1) {
       // 통신이 성공했을 때만 파싱을 해줘야 한다.
       responseDto.data = UserInfo.fromJson(responseDto.data);
     }
