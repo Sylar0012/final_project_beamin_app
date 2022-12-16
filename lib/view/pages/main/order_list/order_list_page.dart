@@ -8,7 +8,7 @@ import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_s
 import 'package:final_project_beamin_app/view/pages/main/order_list/model/order_list_page_model.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/model/order_list_page_view_model.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/my_order_detial/my_order_detail.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -118,7 +118,7 @@ class OrderListPage extends ConsumerWidget {
                         alignment: Alignment.bottomCenter,
                       ),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewWrite(orderId: 1, storeId: 1)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewWritePage(orderId: 1, storeId: 1)));
                       },
                       child: Text(
                         '리뷰 쓰기',

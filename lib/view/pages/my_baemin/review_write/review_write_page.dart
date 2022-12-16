@@ -17,16 +17,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
-class ReviewWrite extends ConsumerStatefulWidget {
-  const ReviewWrite({required this.orderId, required this.storeId, Key? key}) : super(key: key);
+class ReviewWritePage extends ConsumerStatefulWidget {
+  const ReviewWritePage({required this.orderId, required this.storeId, Key? key}) : super(key: key);
   final int storeId;
   final int orderId;
 
   @override
-  ConsumerState<ReviewWrite> createState() => _ReviewWriteState();
+  ConsumerState<ReviewWritePage> createState() => _ReviewWriteState();
 }
 
-class _ReviewWriteState extends ConsumerState<ReviewWrite> {
+class _ReviewWriteState extends ConsumerState<ReviewWritePage> {
   double count = 1;
   double selectNum = 1;
   XFile? _pickedFile;
