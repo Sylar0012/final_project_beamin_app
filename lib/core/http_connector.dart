@@ -6,7 +6,7 @@ final httpConnector = Provider<HttpConnector>((ref) {
 });
 
 class HttpConnector {
-  final host = "http://192.168.0.129:8080";
+  final host = "http://192.168.0.5:8080";
   final headers = {"Content-Type": "application/json; charset=utf-8"};
   final Client _client = Client();
 
@@ -39,6 +39,13 @@ class HttpConnector {
   Future<Response> post(String path, String body) async {
     Uri uri = Uri.parse("${host}${path}");
     Response response = await _client.post(uri, body: body, headers: headers);
+    return response;
+  }
+
+  Future<Response> postInitSession(String path, String body, String? jwtToken) async {
+    Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
+    Uri uri = Uri.parse("${host}${path}");
+    Response response = await _client.post(uri, body: body, headers: requestHeader);
     return response;
   }
 }

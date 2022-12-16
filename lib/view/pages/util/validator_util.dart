@@ -71,6 +71,20 @@ Function validateTitle() {
   };
 }
 
+Function validateReview() {
+  return (String? value) {
+    if (value!.isEmpty) {
+      if (value.length < 10) {
+        return "리뷰는 10자 이상 작성해야 합니다.";
+      } else if (value.length > 100) {
+        return "리뷰는 100자 이하로 작성하여야 합니다.";
+      } else {
+        return null;
+      }
+    }
+  };
+}
+
 Function validatePhoneNumber() {
   return (String? value) {
     if (value!.isEmpty) {

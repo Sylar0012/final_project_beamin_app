@@ -118,7 +118,7 @@ class OrderListPage extends ConsumerWidget {
                         alignment: Alignment.bottomCenter,
                       ),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewWrite()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewWrite(orderId: 1, storeId: 1)));
                       },
                       child: Text(
                         '리뷰 쓰기',

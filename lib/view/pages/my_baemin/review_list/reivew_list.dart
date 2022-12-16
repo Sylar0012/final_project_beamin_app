@@ -1,7 +1,9 @@
+import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_sheet.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/my_info_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +38,16 @@ class ReviewList extends StatelessWidget {
 
 AppBar _buildAppBar(BuildContext context) {
   return AppBar(
+    leading: IconButton(
+      onPressed: () {
+        Navigator.pushNamed(context, Routers.myInfo);
+      },
+      icon: Icon(
+        Icons.arrow_back,
+        size: 24,
+        color: Colors.black,
+      ),
+    ),
     iconTheme: IconThemeData(
       color: Colors.black,
     ),
