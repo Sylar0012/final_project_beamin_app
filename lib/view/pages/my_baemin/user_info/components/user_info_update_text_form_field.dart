@@ -1,12 +1,14 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
+import 'package:final_project_beamin_app/theme.dart';
 import 'package:flutter/material.dart';
 
 class UserInfoUpdateTextFormField extends StatelessWidget {
-  const UserInfoUpdateTextFormField({required this.hintMsg, required this.controller, required this.funValidator, Key? key}) : super(key: key);
+  const UserInfoUpdateTextFormField({required this.hintMsg, required this.controller, required this.funValidator, required this.value, Key? key}) : super(key: key);
   final String hintMsg;
   final TextEditingController controller;
   final funValidator;
+  final value;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class UserInfoUpdateTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         isDense: true,
         contentPadding: EdgeInsets.symmetric(vertical: gap_xs),
-        hintText: "${hintMsg}를(을) 입력하세요",
+        hintText: "${value}",
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: kMenuIconColor),
           borderRadius: BorderRadius.circular(10),

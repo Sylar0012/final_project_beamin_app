@@ -1,19 +1,21 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/model/user_info_update.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_inactive/user_inactive.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/components/user_info_update_text_form_field.dart';
 import 'package:final_project_beamin_app/view/pages/util/validator_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class InfoUpdate extends StatefulWidget {
-  const InfoUpdate({Key? key}) : super(key: key);
-
+class InfoUpdatePage extends StatefulWidget {
+  const InfoUpdatePage({required this.userInfoUpdate, Key? key}) : super(key: key);
+  final UserInfoUpdate userInfoUpdate;
   @override
-  State<InfoUpdate> createState() => _InfoUpdateState();
+  State<InfoUpdatePage> createState() => _InfoUpdatePageState();
 }
 
-class _InfoUpdateState extends State<InfoUpdate> {
+class _InfoUpdatePageState extends State<InfoUpdatePage> {
   final _username = TextEditingController();
   final _oldPassword = TextEditingController();
   final _newPassword = TextEditingController();
@@ -119,7 +121,12 @@ class _InfoUpdateState extends State<InfoUpdate> {
                     color: Colors.grey[100],
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: UserInfoUpdateTextFormField(hintMsg: "주소", controller: _address, funValidator: validateAddress())),
+                  child: UserInfoUpdateTextFormField(
+                    hintMsg: "주소",
+                    controller: _address,
+                    funValidator: validateAddress(),
+                    value: widget.userInfoUpdate.address,
+                  )),
               SizedBox(height: gap_s),
             ],
           ),
@@ -153,7 +160,12 @@ class _InfoUpdateState extends State<InfoUpdate> {
                 color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: UserInfoUpdateTextFormField(hintMsg: "휴대폰 번호", controller: _phone, funValidator: validatePhoneNumber())),
+              child: UserInfoUpdateTextFormField(
+                hintMsg: "휴대폰 번호",
+                controller: _phone,
+                funValidator: validatePhoneNumber(),
+                value: widget.userInfoUpdate.phone,
+              )),
         ),
       ],
     );
@@ -189,7 +201,13 @@ class _InfoUpdateState extends State<InfoUpdate> {
             children: [
               Text("현재 비밀번호", style: textTheme().bodyText1),
               SizedBox(width: gap_m),
-              Expanded(child: UserInfoUpdateTextFormField(hintMsg: "비밀번호", controller: _oldPassword, funValidator: validatePassword())),
+              Expanded(
+                  child: UserInfoUpdateTextFormField(
+                hintMsg: "비밀번호",
+                controller: _oldPassword,
+                funValidator: validatePassword(),
+                value: "",
+              )),
             ],
           ),
           SizedBox(height: gap_l),
@@ -199,7 +217,13 @@ class _InfoUpdateState extends State<InfoUpdate> {
             children: [
               Text("변경 비밀번호", style: textTheme().bodyText1),
               SizedBox(width: gap_m),
-              Expanded(child: UserInfoUpdateTextFormField(hintMsg: "비밀번호", controller: _newPassword, funValidator: validatePassword())),
+              Expanded(
+                  child: UserInfoUpdateTextFormField(
+                hintMsg: "비밀번호",
+                controller: _newPassword,
+                funValidator: validatePassword(),
+                value: "",
+              )),
             ],
           ),
           SizedBox(height: gap_s),
@@ -217,13 +241,15 @@ class _InfoUpdateState extends State<InfoUpdate> {
             SizedBox(
               width: 85,
               height: 85,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset(
-                  'assets/images/category/피자.jpg',
-                  fit: BoxFit.cover,
-                ),
-              ),
+              child: widget.userInfoUpdate.photo == ""
+                  ? Icon(CupertinoIcons.person_alt_circle_fill, size: 85, color: Colors.grey[400])
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.asset(
+                        widget.userInfoUpdate.photo,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
             ),
             Positioned(
               bottom: 3,
@@ -249,7 +275,13 @@ class _InfoUpdateState extends State<InfoUpdate> {
           children: [
             Container(
               width: 170,
-              child: Container(child: UserInfoUpdateTextFormField(hintMsg: "이름", controller: _username, funValidator: validateUsername())),
+              child: Container(
+                  child: UserInfoUpdateTextFormField(
+                hintMsg: "이름",
+                controller: _username,
+                funValidator: validateUsername(),
+                value: widget.userInfoUpdate.nickname,
+              )),
             ),
           ],
         ),

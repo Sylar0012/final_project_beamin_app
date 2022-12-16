@@ -1,8 +1,9 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/model/user_info_update.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/model/my_info_model.dart';
 import 'package:final_project_beamin_app/view/pages/my_baemin/model/my_info_view_model.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/info_update.dart';
+import 'package:final_project_beamin_app/view/pages/my_baemin/user_info/info_update_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,7 +44,7 @@ class MyInfoPage extends ConsumerWidget {
     return Expanded(
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, page);
+          Navigator.pushNamed(context, msg);
         },
         child: Container(
           height: 75,
@@ -88,10 +89,23 @@ class MyInfoPage extends ConsumerWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
-                Align(alignment: Alignment.center, child: Text("ssar님 반갑습니다!", style: textTheme().headline1)),
+                Align(alignment: Alignment.center, child: Text("${model.userInfo.nickname} 반갑습니다!", style: textTheme().headline1)),
                 IconButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => InfoUpdate()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InfoUpdatePage(
+                            userInfoUpdate: UserInfoUpdate(
+                              username: model.userInfo.username,
+                              address: model.userInfo.address,
+                              nickname: model.userInfo.nickname,
+                              photo: model.userInfo.photo,
+                              phone: model.userInfo.phone,
+                            ),
+                          ),
+                        ),
+                      );
                     },
                     icon: Icon(
                       CupertinoIcons.right_chevron,
