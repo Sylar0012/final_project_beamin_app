@@ -2,7 +2,7 @@ import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/dto/user_review_req_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/service/review_service.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/review_list/reivew_list.dart';
+import 'package:final_project_beamin_app/view/pages/my_info/review_list/reivew_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -4,7 +4,7 @@ import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/service/menu_service.dart';
 import 'package:final_project_beamin_app/service/user_service.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/model/my_info_model.dart';
+import 'package:final_project_beamin_app/view/pages/my_info/model/my_info_model.dart';
 import 'package:final_project_beamin_app/view/pages/store/menu_detail/model/menu_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

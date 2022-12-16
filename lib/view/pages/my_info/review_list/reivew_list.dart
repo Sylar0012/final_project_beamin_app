@@ -3,7 +3,6 @@ import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_sheet.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/my_info_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

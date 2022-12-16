@@ -1,5 +1,4 @@
 import 'package:final_project_beamin_app/constants.dart';
-import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/model/order_list.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
@@ -8,7 +7,7 @@ import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_s
 import 'package:final_project_beamin_app/view/pages/main/order_list/model/order_list_page_model.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/model/order_list_page_view_model.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/my_order_detial/my_order_detail.dart';
-import 'package:final_project_beamin_app/view/pages/my_baemin/review_write/review_write_page.dart';
+import 'package:final_project_beamin_app/view/pages/my_info/review_write/review_write_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
