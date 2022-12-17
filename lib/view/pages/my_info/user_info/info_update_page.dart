@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/controller/main_controller.dart';
 import 'package:final_project_beamin_app/controller/user_controller.dart';
 import 'package:final_project_beamin_app/model/user_info_update.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
@@ -26,11 +27,19 @@ class InfoUpdatePage extends ConsumerStatefulWidget {
 }
 
 class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
-  final _username = TextEditingController();
+  final _nickname = TextEditingController();
   final _oldPassword = TextEditingController();
   final _newPassword = TextEditingController();
   final _phone = TextEditingController();
   final _address = TextEditingController();
+
+  @override
+  void initState() {
+    _nickname..text = "${widget.userInfoUpdate.nickname}";
+    _phone..text = "${widget.userInfoUpdate.phone}";
+    _address..text = "${widget.userInfoUpdate.address}";
+    super.initState();
+  }
 
   final _formKey = GlobalKey<FormState>();
   XFile? _pickedFile;
@@ -94,6 +103,7 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
   @override
   Widget build(BuildContext context) {
     UserController userCT = ref.read(userController);
+    MainController mainCT = ref.read(mainController);
     base64Image = widget.userInfoUpdate.photo;
     return Scaffold(
       appBar: _buildAppBar(),
@@ -112,7 +122,7 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
             _buildAddressUpdate(),
             _buildDivider(),
             SizedBox(height: gap_s),
-            _buildUpdateButton(context, userCT),
+            _buildUpdateButton(context, userCT, mainCT),
             SizedBox(height: gap_s),
             _buildDivider(),
             _bulidLogOutAndDisableUser(context, userCT),
@@ -156,7 +166,7 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
     );
   }
 
-  Padding _buildUpdateButton(BuildContext context, UserController userCT) {
+  Padding _buildUpdateButton(BuildContext context, UserController userCT, MainController mainCT) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: gap_m),
       child: Container(
@@ -175,7 +185,7 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
                   oldPassword: _oldPassword.text.trim(),
                   newPassword: _newPassword.text.trim(),
                   address: _address.text,
-                  nickname: _username.text.trim(),
+                  nickname: _nickname.text.trim(),
                   phone: _phone.text.trim(),
                   photo: base64Image);
             }
@@ -398,8 +408,8 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
               child: Container(
                   child: UserInfoUpdateTextFormField(
                 hintMsg: "이름",
-                controller: _username,
-                funValidator: validateUsername(),
+                controller: _nickname,
+                funValidator: validateNickName(),
                 value: widget.userInfoUpdate.nickname,
               )),
             ),

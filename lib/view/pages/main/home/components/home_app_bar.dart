@@ -6,28 +6,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomePageAppBar({required this.appBar, Key? key}) : super(key: key);
+  const HomePageAppBar({required this.appBar, required this.usernickname, Key? key}) : super(key: key);
 
   final AppBar appBar;
-
+  final String usernickname;
   @override
   AppBar build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: Align(alignment: AlignmentDirectional.bottomCenter, child: Text("${UserSession.user.username}님 반갑습니다", style: textTheme().headline1)),
+      title: Align(alignment: AlignmentDirectional.bottomCenter, child: Text("${usernickname}님 반갑습니다", style: textTheme().headline1)),
       centerTitle: true,
       elevation: 1.0,
       actions: [
-        IconButton(
-          padding: EdgeInsets.zero, // 패딩 설정
-          constraints: BoxConstraints(),
-          onPressed: () {},
-          icon: Icon(
-            CupertinoIcons.bell,
-            size: 28,
-            color: Colors.black,
-          ),
-        ),
         IconButton(
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderListPage()));

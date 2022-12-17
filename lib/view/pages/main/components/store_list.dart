@@ -53,9 +53,12 @@ class StoreList extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    for (double i = 0; i < storeFindAllList.starPoint; i++) MyStarIcon(CupertinoIcons.star_fill, 16),
-                    if (storeFindAllList.starPoint < 5 && 1 < storeFindAllList.starPoint)
-                      for (double i = 1; i <= 5 - storeFindAllList.starPoint; i++) MyStarIcon(CupertinoIcons.star, 16),
+                    if (storeFindAllList.starPoint != 0) MyStarIcon(CupertinoIcons.star_fill, 16),
+                    if (storeFindAllList.starPoint == 0) MyStarIcon(CupertinoIcons.star, 16),
+                    SizedBox(width: gap_xs),
+                    Text("${storeFindAllList.starPoint}", style: textTheme().bodyText1),
+                    SizedBox(width: gap_xs),
+                    Text("(${storeFindAllList.count})", style: textTheme().bodyText1),
                   ],
                 ),
                 SizedBox(height: gap_s),

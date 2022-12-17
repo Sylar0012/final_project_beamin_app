@@ -1,20 +1,22 @@
 class User {
   int? id;
   String? address;
-  String username;
+  String? username;
   String? password;
   String? nickname;
   String? phone;
   String? photo;
+  String? role;
 
   User({
     this.id,
     this.address,
-    required this.username,
+    this.username,
     this.password,
     this.nickname,
     this.phone,
     this.photo,
+    this.role,
   });
 
   Map<String, dynamic> toJson() => {
@@ -24,7 +26,8 @@ class User {
 
   User.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        username = json["username"];
+        nickname = json["nickname"],
+        role = json['role'];
 }
 
 class UserInfo {

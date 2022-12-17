@@ -5,6 +5,8 @@ import 'package:final_project_beamin_app/dto/user_info_update_req_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/service/user_service.dart';
+import 'package:final_project_beamin_app/view/pages/my_info/model/my_info_model.dart';
+import 'package:final_project_beamin_app/view/pages/my_info/model/my_info_view_model.dart';
 import 'package:final_project_beamin_app/view/pages/my_info/my_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -122,5 +124,9 @@ class UserController {
 
   void moveUserInfoPage() {
     Navigator.pushNamed(mContext!, Routers.infoUpdate);
+  }
+
+  Future<void> refreshMyPage() async {
+    _ref.read(myInfoViewModel.notifier).notifyViewModel();
   }
 }

@@ -15,15 +15,15 @@ class Stores {
   int count;
   double starPoint;
 
-  Stores({
-    required this.storeId,
-    required this.storeName,
-    required this.thumbnail,
-    required this.deliveryCost,
-    required this.intro,
-    required this.count,
-    required this.starPoint,
-  });
+  Stores(
+    this.storeId,
+    this.storeName,
+    this.thumbnail,
+    this.deliveryCost,
+    this.intro,
+    this.count,
+    this.starPoint,
+  );
 
   /**
    *   {

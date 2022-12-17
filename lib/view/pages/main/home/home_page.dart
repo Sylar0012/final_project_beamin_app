@@ -1,10 +1,13 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/size.dart';
+import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/store_list.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/home_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/store_category.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/model/home_page_model.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/model/home_page_view_model.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +26,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomePageAppBar(appBar: AppBar()),
+      appBar: _buildAppBar("${UserSession.user.nickname}"),
       body: ListView(
         children: [
           Column(
@@ -86,6 +89,30 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  AppBar _buildAppBar(String usernickname) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: Align(alignment: AlignmentDirectional.bottomCenter, child: Text("$usernickname님 반갑습니다", style: textTheme().headline1)),
+      centerTitle: true,
+      elevation: 1.0,
+      actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderListPage()));
+          },
+          icon: Icon(
+            CupertinoIcons.shopping_cart,
+            size: 28,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(
+          width: gap_xs,
+        )
+      ],
     );
   }
 

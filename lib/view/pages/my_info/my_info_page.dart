@@ -89,7 +89,7 @@ class MyInfoPage extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(50),
                         child: Image.memory(base64Decode(model.userInfo.photo), fit: BoxFit.cover, height: 48, width: 48),
                       ),
-                Align(alignment: Alignment.center, child: Text("${model.userInfo.nickname} 반갑습니다!", style: textTheme().headline1)),
+                Align(alignment: Alignment.center, child: Text("${model.userInfo.nickname}님 반갑습니다!", style: textTheme().headline1)),
                 IconButton(
                     onPressed: () {
                       Navigator.push(

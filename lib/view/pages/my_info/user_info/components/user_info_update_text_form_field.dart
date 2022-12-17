@@ -4,7 +4,8 @@ import 'package:final_project_beamin_app/theme.dart';
 import 'package:flutter/material.dart';
 
 class UserInfoUpdateTextFormField extends StatelessWidget {
-  const UserInfoUpdateTextFormField({required this.hintMsg, required this.controller, required this.funValidator, required this.value, Key? key}) : super(key: key);
+  const UserInfoUpdateTextFormField({required this.hintMsg, required this.controller, required this.funValidator, required this.value, Key? key})
+      : super(key: key);
   final String hintMsg;
   final TextEditingController controller;
   final funValidator;
