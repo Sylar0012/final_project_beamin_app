@@ -24,8 +24,7 @@ class User {
 
   User.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        username = json["username"],
-        password = json["password"];
+        username = json["username"];
 }
 
 class UserInfo {

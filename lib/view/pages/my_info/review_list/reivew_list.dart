@@ -12,7 +12,7 @@ class ReviewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
+      appBar: _buildAppBar(context), 
       body: ListView(
         children: [
           SizedBox(height: gap_s),

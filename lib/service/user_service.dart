@@ -40,8 +40,9 @@ class UserService {
 
   Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {
     String requestBody = jsonEncode(joinReqDto.toJson());
-    Response response = await httpConnector.post("/join", requestBody);
-
+    Logger().d("requestBody : $requestBody");
+    Response response = await httpConnector.post("/api/join", requestBody);
+    Logger().d("response : ${response.body}");
     return toResponseDto(response); // ResponseDto 응답
   }
 

@@ -75,15 +75,16 @@ class UserController {
     Navigator.popAndPushNamed(mContext!, Routers.join);
   }
 
-  Future<void> join({required String username, required String password, required String email}) async {
+  Future<void> join(
+      {required String username, required String password, required String nickname, required String phone, required String address}) async {
     // 1. DTO 변환
-    JoinReqDto joinReqDto = JoinReqDto(username: username, password: password);
-
+    JoinReqDto joinReqDto = JoinReqDto(username, password, nickname, phone, address);
+    Logger().d("joinReqDto : $joinReqDto");
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
 
     // 3. 비지니스 로직 처리
-    if (responseDto.msg != null) {
+    if (responseDto.code == 1) {
       Navigator.popAndPushNamed(mContext!, Routers.login);
       // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
     } else {

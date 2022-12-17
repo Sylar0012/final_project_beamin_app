@@ -13,8 +13,7 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(gap_s),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,

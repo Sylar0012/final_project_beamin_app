@@ -21,8 +21,6 @@ Function validateNickName() {
   return (String? value) {
     if (value!.isEmpty) {
       return "닉네임을 입력해주세요.";
-    } else if (!isAlphanumeric(value)) {
-      return "닉네임에 한글이나 특수 문자가 들어갈 수 없습니다.";
     } else if (value.length > 12) {
       return "닉네임의 길이를 초과하였습니다.";
     } else if (value.length < 3) {

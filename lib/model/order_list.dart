@@ -4,21 +4,19 @@ class OrderHistory {
   String thumbnail;
   String deliveryState;
   String createdAt;
+  int orderId;
+  int storeId;
 
-  OrderHistory({
-    required this.name,
-    required this.intro,
-    required this.thumbnail,
-    required this.deliveryState,
-    required this.createdAt,
-  });
+  OrderHistory(this.name, this.intro, this.thumbnail, this.deliveryState, this.createdAt, this.orderId, this.storeId);
 
   OrderHistory.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         intro = json['intro'],
         thumbnail = json['thumbnail'],
         deliveryState = json['deliveryState'],
-        createdAt = json['createdAt'];
+        createdAt = json['createdAt'],
+        orderId = json['orderId'],
+        storeId = json['storeId'];
 }
 
 /*

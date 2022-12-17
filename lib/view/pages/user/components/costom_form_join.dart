@@ -1,24 +1,25 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/controller/user_controller.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/components/costom_text_form_field.dart';
 import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
 import 'package:final_project_beamin_app/view/pages/util/validator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomFormJoin extends StatelessWidget {
+class CustomFormJoin extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
-
+  final _username = TextEditingController();
+  final _password = TextEditingController();
+  final _nickname = TextEditingController();
+  final _phone = TextEditingController();
+  final _address = TextEditingController();
   CustomFormJoin({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final _username = TextEditingController();
-    final _password = TextEditingController();
-    final _nickname = TextEditingController();
-    final _phone = TextEditingController();
-    final _address = TextEditingController();
-
+  Widget build(BuildContext context, WidgetRef ref) {
+    UserController userCT = ref.read(userController);
     return Form(
       key: _formKey,
       child: Column(
@@ -65,13 +66,13 @@ class CustomFormJoin extends StatelessWidget {
             color: Colors.grey[300],
           ),
           SizedBox(height: gap_s),
-          _buildJoinButton(context),
+          _buildJoinButton(context, userCT),
         ],
       ),
     );
   }
 
-  Padding _buildJoinButton(BuildContext context) {
+  Padding _buildJoinButton(BuildContext context, UserController userCT) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: gap_m),
       child: Container(
@@ -85,7 +86,13 @@ class CustomFormJoin extends StatelessWidget {
         child: TextButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              Navigator.pushNamed(context, "/login");
+              userCT.join(
+                username: _username.text.trim(),
+                password: _password.text.trim(),
+                nickname: _nickname.text.trim(),
+                phone: _phone.text.trim(),
+                address: _address.text.trim(),
+              );
             }
           },
           child: Text(

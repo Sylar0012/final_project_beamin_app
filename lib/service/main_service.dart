@@ -20,13 +20,13 @@ class MainService {
     Response response = await httpConnector.getInitSession("/api/user/${UserSession.user.id}/store/list", UserSession.jwtToken);
     Logger().d("d이거 실행됨?");
     ResponseDto responseDto = toResponseDto(response);
-
+    Logger().d("list 의 타입 ${responseDto.data}");
     if (responseDto.code == 1) {
       List<dynamic> list = responseDto.data["stores"];
       Logger().d("list 의 타입 ${list.runtimeType}");
 
       List<Stores> stores = list.map((e) => Stores.fromJson(e)).toList();
-      Logger().d(stores);
+      Logger().d(stores[0].starPoint);
 
       responseDto.data = stores;
     }

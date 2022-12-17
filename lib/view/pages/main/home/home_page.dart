@@ -1,10 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:final_project_beamin_app/controller/main_controller.dart';
-import 'package:final_project_beamin_app/model/store_detail.dart';
-import 'package:final_project_beamin_app/model/home.dart';
 import 'package:final_project_beamin_app/size.dart';
-import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/store_list.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/home_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/store_category.dart';

@@ -46,7 +46,6 @@ class StoreMenu extends StatelessWidget {
                 ),
                 SizedBox(height: gap_s),
                 Container(
-                  width: 200,
                   child: Text(
                     menuFindByStoreIdRespDto.intro,
                     overflow: TextOverflow.ellipsis,
