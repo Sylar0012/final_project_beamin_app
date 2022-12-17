@@ -1,20 +1,21 @@
 import 'package:final_project_beamin_app/constants.dart';
-import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
+import 'package:final_project_beamin_app/model/payment_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/order/payment_detail.dart';
+import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/material.dart';
 
 enum Comment { defaultMsg, costomMsg }
 
-class Payment extends StatefulWidget {
-  const Payment({Key? key}) : super(key: key);
+class PaymentPage extends StatefulWidget {
+  const PaymentPage({required this.payment, Key? key}) : super(key: key);
+  final Payment payment;
 
   @override
-  State<Payment> createState() => _PaymentState();
+  State<PaymentPage> createState() => _PaymentPageState();
 }
 
-class _PaymentState extends State<Payment> {
+class _PaymentPageState extends State<PaymentPage> {
   Comment? _comment = Comment.defaultMsg;
   int selectedId = 1;
 
@@ -36,9 +37,9 @@ class _PaymentState extends State<Payment> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("연락 받을 번호 : 010-0000-0000", style: textTheme().bodyText2),
+                      Text("연락 받을 번호 : ${widget.payment.phone}", style: textTheme().bodyText2),
                       SizedBox(height: gap_s),
-                      Text("경상남도 김해시 외동 9999-9", style: textTheme().bodyText2),
+                      Text("${widget.payment.address}", style: textTheme().bodyText2),
                       SizedBox(height: gap_s),
                       _buildTextFormField("상세 주소", double.infinity),
                     ],
@@ -88,19 +89,8 @@ class _PaymentState extends State<Payment> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _bulidPaymentButton(1, "카카오 페이"),
-                      _bulidPaymentButton(2, "네이버 페이"),
-                    ],
-                  ),
-                ),
-                SizedBox(height: gap_m),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: gap_m),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _bulidPaymentButton(3, "휴대폰 결제"),
-                      _bulidPaymentButton(4, "카드 결제"),
+                      _bulidPaymentButton(1, "카드 결제"),
+                      _bulidPaymentButton(2, "만나서 결제"),
                     ],
                   ),
                 ),
@@ -124,8 +114,8 @@ class _PaymentState extends State<Payment> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("후라이드 치킨", style: textTheme().bodyText2),
-                      Text("17,000원", style: textTheme().bodyText2),
+                      Text("${widget.payment.menuList[0].name}", style: textTheme().bodyText2),
+                      Text(numberPriceFormat("${widget.payment.menuList[0].price}"), style: textTheme().bodyText2),
                     ],
                   ),
                 ),
@@ -136,7 +126,7 @@ class _PaymentState extends State<Payment> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("배달 비용", style: textTheme().bodyText2),
-                      Text("3,000원", style: textTheme().bodyText2),
+                      Text(numberPriceFormat("${widget.payment.deliveryCost}"), style: textTheme().bodyText2),
                     ],
                   ),
                 ),
@@ -147,7 +137,8 @@ class _PaymentState extends State<Payment> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("결제 금액", style: textTheme().bodyText1),
-                      Text("20,000원", style: textTheme().bodyText1),
+                      Text(numberPriceFormat("${widget.payment.deliveryCost + widget.payment.menuList[0].price * widget.payment.menuList[0].conut}"),
+                          style: textTheme().bodyText1),
                     ],
                   ),
                 ),

@@ -11,29 +11,21 @@
 
 class MyOrderRespDto {
   int storeId;
+  String phone;
+  String address;
   String storeName;
   int minAmount;
   String deliveryHour;
   int deliveryCost;
   List<OrderMenu> menuList;
 
-  MyOrderRespDto({
-    required this.storeId,
-    required this.storeName,
-    required this.minAmount,
-    required this.deliveryHour,
-    required this.deliveryCost,
-    required this.menuList,
-  });
+  MyOrderRespDto(this.storeId, this.phone, this.address, this.storeName, this.minAmount, this.deliveryHour, this.deliveryCost, this.menuList);
 }
 
 class OrderMenu {
   String name;
   int price;
   int conut;
-  OrderMenu({
-    required this.name,
-    required this.price,
-    required this.conut,
-  });
+
+  OrderMenu(this.name, this.price, this.conut);
 }

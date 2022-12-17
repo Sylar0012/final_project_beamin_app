@@ -7,17 +7,11 @@ class MenuDetail {
   String storeName;
   int minAmount;
   int deliveryCost;
+  String phone;
+  String address;
 
-  MenuDetail({
-    required this.menuName,
-    required this.thumbnail,
-    required this.intro,
-    required this.price,
-    required this.deliveryHour,
-    required this.storeName,
-    required this.minAmount,
-    required this.deliveryCost,
-  });
+  MenuDetail(this.menuName, this.thumbnail, this.intro, this.price, this.deliveryHour, this.storeName, this.minAmount, this.deliveryCost, this.phone,
+      this.address);
 
   MenuDetail.fromJson(Map<String, dynamic> json)
       : menuName = json["menuName"],
@@ -25,6 +19,8 @@ class MenuDetail {
         intro = json["intro"],
         price = json["price"],
         deliveryHour = json["deliveryHour"],
+        phone = json["phone"],
+        address = json["address"],
         storeName = json["storeName"],
         minAmount = json["minAmount"],
         deliveryCost = json["deliveryCost"];

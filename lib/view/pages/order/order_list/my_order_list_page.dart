@@ -14,7 +14,7 @@ class MyOrderListPage extends ConsumerStatefulWidget {
   ConsumerState<MyOrderListPage> createState() => _MyOrderListPageState();
 }
 
-class _MyOrderListPageState extends ConsumerState<MyOrderListPage> with AutomaticKeepAliveClientMixin {
+class _MyOrderListPageState extends ConsumerState<MyOrderListPage> {
   @override
   bool get wantKeepAlive => true;
 

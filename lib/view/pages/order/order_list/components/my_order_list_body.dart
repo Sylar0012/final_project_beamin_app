@@ -1,7 +1,9 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
+import 'package:final_project_beamin_app/model/payment_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment/payment_page.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,23 +22,11 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
   bool get wantKeepAlive => true;
 
   OrderType? _orderType = OrderType.delivery;
-  int orderCount = 1;
-
-  void increase() {
-    setState(() {
-      if (orderCount < 10) orderCount++;
-    });
-  }
-
-  void decrease() {
-    setState(() {
-      if (orderCount > 1) orderCount--;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     return Column(
       children: [
         Container(
@@ -49,7 +39,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
               SizedBox(height: gap_s),
               _bulidOrderType("배달", OrderType.delivery, "최소 주문 금액 : ${numberPriceFormat("${widget.myOrderRespDto.minAmount}")}"),
               SizedBox(height: gap_s),
-              _bulidOrderType("포장", OrderType.pickup, "포장 시간 : ${widget.myOrderRespDto.deliveryHour}분"),
+              _bulidOrderType("포장", OrderType.pickup, "포장 시간 : ${widget.myOrderRespDto.deliveryHour}"),
               SizedBox(height: gap_s),
             ],
           ),
@@ -105,7 +95,9 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
                 children: [
                   IconButton(
                     onPressed: () {
-                      decrease();
+                      setState(() {
+                        if (widget.myOrderRespDto.menuList[0].conut < 10) widget.myOrderRespDto.menuList[0].conut--;
+                      });
                     },
                     padding: EdgeInsets.zero, // 패딩 설정
                     constraints: BoxConstraints(),
@@ -116,13 +108,15 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
                   ),
                   SizedBox(width: gap_s),
                   Text(
-                    '${orderCount}',
+                    '${widget.myOrderRespDto.menuList[0].conut}',
                     style: TextStyle(fontSize: 16.0, color: Color.fromRGBO(24, 24, 24, 1), fontWeight: FontWeight.bold, height: 1.5),
                   ),
                   SizedBox(width: gap_s),
                   IconButton(
                     onPressed: () {
-                      increase();
+                      setState(() {
+                        if (widget.myOrderRespDto.menuList[0].conut < 10) widget.myOrderRespDto.menuList[0].conut++;
+                      });
                     },
                     padding: EdgeInsets.zero, // 패딩 설정
                     constraints: BoxConstraints(),
@@ -150,7 +144,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
               SizedBox(height: gap_m),
               _buildOrderPrice("상품 금액", numberPriceFormat("${widget.myOrderRespDto.menuList[0].price}")),
               SizedBox(height: gap_s),
-              _buildOrderPrice("결제 금액", numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * orderCount}")),
+              _buildOrderPrice("결제 금액", numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * widget.myOrderRespDto.menuList[0].conut}")),
               SizedBox(height: gap_m),
             ],
           ),
@@ -173,10 +167,29 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             ),
             child: TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/payment");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentPage(
+                      payment: Payment(
+                        widget.myOrderRespDto.storeId,
+                        widget.myOrderRespDto.phone,
+                        widget.myOrderRespDto.address,
+                        widget.myOrderRespDto.storeName,
+                        widget.myOrderRespDto.minAmount,
+                        widget.myOrderRespDto.deliveryHour,
+                        widget.myOrderRespDto.deliveryCost,
+                        <OrderMenuForPayment>[
+                          OrderMenuForPayment(widget.myOrderRespDto.menuList[0].name, widget.myOrderRespDto.menuList[0].price,
+                              widget.myOrderRespDto.menuList[0].conut)
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               },
               child: Text(
-                '${numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * orderCount}")} 주문 하기',
+                '${numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * widget.myOrderRespDto.menuList[0].conut}")} 주문 하기',
                 style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
               ),
             ),
@@ -199,7 +212,9 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
               _buildOrderPrice("배달 비용", numberPriceFormat("${widget.myOrderRespDto.deliveryCost}")),
               SizedBox(height: gap_s),
               _buildOrderPrice(
-                  "결제 금액", numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * orderCount + widget.myOrderRespDto.deliveryCost}")),
+                  "결제 금액",
+                  numberPriceFormat(
+                      "${widget.myOrderRespDto.menuList[0].price * widget.myOrderRespDto.menuList[0].conut + widget.myOrderRespDto.deliveryCost}")),
               SizedBox(height: gap_m),
             ],
           ),
@@ -222,10 +237,29 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             ),
             child: TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/payment");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentPage(
+                      payment: Payment(
+                        widget.myOrderRespDto.storeId,
+                        widget.myOrderRespDto.phone,
+                        widget.myOrderRespDto.address,
+                        widget.myOrderRespDto.storeName,
+                        widget.myOrderRespDto.minAmount,
+                        widget.myOrderRespDto.deliveryHour,
+                        widget.myOrderRespDto.deliveryCost,
+                        <OrderMenuForPayment>[
+                          OrderMenuForPayment(widget.myOrderRespDto.menuList[0].name, widget.myOrderRespDto.menuList[0].price,
+                              widget.myOrderRespDto.menuList[0].conut)
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               },
               child: Text(
-                '${numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * orderCount + widget.myOrderRespDto.deliveryCost}")} 주문 하기',
+                '${numberPriceFormat("${widget.myOrderRespDto.menuList[0].price * widget.myOrderRespDto.menuList[0].conut + widget.myOrderRespDto.deliveryCost}")} 주문 하기',
                 style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
               ),
             ),
