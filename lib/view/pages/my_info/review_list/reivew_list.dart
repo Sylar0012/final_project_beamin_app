@@ -22,8 +22,6 @@ class ReviewList extends ConsumerWidget {
       body: model == null
           ? Align(alignment: Alignment.center, child: Text("내 리뷰가 없습니다.", style: textTheme().headline1))
           : ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
               itemCount: model.customerReviewList.length,
               itemBuilder: (context, index) {
                 return _buildReviewList(

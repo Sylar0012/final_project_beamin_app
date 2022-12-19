@@ -3,16 +3,17 @@ import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/model/my_order_list_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final myOrderListPageViewModel = StateNotifierProvider.family<MyOrderListPageViewModel, MyOrderListPageModel?, MyOrderRespDto>((ref, MyOrderRespDto) {
-  return MyOrderListPageViewModel(null, MyOrderRespDto)..notifyViewModel();
+final myOrderListPageViewModel = StateNotifierProvider<MyOrderListPageViewModel, List<MyOrderRespDto>>((ref) {
+  return MyOrderListPageViewModel([], ref)..initViewModel();
 });
 
-class MyOrderListPageViewModel extends StateNotifier<MyOrderListPageModel?> {
-  final MyOrderRespDto myOrderRespDto;
-  final mContext = navigatorKey.currentContext;
-  MyOrderListPageViewModel(super.state, this.myOrderRespDto);
+class MyOrderListPageViewModel extends StateNotifier<List<MyOrderRespDto>> {
+  Ref _ref;
+  MyOrderListPageViewModel(super.state, this._ref);
 
-  void notifyViewModel() {
-    state = MyOrderListPageModel(myOrderRespDto);
+  void initViewModel() {}
+
+  void addOrderList(MyOrderRespDto myOrderRespDto) {
+    state = [...state, myOrderRespDto];
   }
 }

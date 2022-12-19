@@ -1,10 +1,10 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/dto/menu_req_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/model/payment_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/payment_page.dart';
 import 'package:final_project_beamin_app/view/pages/store/components/store_detail_appber.dart';
 import 'package:final_project_beamin_app/view/pages/store/menu_detail/model/menu_detail_model.dart';
@@ -13,6 +13,9 @@ import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
+
+List<MyOrderRespDto> globalMyOrderItems = List.of(MyOrderRespDtoList);
 
 class MenuDetailPage extends ConsumerStatefulWidget {
   const MenuDetailPage({required this.menuDetailReqDto, Key? key}) : super(key: key);
@@ -211,17 +214,10 @@ class _MenuDetailPageState extends ConsumerState<MenuDetailPage> {
                       ),
                       child: TextButton(
                         onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Color.fromRGBO(251, 82, 28, 0.8),
-                              content: Text("장바구니에 담았습니다! "),
-                            ),
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyOrderListPage(
-                                myOrderRespDto: MyOrderRespDto(
+                          setState(
+                            () {
+                              globalMyOrderItems.add(
+                                MyOrderRespDto(
                                   widget.menuDetailReqDto.storeId,
                                   model.menuDetail.phone,
                                   model.menuDetail.address,
@@ -231,7 +227,14 @@ class _MenuDetailPageState extends ConsumerState<MenuDetailPage> {
                                   model.menuDetail.deliveryCost,
                                   <OrderMenu>[OrderMenu(model.menuDetail.menuName, model.menuDetail.price, orderCount)],
                                 ),
-                              ),
+                              );
+                              Logger().d("globalMyOrderItems.length : ${globalMyOrderItems.length}");
+                            },
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Color.fromRGBO(251, 82, 28, 0.8),
+                              content: Text("장바구니에 담았습니다! "),
                             ),
                           );
                         },
@@ -250,21 +253,7 @@ class _MenuDetailPageState extends ConsumerState<MenuDetailPage> {
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), border: Border.all(color: kMainColor), color: kMainColor),
                       child: TextButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PaymentPage(
-                                        payment: Payment(
-                                          widget.menuDetailReqDto.storeId,
-                                          model.menuDetail.phone,
-                                          model.menuDetail.address,
-                                          model.menuDetail.storeName,
-                                          model.menuDetail.minAmount,
-                                          model.menuDetail.deliveryHour,
-                                          model.menuDetail.deliveryCost,
-                                          <OrderMenuForPayment>[OrderMenuForPayment(model.menuDetail.menuName, model.menuDetail.price, orderCount)],
-                                        ),
-                                      )));
+                          Navigator.pushNamed(context, Routers.myOrderList);
                         },
                         child: Text(
                           '주문 하기',

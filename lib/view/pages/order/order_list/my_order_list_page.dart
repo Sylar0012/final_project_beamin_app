@@ -4,12 +4,14 @@ import 'package:final_project_beamin_app/view/pages/order/components/order_appba
 import 'package:final_project_beamin_app/view/pages/order/order_list/components/my_order_list_body.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/model/my_order_list_model.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/model/my_order_list_view_model.dart';
+import 'package:final_project_beamin_app/view/pages/store/menu_detail/menu_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class MyOrderListPage extends ConsumerStatefulWidget {
-  const MyOrderListPage({this.myOrderRespDto, Key? key}) : super(key: key);
-  final MyOrderRespDto? myOrderRespDto;
+  const MyOrderListPage({Key? key}) : super(key: key);
+
   @override
   ConsumerState<MyOrderListPage> createState() => _MyOrderListPageState();
 }
@@ -17,10 +19,9 @@ class MyOrderListPage extends ConsumerStatefulWidget {
 class _MyOrderListPageState extends ConsumerState<MyOrderListPage> {
   @override
   Widget build(BuildContext context) {
-    MyOrderListPageModel? model = ref.read(myOrderListPageViewModel(widget.myOrderRespDto!));
     return Scaffold(
       appBar: OrderAppBar(appBar: AppBar(), center: true, title: "장바구니"),
-      body: model == null ? _buildNullStoreId() : _buildNotNullStoreId(model),
+      body: globalMyOrderItems.length == 0 ? _buildNullStoreId() : _buildNotNullStoreId(),
     );
   }
 }
@@ -29,6 +30,6 @@ Widget _buildNullStoreId() {
   return Center(child: Text("장바구니가 비었습니다 !", style: textTheme().headline1));
 }
 
-Widget _buildNotNullStoreId(MyOrderListPageModel model) {
-  return MyOrderListBody(myOrderRespDto: model.myOrderRespDto);
+Widget _buildNotNullStoreId() {
+  return MyOrderListBody(myOrderRespDto: globalMyOrderItems);
 }

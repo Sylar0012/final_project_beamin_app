@@ -1,3 +1,5 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 /**
  * 장바구니에 필요한 데이터들
  *  store : storeId, storeName, minAmount(최소 주문금액),deliveryHour(배달시간 ),
@@ -29,3 +31,5 @@ class OrderMenu {
 
   OrderMenu(this.name, this.price, this.conut);
 }
+
+List<MyOrderRespDto> MyOrderRespDtoList = [];
