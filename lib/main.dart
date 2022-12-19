@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
         Routers.favoriteStore: (context) => FavoriteStore(), // 더미 완
         Routers.orderList: (context) => OrderListPage(),
         Routers.myOrderList: (context) => MyOrderListPage(),
-        Routers.reviewList: (context) => ReviewList(),
       },
       title: "beamin_ui",
       debugShowCheckedModeBanner: false,

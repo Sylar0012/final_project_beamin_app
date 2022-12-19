@@ -1,38 +1,61 @@
 import 'package:final_project_beamin_app/core/routers.dart';
+import 'package:final_project_beamin_app/model/my_review_list.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_modal_bottom_sheet.dart';
 import 'package:final_project_beamin_app/view/pages/components/my_star_icon.dart';
+import 'package:final_project_beamin_app/view/pages/my_info/review_list/model/my_review_list_page_model.dart';
+import 'package:final_project_beamin_app/view/pages/my_info/review_list/model/my_review_list_page_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ReviewList extends StatelessWidget {
-  const ReviewList({Key? key}) : super(key: key);
+class ReviewList extends ConsumerWidget {
+  const ReviewList({required this.nickname, Key? key}) : super(key: key);
+  final String nickname;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    MyReviewListPageModel? model = ref.watch(myReviewListPageViewModel);
     return Scaffold(
-      appBar: _buildAppBar(context), 
-      body: ListView(
-        children: [
-          SizedBox(height: gap_s),
-          _bulidUserReview("ssar", "양념치킨, 후라이드 치킨", 4),
-          SizedBox(height: gap_s),
-          _bulidReviewImg(img: "치킨"),
-          SizedBox(height: gap_s),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: gap_s),
-            child: Text(
-              "바삭하게 잘 튀겨주셔서 잘 먹고 갑니다 근데 왜 후라이드가 2마리 온거죠?",
-              style: TextTheme().bodyText1,
+      appBar: _buildAppBar(context),
+      body: model == null
+          ? Align(alignment: Alignment.center, child: Text("내 리뷰가 없습니다.", style: textTheme().headline1))
+          : ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: model.customerReviewList.length,
+              itemBuilder: (context, index) {
+                return _buildReviewList(
+                  customerReviews: model.customerReviewList[index],
+                  nickname: nickname,
+                );
+              },
             ),
-          ),
-          SizedBox(height: gap_s),
-          _bulidOwnerComent("고객님은 나쁜 사람입니다. 착한 사람눈에는 양념치킨으로 보였을 텐데 말이죠...."),
-        ],
-      ),
     );
   }
+}
+
+Widget _buildReviewList({required CustomerReviews customerReviews, required nickname}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      SizedBox(height: gap_s),
+      _bulidUserReview(nickname, customerReviews.storeName, customerReviews.starPoint),
+      SizedBox(height: gap_s),
+      _bulidReviewImg(img: "${customerReviews.photo}"),
+      SizedBox(height: gap_s),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: gap_s),
+        child: Text(
+          customerReviews.content,
+          style: TextTheme().bodyText1,
+        ),
+      ),
+      SizedBox(height: gap_s),
+      _bulidOwnerComent(customerReviews.comment),
+    ],
+  );
 }
 
 AppBar _buildAppBar(BuildContext context) {
@@ -56,44 +79,47 @@ AppBar _buildAppBar(BuildContext context) {
   );
 }
 
-Widget _bulidOwnerComent(String Comment) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: gap_s),
-    child: Container(
-      color: Colors.grey[300],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_s),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "사장님 댓글",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Color(0xFF1E2D2A),
-                shadows: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(1),
-                    blurRadius: 1.0,
-                    spreadRadius: 1.0,
-                    offset: const Offset(0.5, 1),
-                  )
+Widget _bulidOwnerComent(String comment) {
+  return comment == ""
+      ? Container()
+      : Padding(
+          padding: const EdgeInsets.symmetric(horizontal: gap_s),
+          child: Container(
+            width: double.infinity,
+            color: Colors.grey[300],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: gap_s, vertical: gap_s),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "사장님 댓글",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Color(0xFF1E2D2A),
+                      shadows: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(1),
+                          blurRadius: 1.0,
+                          spreadRadius: 1.0,
+                          offset: const Offset(0.5, 1),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: gap_s),
+                  Text(comment, style: TextTheme().bodyText2),
+                  SizedBox(height: gap_s),
                 ],
               ),
             ),
-            SizedBox(height: gap_s),
-            Text("${Comment}", style: TextTheme().bodyText2),
-            SizedBox(height: gap_s),
-          ],
-        ),
-      ),
-    ),
-  );
+          ),
+        );
 }
 
 Widget _bulidReviewImg({String? img}) {
-  if (img != null) {
+  if (img != "") {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: gap_s),
       height: 200,

@@ -15,6 +15,6 @@ class MainController {
   MainService mainService = MainService();
 
   Future<void> refreshHomePage() async {
-    _ref.read(homePageViewModel.notifier).notifyViewModel();
+    _ref.watch(homePageViewModel.notifier).notifyViewModel();
   }
 }

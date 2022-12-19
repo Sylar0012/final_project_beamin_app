@@ -189,6 +189,7 @@ class _InfoUpdatePageState extends ConsumerState<InfoUpdatePage> {
                   phone: _phone.text.trim(),
                   photo: base64Image);
             }
+            mainCT.refreshHomePage();
           },
           child: Text(
             '회원 정보 수정',

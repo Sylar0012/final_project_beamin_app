@@ -16,9 +16,6 @@ class MyOrderListPage extends ConsumerStatefulWidget {
 
 class _MyOrderListPageState extends ConsumerState<MyOrderListPage> {
   @override
-  bool get wantKeepAlive => true;
-
-  @override
   Widget build(BuildContext context) {
     MyOrderListPageModel? model = ref.read(myOrderListPageViewModel(widget.myOrderRespDto!));
     return Scaffold(

@@ -31,7 +31,7 @@ class MyInfoPage extends ConsumerWidget {
                 Row(
                   children: [
                     _buildMenu(context, CupertinoIcons.doc_plaintext, "주문 내역", OrderListPage()),
-                    _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", ReviewList()),
+                    _buildMenu(context, CupertinoIcons.chat_bubble_2, "리뷰 관리", ReviewList(nickname: model.userInfo.nickname)),
                     _buildMenu(context, CupertinoIcons.heart, "찜한 가게", FavoriteStore()),
                   ],
                 ),
