@@ -190,14 +190,10 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             child: TextButton(
               onPressed: () {
                 if (totalPrice > widget.myOrderRespDto[0].minAmount) {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => PaymentPage(
-                  //       payment: Payment(),
-                  //     ),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PaymentPage(myOrderRespDto: widget.myOrderRespDto, orderType: OrderType.pickup)),
+                  );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -255,14 +251,12 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             child: TextButton(
               onPressed: () {
                 if (totalPrice > widget.myOrderRespDto[0].minAmount) {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => PaymentPage(
-                  //       payment: Payment(),
-                  //     ),
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PaymentPage(myOrderRespDto: widget.myOrderRespDto, orderType: OrderType.delivery),
+                    ),
+                  );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(

@@ -67,7 +67,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     builder: (context, ref, child) {
                       HomePageModel? model = ref.watch(homePageViewModel);
                       if (model == null) {
-                        return Text("잠시 기다려주세요");
+                        return Align(alignment: Alignment.center, child: Text("잠시 기다려주세요"));
                       } else {
                         return ListView.builder(
                           shrinkWrap: true,

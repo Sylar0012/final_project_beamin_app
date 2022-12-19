@@ -1,15 +1,18 @@
 import 'package:final_project_beamin_app/constants.dart';
-import 'package:final_project_beamin_app/model/payment_resp_dto.dart';
+import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/components/my_order_list_body.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 enum Comment { defaultMsg, costomMsg }
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({required this.payment, Key? key}) : super(key: key);
-  final Payment payment;
+  const PaymentPage({required this.myOrderRespDto, required this.orderType, Key? key}) : super(key: key);
+  final List<MyOrderRespDto> myOrderRespDto;
+  final OrderType orderType;
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -21,6 +24,14 @@ class _PaymentPageState extends State<PaymentPage> {
 
   @override
   Widget build(BuildContext context) {
+    int totalPrice = 0;
+    final _detailAddress = TextEditingController();
+    final _orderComment = TextEditingController();
+
+    for (int i = 0; i < widget.myOrderRespDto.length; i++) {
+      totalPrice += widget.myOrderRespDto[i].menuList[0].price * widget.myOrderRespDto[i].menuList[0].conut;
+    }
+    Logger().d("orderType : ${widget.orderType}");
     return Scaffold(
       appBar: _buildAppBar(),
       body: ListView(
@@ -37,11 +48,11 @@ class _PaymentPageState extends State<PaymentPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("연락 받을 번호 : ${widget.payment.phone}", style: textTheme().bodyText2),
+                      Text("연락 받을 번호 : ${widget.myOrderRespDto[0].phone}", style: textTheme().bodyText2),
                       SizedBox(height: gap_s),
-                      Text("${widget.payment.address}", style: textTheme().bodyText2),
+                      Text("${widget.myOrderRespDto[0].address}", style: textTheme().bodyText2),
                       SizedBox(height: gap_s),
-                      _buildTextFormField("상세 주소", double.infinity),
+                      _buildTextFormField("상세 주소", double.infinity, _detailAddress),
                     ],
                   ),
                 ),
@@ -66,7 +77,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _bulidOrderType(Comment.costomMsg, ""),
-                    _buildTextFormField("주문시 요청 사항", 300),
+                    _buildTextFormField("주문시 요청 사항", 300, _orderComment),
                   ],
                 ),
               ],
@@ -109,27 +120,26 @@ class _PaymentPageState extends State<PaymentPage> {
               children: [
                 Text("주문 내역", style: textTheme().headline1),
                 SizedBox(height: gap_s),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: gap_s),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("${widget.payment.menuList[0].name}", style: textTheme().bodyText2),
-                      Text(numberPriceFormat("${widget.payment.menuList[0].price}"), style: textTheme().bodyText2),
-                    ],
-                  ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: widget.myOrderRespDto.length,
+                  itemBuilder: (context, index) {
+                    return _buildOrder(widget.myOrderRespDto[index].menuList[0]);
+                  },
                 ),
-                SizedBox(height: gap_s),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: gap_s),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("배달 비용", style: textTheme().bodyText2),
-                      Text(numberPriceFormat("${widget.payment.deliveryCost}"), style: textTheme().bodyText2),
-                    ],
-                  ),
-                ),
+                widget.orderType == OrderType.delivery
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: gap_s),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("배달 비용", style: textTheme().bodyText2),
+                            Text(numberPriceFormat("${widget.myOrderRespDto[0].deliveryCost}"), style: textTheme().bodyText2),
+                          ],
+                        ),
+                      )
+                    : Container(),
                 SizedBox(height: gap_s),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: gap_s),
@@ -137,8 +147,9 @@ class _PaymentPageState extends State<PaymentPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("결제 금액", style: textTheme().bodyText1),
-                      Text(numberPriceFormat("${widget.payment.deliveryCost + widget.payment.menuList[0].price * widget.payment.menuList[0].conut}"),
-                          style: textTheme().bodyText1),
+                      widget.orderType == OrderType.delivery
+                          ? Text(numberPriceFormat("${widget.myOrderRespDto[0].deliveryCost + totalPrice}"), style: textTheme().bodyText1)
+                          : Text(numberPriceFormat("${totalPrice}"), style: textTheme().bodyText1)
                     ],
                   ),
                 ),
@@ -166,7 +177,25 @@ class _PaymentPageState extends State<PaymentPage> {
                 )
               ],
             ),
-          )
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOrder(OrderMenu orderMenu) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: gap_s),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("${orderMenu.name}", style: textTheme().bodyText2),
+              Text(numberPriceFormat("${orderMenu.price}"), style: textTheme().bodyText2),
+            ],
+          ),
+          SizedBox(height: gap_s),
         ],
       ),
     );
@@ -231,13 +260,14 @@ AppBar _buildAppBar() {
   );
 }
 
-Widget _buildTextFormField(String? hintMsg, double setWidth) {
+Widget _buildTextFormField(String? hintMsg, double setWidth, controller) {
   return Container(
     height: 30,
     width: setWidth,
     child: TextFormField(
       scrollPadding: EdgeInsets.zero,
       textAlign: TextAlign.center,
+      controller: controller,
       textAlignVertical: TextAlignVertical.bottom,
       validator: (value) => value!.isEmpty ? "값을 넣어 주세요" : null,
       obscureText: hintMsg == "비밀번호" ? true : false,
