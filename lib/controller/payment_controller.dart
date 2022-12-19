@@ -1,10 +1,10 @@
 import 'package:final_project_beamin_app/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final orderController = Provider<OrderController>((ref) {
-  return OrderController();
+final paymentController = Provider<PaymentController>((ref) {
+  return PaymentController();
 });
 
-class OrderController {
+class PaymentController {
   final mContext = navigatorKey.currentContext;
 }

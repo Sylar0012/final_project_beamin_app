@@ -22,14 +22,35 @@ class MyOrderRespDto {
   List<OrderMenu> menuList;
 
   MyOrderRespDto(this.storeId, this.phone, this.address, this.storeName, this.minAmount, this.deliveryHour, this.deliveryCost, this.menuList);
+
+  Map<String, dynamic> toJson() {
+    return {
+      "storeId": storeId,
+      "phone": phone,
+      "address": address,
+      "storeName": storeName,
+      "minAmount": minAmount,
+      "deliveryHour": deliveryHour,
+      "deliveryCost": deliveryCost,
+      "OrderMenu": menuList,
+    };
+  }
 }
 
 class OrderMenu {
   String name;
   int price;
-  int conut;
+  int count;
 
-  OrderMenu(this.name, this.price, this.conut);
+  OrderMenu(this.name, this.price, this.count);
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "price": price,
+      "count": count,
+    };
+  }
 }
 
 List<MyOrderRespDto> MyOrderRespDtoList = [];

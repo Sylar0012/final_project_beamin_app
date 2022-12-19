@@ -29,7 +29,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
     int totalPrice = 0;
 
     for (int i = 0; i < widget.myOrderRespDto.length; i++) {
-      totalPrice += widget.myOrderRespDto[i].menuList[0].price * widget.myOrderRespDto[i].menuList[0].conut;
+      totalPrice += widget.myOrderRespDto[i].menuList[0].price * widget.myOrderRespDto[i].menuList[0].count;
     }
     print("$totalPrice");
     return ListView(
@@ -117,7 +117,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        if (orderMenu.conut < 10) orderMenu.conut--;
+                        if (orderMenu.count < 10) orderMenu.count--;
                       });
                     },
                     padding: EdgeInsets.zero, // 패딩 설정
@@ -129,14 +129,14 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
                   ),
                   SizedBox(width: gap_s),
                   Text(
-                    '${orderMenu.conut}',
+                    '${orderMenu.count}',
                     style: TextStyle(fontSize: 16.0, color: Color.fromRGBO(24, 24, 24, 1), fontWeight: FontWeight.bold, height: 1.5),
                   ),
                   SizedBox(width: gap_s),
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        if (orderMenu.conut < 10) orderMenu.conut++;
+                        if (orderMenu.count < 10) orderMenu.count++;
                       });
                     },
                     padding: EdgeInsets.zero, // 패딩 설정
@@ -189,7 +189,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             ),
             child: TextButton(
               onPressed: () {
-                if (totalPrice > widget.myOrderRespDto[0].minAmount) {
+                if (totalPrice >= widget.myOrderRespDto[0].minAmount) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => PaymentPage(myOrderRespDto: widget.myOrderRespDto, orderType: OrderType.pickup)),
@@ -250,7 +250,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             ),
             child: TextButton(
               onPressed: () {
-                if (totalPrice > widget.myOrderRespDto[0].minAmount) {
+                if (totalPrice >= widget.myOrderRespDto[0].minAmount) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -1,8 +1,13 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
+import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/components/my_order_list_body.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/iamport_dto/iamport_req_dto/iamport_data.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/payment_model/pg.dart';
+import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/menu_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -29,7 +34,7 @@ class _PaymentPageState extends State<PaymentPage> {
     final _orderComment = TextEditingController();
 
     for (int i = 0; i < widget.myOrderRespDto.length; i++) {
-      totalPrice += widget.myOrderRespDto[i].menuList[0].price * widget.myOrderRespDto[i].menuList[0].conut;
+      totalPrice += widget.myOrderRespDto[i].menuList[0].price * widget.myOrderRespDto[i].menuList[0].count;
     }
     Logger().d("orderType : ${widget.orderType}");
     return Scaffold(
@@ -166,7 +171,26 @@ class _PaymentPageState extends State<PaymentPage> {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/paymentDetail");
+                        MyOrderRespDto resp = MyOrderRespDto(widget.myOrderRespDto[0].storeId, widget.myOrderRespDto[0].phone, widget.myOrderRespDto[0].address, widget.myOrderRespDto[0].storeName,
+                            widget.myOrderRespDto[0].minAmount, widget.myOrderRespDto[0].deliveryHour, widget.myOrderRespDto[0].deliveryCost, widget.myOrderRespDto[0].menuList);
+                        // List<OrderMenu> omlist = OrderMenu(name, price, count);
+                        Logger().d("myOrderRespDto : ${resp.toJson()}");
+                        Navigator.pushNamed(
+                          context,
+                          "/iaportTest",
+                          arguments: PaymentData(
+                            pg: Pg.pg, // 뭘로 결제?
+                            payMethod: 'card', // 카드
+                            cardQuota: 0,
+                            name: "${widget.myOrderRespDto[0].menuList[0].name} 외 ${widget.myOrderRespDto.length - 1}", // 상품이름
+                            amount: totalPrice, // 가격
+                            merchantUid: "mid_${DateTime.now().millisecondsSinceEpoch}", // 거래 고유번호
+                            buyerName: UserSession.user.nickname, // 결제자 이름
+                            buyerTel: "${widget.myOrderRespDto[0].phone}", // 결제자 번호
+                            appScheme: 'flutterexample', // 모바일 웹뷰에서 외부앱 ( 결제창 ) 을 띄우기 위한 코드
+                            niceMobileV2: true,
+                          ),
+                        );
                       },
                       child: Text(
                         '주문 하기',
