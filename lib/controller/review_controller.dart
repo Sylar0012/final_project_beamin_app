@@ -26,7 +26,7 @@ class ReviewController {
           mContext!,
           MaterialPageRoute(
               builder: (mContext) => ReviewList(
-                    nickname: UserSession.user.username,
+                    nickname: UserSession.user.nickname,
                   )));
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(

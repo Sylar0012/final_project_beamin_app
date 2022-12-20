@@ -190,7 +190,8 @@ class _MyOrderListBodyState extends ConsumerState<MyOrderListBody> {
             ),
             child: TextButton(
               onPressed: () {
-                if (totalPrice >= model.storeDetail.minAmount) {
+                if (totalPrice >= 0) {
+                  //model.storeDetail.minAmount
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => PaymentPage(orderType: OrderType.pickup, myOrderInfo: globalMyOrderInfo, orderMenu: globalOrderMenuItems)),

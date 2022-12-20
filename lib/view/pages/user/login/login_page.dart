@@ -22,7 +22,19 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: gap_xl),
                 Text(
                   "땡기는 민족",
-                  style: TextStyle(color: kMainColor, fontSize: 50),
+                  style: TextStyle(
+                    color: kMainColor,
+                    fontSize: 50,
+                    fontFamily: "Nanum",
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(1),
+                        blurRadius: 1.0,
+                        spreadRadius: 1.0,
+                        offset: const Offset(0.5, 1),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: gap_xl),
                 CustomFormLogin(),

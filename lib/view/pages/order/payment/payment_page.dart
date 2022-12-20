@@ -184,7 +184,7 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                             payMethod: 'card', // 카드
                             cardQuota: 0,
                             name: widget.orderMenu.length == 1 ? "${widget.orderMenu[0].name}" : "${widget.orderMenu[0].name} 외 ${widget.orderMenu.length - 1}", // 상품이름
-                            amount: totalPrice, // 가격
+                            amount: 100, // 가격 totalPrice
                             merchantUid: "mid_${DateTime.now().millisecondsSinceEpoch}", // 거래 고유번호
                             buyerName: UserSession.user.nickname, // 결제자 이름
                             buyerTel: "${widget.myOrderInfo[0].phone}", // 결제자 번호

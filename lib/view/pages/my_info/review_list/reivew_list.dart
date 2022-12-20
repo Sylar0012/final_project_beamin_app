@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/model/my_review_list.dart';
 import 'package:final_project_beamin_app/size.dart';
@@ -124,9 +126,9 @@ Widget _bulidReviewImg({String? img}) {
       width: double.infinity,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: Image.asset(
-          "assets/images/category/${img}.jpg",
-          fit: BoxFit.cover,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(50),
+          child: Image.memory(base64Decode(img!), fit: BoxFit.cover),
         ),
       ),
     );

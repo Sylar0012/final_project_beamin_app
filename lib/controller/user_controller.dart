@@ -5,12 +5,10 @@ import 'package:final_project_beamin_app/dto/user_info_update_req_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/service/user_service.dart';
-import 'package:final_project_beamin_app/view/pages/my_info/model/my_info_model.dart';
 import 'package:final_project_beamin_app/view/pages/my_info/model/my_info_view_model.dart';
 import 'package:final_project_beamin_app/view/pages/my_info/my_info_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 /**
  * View -> Controller 요청
@@ -50,15 +48,8 @@ class UserController {
   }
 
   Future<void> updatePost(
-      {required int id,
-      required String oldPassword,
-      required String newPassword,
-      required String address,
-      required String nickname,
-      required String phone,
-      required String photo}) async {
-    UserInfoUpdateReqDto userInfoUpdateReqDto = UserInfoUpdateReqDto(
-        id: id, oldPassword: oldPassword, newPassword: newPassword, address: address, nickname: nickname, phone: phone, photo: photo);
+      {required int id, required String oldPassword, required String newPassword, required String address, required String nickname, required String phone, required String photo}) async {
+    UserInfoUpdateReqDto userInfoUpdateReqDto = UserInfoUpdateReqDto(id: id, oldPassword: oldPassword, newPassword: newPassword, address: address, nickname: nickname, phone: phone, photo: photo);
     ResponseDto responseDto = await userService.fetchInfoUpdate(userInfoUpdateReqDto);
     if (responseDto.code == 1) {
       Navigator.pop(mContext!, MaterialPageRoute(builder: (mContext) => MyInfoPage()));
@@ -77,11 +68,9 @@ class UserController {
     Navigator.popAndPushNamed(mContext!, Routers.join);
   }
 
-  Future<void> join(
-      {required String username, required String password, required String nickname, required String phone, required String address}) async {
+  Future<void> join({required String username, required String password, required String nickname, required String phone, required String address}) async {
     // 1. DTO 변환
     JoinReqDto joinReqDto = JoinReqDto(username, password, nickname, phone, address);
-    Logger().d("joinReqDto : $joinReqDto");
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
 
@@ -102,10 +91,8 @@ class UserController {
 
     // 2. 통신 요청
     ResponseDto responseDto = await userService.fetchLogin(loginReqDto);
-    Logger().d("로그인  : ${responseDto.code}");
     //3. 비지니스 로직 처리
     if (responseDto.code == 1) {
-      Logger().d("로그인 성공시 바디 데이터 : ${responseDto.data}");
       Navigator.popAndPushNamed(mContext!, Routers.main);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(

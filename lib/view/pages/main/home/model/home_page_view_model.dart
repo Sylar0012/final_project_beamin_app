@@ -22,11 +22,9 @@ class HomePageViewModel extends StateNotifier<HomePageModel?> {
 
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await mainService.fetchStoreList();
-    Logger().d("responseDto? ${responseDto.code}");
 
     if (responseDto.code == 1) {
       state = HomePageModel(responseDto.data);
-      Logger().d("state? ${state?.storesList.length}");
     }
   }
 }

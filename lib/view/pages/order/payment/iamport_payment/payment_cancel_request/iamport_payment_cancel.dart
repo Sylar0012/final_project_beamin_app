@@ -1,5 +1,5 @@
 import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/iamport_controller/iamport_payment_cancel_contorller.dart';
-import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/payment_request/iamport_payment_page.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/payment_page/iamport_payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,7 +29,7 @@ class _CertificationTestState extends ConsumerState<PaymentCancelTest> {
     print("checkSum : $checkSum");
     return Scaffold(
       appBar: AppBar(
-        title: Text('아임포트 환불 테스트'),
+        title: Text('아임포트 환불'),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
