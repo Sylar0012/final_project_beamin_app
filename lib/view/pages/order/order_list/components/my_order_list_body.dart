@@ -3,35 +3,36 @@ import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/model/payment_resp_dto.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/model/my_order_list_model.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/model/my_order_list_view_model.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/payment_page.dart';
+import 'package:final_project_beamin_app/view/pages/store/menu_detail/menu_detail_page.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum OrderType { delivery, pickup }
 
-class MyOrderListBody extends StatefulWidget {
-  const MyOrderListBody({required this.myOrderRespDto, Key? key}) : super(key: key);
-  final List<MyOrderRespDto> myOrderRespDto;
+class MyOrderListBody extends ConsumerStatefulWidget {
+  const MyOrderListBody({required this.orderMenu, Key? key}) : super(key: key);
+  final List<OrderMenu> orderMenu;
+
   @override
-  State<MyOrderListBody> createState() => _MyOrderListBodyState();
+  ConsumerState<MyOrderListBody> createState() => _MyOrderListBodyState();
 }
 
-class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true;
-
+class _MyOrderListBodyState extends ConsumerState<MyOrderListBody> {
   OrderType? _orderType = OrderType.delivery;
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     int totalPrice = 0;
 
-    for (int i = 0; i < widget.myOrderRespDto.length; i++) {
-      totalPrice += widget.myOrderRespDto[i].menuList[0].price * widget.myOrderRespDto[i].menuList[0].count;
+    for (int i = 0; i < widget.orderMenu.length; i++) {
+      totalPrice += widget.orderMenu[i].price * widget.orderMenu[i].count;
     }
-    print("$totalPrice");
+    MyOrderListPageModel? model = ref.watch(myOrderListPageViewModel(widget.orderMenu[0].storeId));
     return ListView(
       children: [
         Container(
@@ -40,11 +41,11 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: gap_s),
-              Text("${widget.myOrderRespDto[0].storeName}", style: textTheme().headline1),
+              Text("${model?.storeDetail.name}", style: textTheme().headline1),
               SizedBox(height: gap_s),
-              _bulidOrderType("배달", OrderType.delivery, "최소 주문 금액 : ${numberPriceFormat("${widget.myOrderRespDto[0].minAmount}")}"),
+              _bulidOrderType("배달", OrderType.delivery, "최소 주문 금액 : ${numberPriceFormat("${model?.storeDetail.minAmount}")}"),
               SizedBox(height: gap_s),
-              _bulidOrderType("포장", OrderType.pickup, "포장 시간 : ${widget.myOrderRespDto[0].deliveryHour}"),
+              _bulidOrderType("포장", OrderType.pickup, "포장 시간 : ${model?.storeDetail.deliveryHour}"),
               SizedBox(height: gap_s),
             ],
           ),
@@ -58,10 +59,10 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
         ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: widget.myOrderRespDto.length,
+          itemCount: widget.orderMenu.length,
           itemBuilder: (context, index) {
             return _buildMenuList(
-              widget.myOrderRespDto[index].menuList[0],
+              widget.orderMenu[index],
             );
           },
         ),
@@ -70,8 +71,8 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
           thickness: 1,
           color: Colors.grey[300],
         ),
-        if (_orderType == OrderType.delivery) _buildDelivery(totalPrice),
-        if (_orderType == OrderType.pickup) _buildPickUp(totalPrice),
+        if (_orderType == OrderType.delivery) _buildDelivery(totalPrice, model),
+        if (_orderType == OrderType.pickup) _buildPickUp(totalPrice, model!),
       ],
     );
   }
@@ -89,10 +90,10 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {
-                  for (int i = 0; i < widget.myOrderRespDto.length; i++) {
-                    if (widget.myOrderRespDto[i].menuList[0].name == orderMenu.name) {
+                  for (int i = 0; i < widget.orderMenu.length; i++) {
+                    if (widget.orderMenu[i].name == orderMenu.name) {
                       setState(() {
-                        widget.myOrderRespDto.removeAt(i);
+                        widget.orderMenu.removeAt(i);
                       });
                     }
                   }
@@ -156,7 +157,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
     );
   }
 
-  Widget _buildPickUp(int totalPrice) {
+  Widget _buildPickUp(int totalPrice, MyOrderListPageModel model) {
     return Column(
       children: [
         Padding(
@@ -189,10 +190,10 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             ),
             child: TextButton(
               onPressed: () {
-                if (totalPrice >= widget.myOrderRespDto[0].minAmount) {
+                if (totalPrice >= model.storeDetail.minAmount) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PaymentPage(myOrderRespDto: widget.myOrderRespDto, orderType: OrderType.pickup)),
+                    MaterialPageRoute(builder: (context) => PaymentPage(orderType: OrderType.pickup, myOrderInfo: globalMyOrderInfo, orderMenu: globalOrderMenuItems)),
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -215,7 +216,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
     );
   }
 
-  Widget _buildDelivery(int totalPrice) {
+  Widget _buildDelivery(int totalPrice, model) {
     return Column(
       children: [
         Padding(
@@ -225,9 +226,9 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
               SizedBox(height: gap_m),
               _buildOrderPrice("상품 금액", numberPriceFormat("${totalPrice}")),
               SizedBox(height: gap_s),
-              _buildOrderPrice("배달 비용", numberPriceFormat("${widget.myOrderRespDto[0].deliveryCost}")),
+              _buildOrderPrice("배달 비용", numberPriceFormat("${model.storeDetail.deliveryCost}")),
               SizedBox(height: gap_s),
-              _buildOrderPrice("결제 금액", numberPriceFormat("${totalPrice + widget.myOrderRespDto[0].deliveryCost}")),
+              _buildOrderPrice("결제 금액", numberPriceFormat("${totalPrice + model.storeDetail.deliveryCost}")),
               SizedBox(height: gap_m),
             ],
           ),
@@ -250,12 +251,10 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
             ),
             child: TextButton(
               onPressed: () {
-                if (totalPrice >= widget.myOrderRespDto[0].minAmount) {
+                if (totalPrice >= model.storeDetail.minAmount) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => PaymentPage(myOrderRespDto: widget.myOrderRespDto, orderType: OrderType.delivery),
-                    ),
+                    MaterialPageRoute(builder: (context) => PaymentPage(orderType: OrderType.delivery, myOrderInfo: globalMyOrderInfo, orderMenu: globalOrderMenuItems)),
                   );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -267,7 +266,7 @@ class _MyOrderListBodyState extends State<MyOrderListBody> with AutomaticKeepAli
                 }
               },
               child: Text(
-                '${numberPriceFormat("${totalPrice + widget.myOrderRespDto[0].deliveryCost}")} 주문 하기',
+                '${numberPriceFormat("${totalPrice + model.storeDetail.deliveryCost}")} 주문 하기',
                 style: TextStyle(color: Colors.white, fontSize: 14, height: 1.0),
               ),
             ),

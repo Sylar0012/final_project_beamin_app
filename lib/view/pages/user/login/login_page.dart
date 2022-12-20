@@ -1,3 +1,4 @@
+import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/user/components/costom_form_login.dart';
@@ -19,7 +20,10 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: gap_xl),
-                Text("로그인", style: textTheme().headline1),
+                Text(
+                  "땡기는 민족",
+                  style: TextStyle(color: kMainColor, fontSize: 50),
+                ),
                 SizedBox(height: gap_xl),
                 CustomFormLogin(),
                 SizedBox(height: gap_xl),

@@ -1,4 +1,5 @@
 import 'package:final_project_beamin_app/theme.dart';
+import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/iamport_dto/iamport_req_dto/iamport_data.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/payment_model/quota.dart';
@@ -34,7 +35,7 @@ class _PaymentTestState extends State<PaymentTest> {
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.black,
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderListPage()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
           },
         ),
       ),

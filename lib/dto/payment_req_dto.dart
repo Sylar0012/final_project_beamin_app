@@ -1,21 +1,36 @@
-class PaymentReqDto {
-  int orderId;
-  String merchantUid;
-  int amount;
-  String nickname;
-  String impUid;
-  String menuName;
+import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 
-  PaymentReqDto(this.orderId, this.merchantUid, this.amount, this.nickname, this.impUid, this.menuName);
+class PaymentReqDto {
+  String comment;
+  String deliveryStateEnum;
+  List<OrderDetailList> orderDetailList;
+
+  PaymentReqDto(this.comment, this.deliveryStateEnum, this.orderDetailList);
 
   Map<String, dynamic> toJson() {
     return {
-      "orderId": orderId,
-      "impUid": impUid,
-      "merchantUid": merchantUid,
-      "amount": amount,
-      "nickname": nickname,
-      "menuName": menuName,
+      "comment": comment,
+      "deliveryStateEnum": deliveryStateEnum,
+      "orderDetailList": orderDetailList,
     };
   }
 }
+
+class OrderDetailList {
+  int storeId;
+  int menuId;
+  String name;
+  int price;
+  int count;
+
+  OrderDetailList(this.storeId, this.menuId, this.name, this.price, this.count);
+
+  Map<String, dynamic> toJson() {
+    return {
+      "menuId": menuId,
+      "count": count,
+    };
+  }
+}
+
+List<OrderDetailList> list = [];

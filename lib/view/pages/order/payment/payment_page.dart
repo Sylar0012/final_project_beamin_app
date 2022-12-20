@@ -1,7 +1,6 @@
 import 'package:final_project_beamin_app/constants.dart';
 import 'package:final_project_beamin_app/controller/order_controller.dart';
-import 'package:final_project_beamin_app/dto/order_req_dto.dart';
-import 'package:final_project_beamin_app/dto/response_dto.dart';
+import 'package:final_project_beamin_app/dto/payment_req_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/size.dart';
@@ -9,8 +8,9 @@ import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/components/my_order_list_body.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/iamport_dto/iamport_req_dto/iamport_data.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/payment_model/pg.dart';
-import 'package:final_project_beamin_app/view/pages/order/payment_detail_page.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/menu_list_page.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment/model/payment_page_model.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment/model/payment_page_view_model.dart';
+import 'package:final_project_beamin_app/view/pages/store/menu_detail/menu_detail_page.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,9 +19,10 @@ import 'package:logger/logger.dart';
 enum Comment { defaultMsg, costomMsg }
 
 class PaymentPage extends ConsumerStatefulWidget {
-  const PaymentPage({required this.myOrderRespDto, required this.orderType, Key? key}) : super(key: key);
-  final List<MyOrderRespDto> myOrderRespDto;
+  const PaymentPage({required this.orderType, required this.myOrderInfo, required this.orderMenu, Key? key}) : super(key: key);
   final OrderType orderType;
+  final List<OrderMenu> orderMenu;
+  final List<MyOrderInfo> myOrderInfo;
 
   @override
   ConsumerState<PaymentPage> createState() => _PaymentPageState();
@@ -34,13 +35,13 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     int totalPrice = 0;
-    final _detailAddress = TextEditingController();
+
     final _orderComment = TextEditingController();
     OrderController odCT = ref.read(orderController);
-    for (int i = 0; i < widget.myOrderRespDto.length; i++) {
-      totalPrice += widget.myOrderRespDto[i].menuList[0].price * widget.myOrderRespDto[i].menuList[0].count;
+    for (int i = 0; i < widget.orderMenu.length; i++) {
+      totalPrice += widget.orderMenu[i].price * widget.orderMenu[i].count;
     }
-    Logger().d("orderType : ${widget.orderType}");
+    PaymentPageModel? model = ref.watch(paymentPageViewModel(widget.orderMenu[0].storeId));
     return Scaffold(
       appBar: _buildAppBar(),
       body: ListView(
@@ -57,11 +58,9 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("연락 받을 번호 : ${widget.myOrderRespDto[0].phone}", style: textTheme().bodyText2),
+                      Text("연락 받을 번호 : ${widget.myOrderInfo[0].phone}", style: textTheme().bodyText2),
                       SizedBox(height: gap_s),
-                      Text("${widget.myOrderRespDto[0].address}", style: textTheme().bodyText2),
-                      SizedBox(height: gap_s),
-                      _buildTextFormField("상세 주소", double.infinity, _detailAddress),
+                      Text(widget.myOrderInfo[0].address, style: textTheme().bodyText2),
                     ],
                   ),
                 ),
@@ -132,9 +131,9 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: widget.myOrderRespDto.length,
+                  itemCount: widget.orderMenu.length,
                   itemBuilder: (context, index) {
-                    return _buildOrder(widget.myOrderRespDto[index].menuList[0]);
+                    return _buildOrder(widget.orderMenu[index]);
                   },
                 ),
                 widget.orderType == OrderType.delivery
@@ -144,7 +143,7 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("배달 비용", style: textTheme().bodyText2),
-                            Text(numberPriceFormat("${widget.myOrderRespDto[0].deliveryCost}"), style: textTheme().bodyText2),
+                            Text(numberPriceFormat("${model?.storeDetail.deliveryCost}"), style: textTheme().bodyText2),
                           ],
                         ),
                       )
@@ -157,7 +156,7 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                     children: [
                       Text("결제 금액", style: textTheme().bodyText1),
                       widget.orderType == OrderType.delivery
-                          ? Text(numberPriceFormat("${widget.myOrderRespDto[0].deliveryCost + totalPrice}"), style: textTheme().bodyText1)
+                          ? Text(numberPriceFormat("${model!.storeDetail.deliveryCost + totalPrice}"), style: textTheme().bodyText1)
                           : Text(numberPriceFormat("${totalPrice}"), style: textTheme().bodyText1)
                     ],
                   ),
@@ -175,7 +174,8 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        odCT.saveOrder(widget.myOrderRespDto);
+                        odCT.saveOrder(PaymentReqDto(_comment == Comment.defaultMsg ? "문 앞에 나둬 주세요" : _orderComment.text.trim(), widget.orderType == OrderType.pickup ? "TAKEOUT" : "DELIVERY",
+                            widget.orderMenu.map((e) => OrderDetailList(e.storeId, e.menuId, e.name, e.price, e.count)).toList()));
                         Navigator.pushNamed(
                           context,
                           "/iaportTest",
@@ -183,21 +183,17 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                             pg: Pg.pg, // 뭘로 결제?
                             payMethod: 'card', // 카드
                             cardQuota: 0,
-                            name: widget.myOrderRespDto.length == 1
-                                ? "${widget.myOrderRespDto[0].menuList[0].name}"
-                                : "${widget.myOrderRespDto[0].menuList[0].name} 외 ${widget.myOrderRespDto.length - 1}", // 상품이름
+                            name: widget.orderMenu.length == 1 ? "${widget.orderMenu[0].name}" : "${widget.orderMenu[0].name} 외 ${widget.orderMenu.length - 1}", // 상품이름
                             amount: totalPrice, // 가격
                             merchantUid: "mid_${DateTime.now().millisecondsSinceEpoch}", // 거래 고유번호
                             buyerName: UserSession.user.nickname, // 결제자 이름
-                            buyerTel: "${widget.myOrderRespDto[0].phone}", // 결제자 번호
+                            buyerTel: "${widget.myOrderInfo[0].phone}", // 결제자 번호
                             appScheme: 'flutterexample', // 모바일 웹뷰에서 외부앱 ( 결제창 ) 을 띄우기 위한 코드
                             niceMobileV2: true,
                           ),
                         );
                         setState(() {
-                          for (int i = 0; i < widget.myOrderRespDto.length; i++) {
-                            widget.myOrderRespDto.removeAt(i);
-                          }
+                          widget.orderMenu.clear();
                         });
                       },
                       child: Text(

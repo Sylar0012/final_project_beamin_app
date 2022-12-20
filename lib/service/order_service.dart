@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:final_project_beamin_app/core/http_connector.dart';
+import 'package:final_project_beamin_app/dto/payment_req_dto.dart';
 import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/model/order_list.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/iamport_util/iamport_util.dart';
-import 'package:final_project_beamin_app/view/pages/util/parsing_util.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
@@ -19,17 +19,18 @@ class OrderService {
   factory OrderService() {
     return _instance;
   }
-  Future<ResponseDto> fetchOrderInsert(List<MyOrderRespDto> myOrderRespDto) async {
-    String requestBody = jsonEncode(myOrderRespDto);
+  Future<ResponseDto> fetchOrderInsert(PaymentReqDto paymentReqDto) async {
+    String requestBody = jsonEncode(paymentReqDto);
     Logger().d("requestBody어캐나옴? $requestBody");
-    Response response = await httpConnector.postInitSession("/api/user/${UserSession.user.id}/store/${myOrderRespDto[0].storeId}/order/insert", UserSession.jwtToken, requestBody);
+    Response response = await httpConnector.postInitSession("/api/user/${UserSession.user.id}/store/${paymentReqDto.orderDetailList[0].storeId}/order/insert", requestBody, UserSession.jwtToken);
     ResponseDto responseDto = toResponseDto(response);
+    Logger().d("responseDto : ${response}");
 
     return responseDto;
   }
 
   Future<ResponseDto> fetchOrderHistory() async {
-    Response response = await httpConnector.getInitSession("/api/user/${UserSession.user?.id}/order/history/list", UserSession.jwtToken);
+    Response response = await httpConnector.getInitSession("/api/user/${UserSession.user.id}/order/history/list", UserSession.jwtToken);
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("responseDto 실행됨? ${responseDto.data}");
     if (responseDto.code == 1) {

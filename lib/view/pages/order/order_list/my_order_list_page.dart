@@ -1,3 +1,4 @@
+import 'package:final_project_beamin_app/dto/menu_req_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/components/order_appbar.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class MyOrderListPage extends ConsumerStatefulWidget {
-  const MyOrderListPage({Key? key}) : super(key: key);
+  MyOrderListPage({Key? key}) : super(key: key);
 
   @override
   ConsumerState<MyOrderListPage> createState() => _MyOrderListPageState();
@@ -21,7 +22,7 @@ class _MyOrderListPageState extends ConsumerState<MyOrderListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: OrderAppBar(appBar: AppBar(), center: true, title: "장바구니"),
-      body: globalMyOrderItems.length == 0 ? _buildNullStoreId() : _buildNotNullStoreId(),
+      body: globalOrderMenuItems.length == 0 ? _buildNullStoreId() : _buildNotNullStoreId(),
     );
   }
 }
@@ -31,5 +32,5 @@ Widget _buildNullStoreId() {
 }
 
 Widget _buildNotNullStoreId() {
-  return MyOrderListBody(myOrderRespDto: globalMyOrderItems);
+  return MyOrderListBody(orderMenu: globalOrderMenuItems);
 }

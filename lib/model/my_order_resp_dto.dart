@@ -1,38 +1,27 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-class MyOrderRespDto {
-  int storeId;
+class MyOrderInfo {
   String phone;
   String address;
-  String storeName;
-  int minAmount;
-  String deliveryHour;
-  int deliveryCost;
-  List<OrderMenu> menuList;
 
-  MyOrderRespDto(this.storeId, this.phone, this.address, this.storeName, this.minAmount, this.deliveryHour, this.deliveryCost, this.menuList);
+  MyOrderInfo(this.phone, this.address);
 
   Map<String, dynamic> toJson() {
     return {
-      "storeId": storeId,
       "phone": phone,
       "address": address,
-      "storeName": storeName,
-      "minAmount": minAmount,
-      "deliveryHour": deliveryHour,
-      "deliveryCost": deliveryCost,
-      "OrderMenu": menuList,
     };
   }
 }
 
+List<MyOrderInfo> myOrderInfo = [];
+
 class OrderMenu {
+  int storeId;
   int menuId;
   String name;
   int price;
   int count;
 
-  OrderMenu(this.menuId, this.name, this.price, this.count);
+  OrderMenu(this.storeId, this.menuId, this.name, this.price, this.count);
 
   Map<String, dynamic> toJson() {
     return {
@@ -44,4 +33,4 @@ class OrderMenu {
   }
 }
 
-List<MyOrderRespDto> MyOrderRespDtoList = [];
+List<OrderMenu> orderMenuList = [];

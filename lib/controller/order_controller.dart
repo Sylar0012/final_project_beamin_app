@@ -1,3 +1,4 @@
+import 'package:final_project_beamin_app/dto/payment_req_dto.dart';
 import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/main.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
@@ -12,8 +13,8 @@ final orderController = Provider<OrderController>((ref) {
 class OrderController {
   final mContext = navigatorKey.currentContext;
   final OrderService orderService = OrderService();
-  Future<void> saveOrder(List<MyOrderRespDto> myOrderRespDto) async {
-    ResponseDto responseDto = await orderService.fetchOrderInsert(myOrderRespDto);
+  Future<void> saveOrder(PaymentReqDto paymentReqDto) async {
+    ResponseDto responseDto = await orderService.fetchOrderInsert(paymentReqDto);
     Logger().d("컨트롤러의 responseDto ? $responseDto");
   }
 }
