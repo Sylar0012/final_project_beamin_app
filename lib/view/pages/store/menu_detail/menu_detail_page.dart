@@ -225,7 +225,7 @@ class _MenuDetailPageState extends ConsumerState<MenuDetailPage> {
                                   model.menuDetail.minAmount,
                                   model.menuDetail.deliveryHour,
                                   model.menuDetail.deliveryCost,
-                                  <OrderMenu>[OrderMenu(model.menuDetail.menuName, model.menuDetail.price, orderCount)],
+                                  <OrderMenu>[OrderMenu(widget.menuDetailReqDto.menuId, model.menuDetail.menuName, model.menuDetail.price, orderCount)],
                                 ),
                               );
                               Logger().d("globalMyOrderItems.length : ${globalMyOrderItems.length}");

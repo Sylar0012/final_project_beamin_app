@@ -1,6 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-class MyOrderRespDto {
+class OrderReqDto {
   int storeId;
   String phone;
   String address;
@@ -8,9 +6,9 @@ class MyOrderRespDto {
   int minAmount;
   String deliveryHour;
   int deliveryCost;
-  List<OrderMenu> menuList;
+  List<OrderMenu>? menuList;
 
-  MyOrderRespDto(this.storeId, this.phone, this.address, this.storeName, this.minAmount, this.deliveryHour, this.deliveryCost, this.menuList);
+  OrderReqDto(this.storeId, this.phone, this.address, this.storeName, this.minAmount, this.deliveryHour, this.deliveryCost, this.menuList);
 
   Map<String, dynamic> toJson() {
     return {
@@ -43,5 +41,3 @@ class OrderMenu {
     };
   }
 }
-
-List<MyOrderRespDto> MyOrderRespDtoList = [];

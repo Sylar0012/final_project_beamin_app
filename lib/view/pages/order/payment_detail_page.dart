@@ -149,7 +149,7 @@ AppBar _buildAppBar(context) {
     automaticallyImplyLeading: false,
     leading: IconButton(
       onPressed: () {
-        Navigator.pushNamed(context, "/home");
+        Navigator.pushNamed(context, "/main");
       },
       icon: Icon(CupertinoIcons.arrow_left),
     ),

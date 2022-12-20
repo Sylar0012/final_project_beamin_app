@@ -1,7 +1,7 @@
 import 'package:final_project_beamin_app/core/routers.dart';
 import 'package:final_project_beamin_app/service/local_service.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
+import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list_page.dart';

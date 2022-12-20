@@ -1,4 +1,4 @@
-import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store.dart';
+import 'package:final_project_beamin_app/view/pages/main/favorite_store/favorite_store_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/home_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/order_list/order_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/main/search/search_page.dart';

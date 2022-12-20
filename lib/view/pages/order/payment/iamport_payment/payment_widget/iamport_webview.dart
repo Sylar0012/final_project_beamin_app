@@ -92,9 +92,6 @@ class _IamportWebViewState extends State<IamportWebView> {
                 this._webViewController = controller;
                 if (widget.type == ActionType.payment) {
                   // 스마일페이, 나이스 실시간 계좌이체
-                  Logger().d("스마일 페이 실행됨 : ${widget.type.toString()}");
-                  Logger().d("name : ${ActionType.payment.name}");
-                  Logger().d("index : ${ActionType.payment.index}");
                   _sub = widget.customPGAction(this._webViewController);
                 }
               },

@@ -1,4 +1,6 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/controller/order_controller.dart';
+import 'package:final_project_beamin_app/dto/order_req_dto.dart';
 import 'package:final_project_beamin_app/dto/response_dto.dart';
 import 'package:final_project_beamin_app/model/my_order_resp_dto.dart';
 import 'package:final_project_beamin_app/model/user_session.dart';
@@ -7,23 +9,25 @@ import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/order/order_list/components/my_order_list_body.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/iamport_dto/iamport_req_dto/iamport_data.dart';
 import 'package:final_project_beamin_app/view/pages/order/payment/iamport_payment/payment_model/pg.dart';
+import 'package:final_project_beamin_app/view/pages/order/payment_detail_page.dart';
 import 'package:final_project_beamin_app/view/pages/store/store_detail/store_tap/menu/menu_list_page.dart';
 import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 enum Comment { defaultMsg, costomMsg }
 
-class PaymentPage extends StatefulWidget {
+class PaymentPage extends ConsumerStatefulWidget {
   const PaymentPage({required this.myOrderRespDto, required this.orderType, Key? key}) : super(key: key);
   final List<MyOrderRespDto> myOrderRespDto;
   final OrderType orderType;
 
   @override
-  State<PaymentPage> createState() => _PaymentPageState();
+  ConsumerState<PaymentPage> createState() => _PaymentPageState();
 }
 
-class _PaymentPageState extends State<PaymentPage> {
+class _PaymentPageState extends ConsumerState<PaymentPage> {
   Comment? _comment = Comment.defaultMsg;
   int selectedId = 1;
 
@@ -32,7 +36,7 @@ class _PaymentPageState extends State<PaymentPage> {
     int totalPrice = 0;
     final _detailAddress = TextEditingController();
     final _orderComment = TextEditingController();
-
+    OrderController odCT = ref.read(orderController);
     for (int i = 0; i < widget.myOrderRespDto.length; i++) {
       totalPrice += widget.myOrderRespDto[i].menuList[0].price * widget.myOrderRespDto[i].menuList[0].count;
     }
@@ -171,10 +175,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     ),
                     child: TextButton(
                       onPressed: () {
-                        MyOrderRespDto resp = MyOrderRespDto(widget.myOrderRespDto[0].storeId, widget.myOrderRespDto[0].phone, widget.myOrderRespDto[0].address, widget.myOrderRespDto[0].storeName,
-                            widget.myOrderRespDto[0].minAmount, widget.myOrderRespDto[0].deliveryHour, widget.myOrderRespDto[0].deliveryCost, widget.myOrderRespDto[0].menuList);
-                        // List<OrderMenu> omlist = OrderMenu(name, price, count);
-                        Logger().d("myOrderRespDto : ${resp.toJson()}");
+                        odCT.saveOrder(widget.myOrderRespDto);
                         Navigator.pushNamed(
                           context,
                           "/iaportTest",
@@ -182,7 +183,9 @@ class _PaymentPageState extends State<PaymentPage> {
                             pg: Pg.pg, // 뭘로 결제?
                             payMethod: 'card', // 카드
                             cardQuota: 0,
-                            name: "${widget.myOrderRespDto[0].menuList[0].name} 외 ${widget.myOrderRespDto.length - 1}", // 상품이름
+                            name: widget.myOrderRespDto.length == 1
+                                ? "${widget.myOrderRespDto[0].menuList[0].name}"
+                                : "${widget.myOrderRespDto[0].menuList[0].name} 외 ${widget.myOrderRespDto.length - 1}", // 상품이름
                             amount: totalPrice, // 가격
                             merchantUid: "mid_${DateTime.now().millisecondsSinceEpoch}", // 거래 고유번호
                             buyerName: UserSession.user.nickname, // 결제자 이름
@@ -191,6 +194,11 @@ class _PaymentPageState extends State<PaymentPage> {
                             niceMobileV2: true,
                           ),
                         );
+                        setState(() {
+                          for (int i = 0; i < widget.myOrderRespDto.length; i++) {
+                            widget.myOrderRespDto.removeAt(i);
+                          }
+                        });
                       },
                       child: Text(
                         '주문 하기',
@@ -207,7 +215,7 @@ class _PaymentPageState extends State<PaymentPage> {
     );
   }
 
-  Widget _buildOrder(OrderMenu orderMenu) {
+  Widget _buildOrder(orderMenu) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: gap_s),
       child: Column(
