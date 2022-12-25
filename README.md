@@ -32,8 +32,7 @@ https://www.youtube.com/watch?v=5i710ncxHWU
 ## 배운 점 & 아쉬운 점
 
 <p align="justify">
- 상태관리의 중요성에 대해 배웠음.
- 백엔드 프로그래머와 소통하는 법을 배웠음.
+ 상태관리의 중요성에 대해 배웠고 백엔드 프로그래머와 소통하는 법을 배웠음.
 </p>
 
 <p align="justify">
