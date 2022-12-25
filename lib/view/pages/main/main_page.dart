@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             label: "내 정보",
             icon: IconButton(
-              padding: EdgeInsets.zero, // 패딩 설정
+              padding: EdgeInsets.zero,
               constraints: BoxConstraints(),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => MyInfoPage()));
