@@ -1,16 +1,45 @@
-# final_project_beamin_app
+# 땡기는 민족
 
-A new Flutter project.
+<p align="center">
+  <br>
+  <img src="https://user-images.githubusercontent.com/108394995/209459760-55d55c80-0e1a-4daa-bce3-408d8a356335.png">
+  <br>
+</p>
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## 프로젝트 소개
 
-A few resources to get you started if this is your first Flutter project:
+<p align="justify">
+프로젝트 개요/동기
+<br>
+<img src ="https://user-images.githubusercontent.com/108394995/209460006-6e3b12fe-1fc0-4d29-b321-af51c08e267c.png">
+<br>
+</p>
+<br>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 개발 환경 및 사용 언어
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Java, Dart ,Spring Boot, MariaDB, H2 DataBase, Apache Tomcat, Flutter
+
+<br>
+
+## 시연 영상
+
+https://www.youtube.com/watch?v=5i710ncxHWU
+
+<br>
+
+## 배운 점 & 아쉬운 점
+
+<p align="justify">
+ 상태관리의 중요성에 대해 배웠음.
+ 백엔드 프로그래머와 소통하는 법을 배웠음.
+</p>
+
+<p align="justify">
+ 결제 API를 사용하는데 익숙하지 못해 결제 취소는 미구현 된게 아쉬움
+</p>
+
+<br>
+
+
