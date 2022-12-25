@@ -1,30 +1,40 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/controller/user_controller.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/components/costom_text_form_field.dart';
 import 'package:final_project_beamin_app/view/pages/user/login/login_page.dart';
+import 'package:final_project_beamin_app/view/pages/util/validator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomFormJoin extends StatelessWidget {
+class CustomFormJoin extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
-
+  final _username = TextEditingController();
+  final _password = TextEditingController();
+  final _nickname = TextEditingController();
+  final _phone = TextEditingController();
+  final _address = TextEditingController();
   CustomFormJoin({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var username;
-    var password;
-    var nickname;
-    var phone;
-    var address;
-
+  Widget build(BuildContext context, WidgetRef ref) {
+    UserController userCT = ref.read(userController);
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          CustomTextFormField(text: "아이디", controller: username),
+          CustomTextFormField(
+            text: "아이디",
+            controller: _username,
+            funValidator: validateUsername(),
+          ),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "비밀번호", controller: password),
+          CustomTextFormField(
+            text: "비밀번호",
+            controller: _password,
+            funValidator: validatePassword(),
+          ),
           SizedBox(height: gap_s),
           Divider(
             height: 1,
@@ -32,11 +42,23 @@ class CustomFormJoin extends StatelessWidget {
             color: Colors.grey[300],
           ),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "닉네임", controller: nickname),
+          CustomTextFormField(
+            text: "닉네임",
+            controller: _nickname,
+            funValidator: validateNickName(),
+          ),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "휴대폰 번호", controller: phone),
+          CustomTextFormField(
+            text: "휴대폰 번호",
+            controller: _phone,
+            funValidator: validatePhoneNumber(),
+          ),
           SizedBox(height: gap_s),
-          CustomTextFormField(text: "주소", controller: address),
+          CustomTextFormField(
+            text: "주소",
+            controller: _address,
+            funValidator: validateAddress(),
+          ),
           SizedBox(height: gap_s),
           Divider(
             height: 1,
@@ -44,13 +66,13 @@ class CustomFormJoin extends StatelessWidget {
             color: Colors.grey[300],
           ),
           SizedBox(height: gap_s),
-          _buildJoinButton(context),
+          _buildJoinButton(context, userCT),
         ],
       ),
     );
   }
 
-  Padding _buildJoinButton(BuildContext context) {
+  Padding _buildJoinButton(BuildContext context, UserController userCT) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: gap_m),
       child: Container(
@@ -64,7 +86,13 @@ class CustomFormJoin extends StatelessWidget {
         child: TextButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              userCT.join(
+                username: _username.text.trim(),
+                password: _password.text.trim(),
+                nickname: _nickname.text.trim(),
+                phone: _phone.text.trim(),
+                address: _address.text.trim(),
+              );
             }
           },
           child: Text(

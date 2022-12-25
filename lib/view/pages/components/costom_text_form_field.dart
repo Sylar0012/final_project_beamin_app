@@ -3,9 +3,10 @@ import 'package:final_project_beamin_app/size.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({required this.text, required this.controller, Key? key}) : super(key: key);
+  const CustomTextFormField({required this.text, required this.controller, required this.funValidator, Key? key}) : super(key: key);
   final String text;
   final TextEditingController controller;
+  final funValidator;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,7 +21,7 @@ class CustomTextFormField extends StatelessWidget {
         SizedBox(height: gap_xxs),
         TextFormField(
           controller: controller,
-          validator: (value) => value!.isEmpty ? "${text}를 입력해주세요" : null,
+          validator: funValidator,
           obscureText: text == "비밀번호" ? true : false,
           decoration: InputDecoration(
             hintText: "${text}를 입력하세요",
