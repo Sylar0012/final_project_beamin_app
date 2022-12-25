@@ -1,70 +1,118 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:final_project_beamin_app/model/user_session.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
 import 'package:final_project_beamin_app/view/pages/main/components/store_list.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/home_app_bar.dart';
 import 'package:final_project_beamin_app/view/pages/main/home/components/store_category.dart';
-import 'package:final_project_beamin_app/view/pages/main/search/search.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/model/home_page_model.dart';
+import 'package:final_project_beamin_app/view/pages/main/home/model/home_page_view_model.dart';
+import 'package:final_project_beamin_app/view/pages/order/order_list/my_order_list_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+final scaffoldKey = GlobalKey<ScaffoldState>();
+final refreshKey = GlobalKey<RefreshIndicatorState>();
+
+class _HomePageState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomePageAppBar(appBar: AppBar(), userAddress: "외동 9999-9번지"),
+      appBar: _buildAppBar("${UserSession.user.nickname}"),
       body: ListView(
         children: [
-          _buildMainScreen(),
-          Container(color: Colors.grey[200], height: 8),
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(gap_s),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    StoreCatagory(text: "전체보기"),
-                    StoreCatagory(text: "치킨"),
-                    StoreCatagory(text: "피자"),
-                    StoreCatagory(text: "버거"),
-                    StoreCatagory(text: "분식"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: gap_s, left: gap_s, bottom: gap_s),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    StoreCatagory(text: "한식"),
-                    StoreCatagory(text: "중식"),
-                    StoreCatagory(text: "일식"),
-                    StoreCatagory(text: "보쌈"),
-                    StoreCatagory(text: "죽"),
-                  ],
-                ),
-              ),
+              _buildMainScreen(),
               Container(color: Colors.grey[200], height: 8),
-              StoreList(img: "치킨", storeName: "네네치킨", starPoint: 4),
-              StoreList(img: "피자", storeName: "도미노피자", starPoint: 5),
-              StoreList(img: "버거", storeName: "롯데리아", starPoint: 3),
-              StoreList(img: "분식", storeName: "신전떡볶이", starPoint: 5),
-              StoreList(img: "한식", storeName: "본비빔밥", starPoint: 4),
-              StoreList(img: "중식", storeName: "홍콩반점", starPoint: 3),
-              StoreList(img: "보쌈", storeName: "원할머니보쌈", starPoint: 3),
-              StoreList(img: "죽", storeName: "본죽", starPoint: 1),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(gap_s),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StoreCatagory(text: "전체보기"),
+                        StoreCatagory(text: "치킨"),
+                        StoreCatagory(text: "피자"),
+                        StoreCatagory(text: "버거"),
+                        StoreCatagory(text: "분식"),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: gap_s, left: gap_s, bottom: gap_s),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StoreCatagory(text: "한식"),
+                        StoreCatagory(text: "중식"),
+                        StoreCatagory(text: "일식"),
+                        StoreCatagory(text: "보쌈"),
+                        StoreCatagory(text: "죽"),
+                      ],
+                    ),
+                  ),
+                  Container(color: Colors.grey[200], height: 8),
+                  SizedBox(height: gap_s),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      HomePageModel? model = ref.watch(homePageViewModel);
+                      if (model == null) {
+                        return Align(alignment: Alignment.center, child: Text("잠시 기다려주세요"));
+                      } else {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: model.storesList.length,
+                          itemBuilder: (context, index) {
+                            return StoreList(
+                              storeFindAllList: model.storesList[index],
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+                  SizedBox(height: gap_s),
+                ],
+              ),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  AppBar _buildAppBar(String usernickname) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: Align(alignment: AlignmentDirectional.bottomCenter, child: Text("$usernickname님 반갑습니다", style: textTheme().headline1)),
+      centerTitle: true,
+      elevation: 1.0,
+      actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyOrderListPage()));
+          },
+          icon: Icon(
+            CupertinoIcons.shopping_cart,
+            size: 28,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(
+          width: gap_xs,
+        )
+      ],
     );
   }
 

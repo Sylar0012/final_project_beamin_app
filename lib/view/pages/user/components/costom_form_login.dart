@@ -1,39 +1,45 @@
 import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/controller/user_controller.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/view/pages/components/costom_text_form_field.dart';
 import 'package:final_project_beamin_app/view/pages/main/main_page.dart';
+import 'package:final_project_beamin_app/view/pages/util/validator_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomFormLogin extends StatelessWidget {
+class CustomFormLogin extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
   CustomFormLogin({Key? key}) : super(key: key);
-  final username = TextEditingController();
-  final password = TextEditingController();
+  final _username = TextEditingController();
+  final _password = TextEditingController();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    UserController userCT = ref.read(userController);
     return Form(
       key: _formKey,
       child: Column(
         children: [
           CustomTextFormField(
             text: "아이디",
-            controller: username,
+            controller: _username,
+            funValidator: validateUsername(),
           ),
           SizedBox(height: gap_s),
           CustomTextFormField(
             text: "비밀번호",
-            controller: password,
+            controller: _password,
+            funValidator: validatePassword(),
           ),
           SizedBox(height: gap_l),
-          _buildLoginButton(context),
+          _buildLoginButton(context, userCT),
         ],
       ),
     );
   }
 
-  Padding _buildLoginButton(BuildContext context) {
+  Padding _buildLoginButton(BuildContext context, UserController userCT) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: gap_m),
       child: Container(
@@ -47,16 +53,10 @@ class CustomFormLogin extends StatelessWidget {
         child: TextButton(
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              if (username.text == "ssar" && password.text == "1234") {
-                Navigator.pushNamed(context, "/home");
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: Color.fromRGBO(251, 82, 28, 0.8),
-                    content: Text("아이디 또는 비밀번호가 다릅니다."),
-                  ),
-                );
-              }
+              userCT.login(
+                username: _username.text.trim(),
+                password: _password.text.trim(),
+              );
             }
           },
           child: Text(

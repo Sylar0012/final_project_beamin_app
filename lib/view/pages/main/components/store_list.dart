@@ -1,32 +1,30 @@
-import 'package:final_project_beamin_app/constants.dart';
+import 'package:final_project_beamin_app/controller/store_controller.dart';
+import 'package:final_project_beamin_app/core/routers.dart';
+import 'package:final_project_beamin_app/model/store_detail.dart';
+import 'package:final_project_beamin_app/model/home.dart';
 import 'package:final_project_beamin_app/size.dart';
 import 'package:final_project_beamin_app/theme.dart';
-import 'package:final_project_beamin_app/view/pages/store/store_detail.dart';
+import 'package:final_project_beamin_app/view/pages/util/my_number_formet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../components/my_icons.dart';
+import '../../components/my_star_icon.dart';
 
 class StoreList extends StatelessWidget {
-  final String img;
-  final String storeName;
-  final int starPoint;
-  const StoreList({required this.img, required this.storeName, required this.starPoint, Key? key}) : super(key: key);
-
+  const StoreList({required this.storeFindAllList, Key? key}) : super(key: key);
+  final Stores storeFindAllList;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => StoreDetail()));
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(gap_s),
+    StoreController StoreCT = StoreController();
+    return ListTile(
+      title: Padding(
+        padding: const EdgeInsets.only(bottom: gap_xxs),
         child: Row(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.asset(
-                "assets/images/category/${img}.jpg",
+                storeFindAllList.thumbnail == "" ? "assets/images/category/치킨.jpg" : storeFindAllList.thumbnail,
                 width: 115,
                 height: 115,
                 fit: BoxFit.cover,
@@ -37,7 +35,7 @@ class StoreList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${storeName}",
+                  "${storeFindAllList.storeName}",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
@@ -55,23 +53,29 @@ class StoreList extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    for (int i = 0; i < starPoint; i++) StarIcon(CupertinoIcons.star_fill, 16),
-                    if (starPoint < 5)
-                      for (int i = 0; i < 5 - starPoint; i++) StarIcon(CupertinoIcons.star, 16),
+                    if (storeFindAllList.starPoint != 0) MyStarIcon(CupertinoIcons.star_fill, 16),
+                    if (storeFindAllList.starPoint == 0) MyStarIcon(CupertinoIcons.star, 16),
+                    SizedBox(width: gap_xs),
+                    Text("${storeFindAllList.starPoint}", style: textTheme().bodyText1),
+                    SizedBox(width: gap_xs),
+                    Text("(${storeFindAllList.count})", style: textTheme().bodyText1),
                   ],
                 ),
                 SizedBox(height: gap_s),
                 Text(
-                  "배달 예상 시간 : 38 ~ 42분",
+                  "배달 요금 : " + numberPriceFormat("${storeFindAllList.deliveryCost}"),
                   style: textTheme().bodyText2,
                 ),
                 SizedBox(height: gap_s),
-                Text("${storeName} 주운나 마싯어연 ^^", style: textTheme().bodyText2),
+                Text(storeFindAllList.intro, style: textTheme().bodyText2),
               ],
             ),
           ],
         ),
       ),
+      onTap: () {
+        StoreCT.storeDetailPage(storeFindAllList.storeId);
+      },
     );
   }
 }
