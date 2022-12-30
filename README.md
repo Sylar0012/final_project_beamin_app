@@ -46,16 +46,4 @@ https://www.youtube.com/watch?v=5i710ncxHWU
 * 모듈화하여 개발 가능
 * 여러개의 view가 하나의 viewModel을 의존할 수 있다.
 
-# 배운 점 & 아쉬운 점
-
-<p align="justify">
- 상태관리의 중요성에 대해 배웠고 백엔드 프로그래머와 소통하는 법을 배웠음.
-</p>
-
-<p align="justify">
- 결제 API를 사용하는데 익숙하지 못해 결제 취소는 미구현 된게 아쉬움
-</p>
-
-<br>
-
 
