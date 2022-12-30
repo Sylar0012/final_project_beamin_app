@@ -47,4 +47,5 @@ https://www.youtube.com/watch?v=5i710ncxHWU
 * 여러개의 view가 하나의 viewModel을 의존할 수 있다.
 
 # 테스트 코드
-https://github.com/Sylar0012/flutter_test
+* GitHub : https://github.com/Sylar0012/flutter_test
+* Notion : https://subsequent-poppyseed-2fc.notion.site/be25eac576314539ae22e55d36c655c9
